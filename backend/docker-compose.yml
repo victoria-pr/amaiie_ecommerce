@@ -1,0 +1,31 @@
+version: "3"
+services:
+  mongo:
+    image: mongo:5
+    container_name: mongo-amaiie
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: amaiie
+    ports:
+      - 27030:27017
+    volumes:
+      - ~/amaiieData/mongo:/data/db
+    networks:
+      - amaiie
+  node:
+    build: .
+    container_name: node-amaiie
+    restart: always
+    ports:
+      - 3030:3000
+    depends_on:
+      - mongo
+    networks:
+      - amaiie
+    volumes:
+      - ./:/usr/src/app
+      - exclude:/usr/src/app/node_modules/
+volumes:
+  exclude:
+networks:
+  amaiie:
