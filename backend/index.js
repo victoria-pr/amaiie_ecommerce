@@ -1,24 +1,35 @@
 import express from "express";
 import mongoose from "mongoose";
 import data from "./data.js";
+import orderRoutes from './routers/orderRouters.js';
 
-// express server
+// Servidor express
 const app = express();
+const puerto = process.env.PUERTO || 3000;
+const mongoURI = process.env.MONGODB_URI;
 
-app.get("/api/products", (req, res) => {
-  res.send(data.products);
+app.get("/api/productos", (req, res) => {
+  res.send(data.productos);
 });
 
-app.listen(3000, () => {
-  console.log("server is running on port 3000");
+app.use(orderRoutes);
+
+// Middleware para manejar errores
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("¡Algo salió mal!");
 });
 
-// Mongoose server
+app.listen(puerto, () => {
+  console.log(`El servidor está funcionando en el puerto ${puerto}`);
+});
+
+// Servidor Mongoose
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(mongoURI)
   .then(() => {
-    console.log("connected on db");
+    console.log("Conectado a MongoDB");
   })
-  .catch((error) => {
-    console.log(error.message);
+  .catch((err) => {
+    console.error("Error al conectarse a MongoDB:", err.message);
   });
