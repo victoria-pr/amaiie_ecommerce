@@ -2,12 +2,14 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
 import { isAuth, isAdmin } from "../utils.js";
-
+//Función Router de Express para manejar las rutas relacionadas con producto
 const productRouter = express.Router();
 productRouter.get("/", async (req, res) => {
+  //para buscar los productos
   const products = await Product.find();
-  res.send(products);
+  res.send(products); //muestra los productos en formato JSON
 });
+
 productRouter.post(
   "/",
   isAuth,
@@ -16,13 +18,11 @@ productRouter.post(
     const newProduct = new Product({
       name: "sample name " + Date.now(),
       slug: "sample-name-" + Date.now(),
-      image: "/images/p1.jpg",
+      image: "/images/sample-image.png",
       price: 0,
       category: "sample category",
-      brand: "sample brand",
-      countInStock: 0,
-      rating: 0,
-      numReviews: 0,
+      idartist: "sample idartist",
+      createdate: "sample date",
       description: "sample description",
     });
     const product = await newProduct.save();
@@ -41,10 +41,9 @@ productRouter.put(
       product.slug = req.body.slug;
       product.price = req.body.price;
       product.image = req.body.image;
-      product.images = req.body.images;
       product.category = req.body.category;
-      product.brand = req.body.brand;
-      product.countInStock = req.body.countInStock;
+      product.idartist = req.body.idartist;
+      product.createdate = req.body.createdate;
       product.description = req.body.description;
       await product.save();
       res.send({ message: "Product Updated" });
@@ -67,7 +66,7 @@ productRouter.delete(
     }
   })
 );
-productRouter.post(
+/*productRouter.post(
   "/:id/reviews",
   isAuth,
   expressAsyncHandler(async (req, res) => {
@@ -100,7 +99,7 @@ productRouter.post(
       res.status(404).send({ message: "Product Not Found" });
     }
   })
-);
+);*/
 const PAGE_SIZE = 3;
 productRouter.get(
   "/admin",
@@ -122,6 +121,7 @@ productRouter.get(
     });
   })
 );
+//BUSCADOR DE PRODUCTOS
 productRouter.get(
   "/search",
   expressAsyncHandler(async (req, res) => {
@@ -130,7 +130,6 @@ productRouter.get(
     const page = query.page || 1;
     const category = query.category || "";
     const price = query.price || "";
-    const rating = query.rating || "";
     const order = query.order || "";
     const searchQuery = query.query || "";
     const queryFilter =
@@ -143,14 +142,14 @@ productRouter.get(
           }
         : {};
     const categoryFilter = category && category !== "all" ? { category } : {};
-    const ratingFilter =
+    /*const ratingFilter =
       rating && rating !== "all"
         ? {
             rating: {
               $gte: Number(rating),
             },
           }
-        : {};
+        : {};*/
     const priceFilter =
       price && price !== "all"
         ? {
@@ -177,7 +176,7 @@ productRouter.get(
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-      ...ratingFilter,
+      /*...ratingFilter,*/
     })
       .sort(sortOrder)
       .skip(pageSize * (page - 1))
@@ -186,7 +185,7 @@ productRouter.get(
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-      ...ratingFilter,
+      /*...ratingFilter,*/
     });
     res.send({
       products,

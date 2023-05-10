@@ -1,35 +1,48 @@
 import express from "express";
 import mongoose from "mongoose";
 import data from "./data.js";
+
 import orderRoutes from './routers/orderRouters.js';
+
+import userRouter from "./routers/userRouters.js";
+
 
 // Servidor express
 const app = express();
-const puerto = process.env.PUERTO || 3000;
-const mongoURI = process.env.MONGODB_URI;
+
+app.use(express.json()); // middleware que permite recibir json en el body de las peticiones 
+app.use(express.urlencoded({ extended: true })); // middleware que permite recibir datos de formularios en el body de las peticiones
+app.use("/api/users", userRouter);
 
 app.get("/api/productos", (req, res) => {
   res.send(data.productos);
 });
 
-app.use(orderRoutes);
 
-// Middleware para manejar errores
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("¡Algo salió mal!");
+
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`server at http://localhost:${port}`);
 });
 
-app.listen(puerto, () => {
-  console.log(`El servidor está funcionando en el puerto ${puerto}`);
-});
 
-// Servidor Mongoose
-mongoose
-  .connect(mongoURI)
+// Mongoose server
+ mongoose
+  .connect(process.env.MONGODB_URI)
+
   .then(() => {
     console.log("Conectado a MongoDB");
   })
-  .catch((err) => {
-    console.error("Error al conectarse a MongoDB:", err.message);
+
+  .catch((error) => {
+    console.log(error.message);
+
+  }); 
+
+app.use((error, req, res, next) => {
+  res.status(500).send({ message: error.message });
+}); 
+
   });
+ 
+
