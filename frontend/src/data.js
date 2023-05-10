@@ -1,4 +1,5 @@
-// import bcrypt from "bcryptjs";
+
+/*import bcrypt from "bcryptjs";*/
 
 const data = {
   /* users: [
@@ -14,6 +15,7 @@ const data = {
       password: bcrypt.hashSync("123456"),
       isAdmin: false,
     },
+
   ], */
   products: [
     {
@@ -59,6 +61,7 @@ const data = {
       countInStock: 5,
       brand: "Unai",
       description: "high quality product",
+
     },
   ],
 };

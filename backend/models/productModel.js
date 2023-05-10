@@ -23,7 +23,7 @@ const productSchema = new mongoose.Schema({
       "ceramic",
       "paper",
       "miniatures",
-      "soaps and candel",
+      "soaps and candels",
     ],
   },
 

@@ -18,6 +18,7 @@ const data = {
   products: [
     {
       // _id: '1',
+
       nameproduct: "Armario antiguo",
       slug: "armario siglo XI",
       category: "decoration",
