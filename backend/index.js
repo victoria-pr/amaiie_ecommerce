@@ -13,7 +13,7 @@ app.listen(3000, () => {
   console.log("server is running on port 3000");
 });
 
-// Mongoose server
+/*Mongoose server
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
@@ -21,4 +21,4 @@ mongoose
   })
   .catch((error) => {
     console.log(error.message);
-  });
+  });*/
