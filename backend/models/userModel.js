@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
 
   image: { type: String, required: false },
   adress: { type: String, required: false },
-  cardnumber: { type: Number, required: false },
   video: { type: String, required: false },
 
   role: { type: String, required: true, enum: ["admin", "user", "artist"] },

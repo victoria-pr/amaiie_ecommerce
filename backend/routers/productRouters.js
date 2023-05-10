@@ -2,6 +2,7 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
 import { isAuth, isAdmin } from "../utils.js";
+
 //Función Router de Express para manejar las rutas relacionadas con producto
 const productRouter = express.Router();
 productRouter.get("/", async (req, res) => {
