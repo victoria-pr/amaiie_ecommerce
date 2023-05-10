@@ -8,10 +8,14 @@ const userSchema = new mongoose.Schema({
 
   image: { type: String, required: false },
   adress: { type: String, required: false },
-  cardnumber: { type: Number, required: false },
   video: { type: String, required: false },
 
-  role: { type: String, required: true, enum: ["admin", "user", "artist"] },
+  isArtist: { type: Boolean, default: false, required: false },
+  isAdmin: { type: Boolean, default: false, required: false }, 
+}, 
+{
+  freezeTableName: true,
+  typestamps: false,
 });
 
 const User = mongoose.model("User", userSchema);
