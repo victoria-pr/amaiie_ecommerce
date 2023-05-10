@@ -8,6 +8,7 @@ body {
 }
 
 header {
+
   background-color: #4e4949;
   padding: 1rem;
 }
@@ -17,11 +18,13 @@ header a {
   text-decoration: none;
   font-size: 25px;
 }
+
 main {
   padding: 1rem;
 }
 
 .products {
+
   display: flex; /*Para poner los productos uno detrás de otro*/
   flex-wrap: wrap;
   justify-content: center;
@@ -61,4 +64,5 @@ button {
   width: 80%; /* Ancho de cada botón */
   line-height: 1.5; /* Centrar texto verticalmente */
   text-align: center; /* Centrar texto horizontalmente */
+
 }

@@ -9,16 +9,20 @@ app.get("/api/products", (req, res) => {
   res.send(data.products);
 });
 
-app.listen(3000, () => {
-  console.log("server is running on port 3000");
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`server at http://localhost:${port}`);
 });
 
-/*Mongoose server
-mongoose
+
+// Mongoose server
+/* mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("connected on db");
   })
   .catch((error) => {
     console.log(error.message);
-  });*/
+
+  });
+ */
