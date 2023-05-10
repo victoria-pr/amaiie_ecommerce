@@ -14,20 +14,27 @@ app.get("/api/products", (req, res) => {
 });
 
 
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`server at http://localhost:${port}`);
+});
+
+
 // Mongoose server
-mongoose
+ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("connected on db");
   })
   .catch((error) => {
     console.log(error.message);
+
   }); 
 
 app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });
 }); 
 
-app.listen(5000, () => {
-  console.log("server is running on port 5000");
-});
+  });
+ 
+
