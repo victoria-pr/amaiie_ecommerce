@@ -20,7 +20,6 @@ function App() {
           <Routes>
             <Route path='/product/:slug' element={<ProductScreen />}></Route>
             <Route path='/' element={<HomeScreen />}></Route>
-
           </Routes>
         </main>
       </div>

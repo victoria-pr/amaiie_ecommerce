@@ -6,14 +6,14 @@ const data = {
     {
       name: "Basir",
       email: "admin@example.com",
-      password: bcrypt.hashSync("123456"),
-      role: admin,
+      /* password: bcrypt.hashSync("123456"),
+      role: admin, */
     },
     {
       name: "John",
       email: "user@example.com",
-      password: bcrypt.hashSync("123456"),
-      role: user,
+      /* password: bcrypt.hashSync("123456"),
+      role: user, */
     },
 
   ],
