@@ -7,6 +7,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
 import Button from "react-bootstrap/Button";
 import { Helmet } from "react-helmet-async";
+import Card from "react-bootstrap/Card";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -60,14 +61,15 @@ function ProductScreen() {
         </Col>
         <Col md={3}>
           <ListGroup variant='flush'>
-            <ListGroup.item>
+            <title>{product.nameproduct}</title>
+            <ListGroup.Item>
               <Helmet>
                 <title>{product.nameproduct}</title>
               </Helmet>
               <h1>{product.nameproduct}</h1>
-            </ListGroup.item>
-            <ListGroup.item>Precio : {product.price}€</ListGroup.item>
-            <ListGroup.item>Descripción : {product.description}</ListGroup.item>
+            </ListGroup.Item>
+            <ListGroup.Item>Precio : {product.price}€</ListGroup.Item>
+            <ListGroup.Item>Descripción : {product.description}</ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={3}>
@@ -75,13 +77,13 @@ function ProductScreen() {
             <Card.Body>
               <ListGroup variant='flush'>
                 <ListGroup>
-                  <ListGroup.item>
+                  <ListGroup.Item>
                     <Row>
                       <Col>Precio:</Col>
                       <Col>{product.price}€</Col>
                     </Row>
-                  </ListGroup.item>
-                  <ListGroup.item>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
                     <Row>
                       <Col>Status:</Col>
                       <Col>
@@ -92,16 +94,16 @@ function ProductScreen() {
                         )}
                       </Col>
                     </Row>
-                  </ListGroup.item>
-                  <ListGroup.item>
+                  </ListGroup.Item>
+                  <ListGroup.Item>
                     {product.countInStock > 0 && (
-                      <ListGroup.item>
+                      <ListGroup.Item>
                         <div classname='d-grid'>
-                          <Button variant='primary'>add to cart</Button>>
+                          <Button variant='primary'>add to cart</Button>
                         </div>
-                      </ListGroup.item>
+                      </ListGroup.Item>
                     )}
-                  </ListGroup.item>
+                  </ListGroup.Item>
                 </ListGroup>
               </ListGroup>
             </Card.Body>

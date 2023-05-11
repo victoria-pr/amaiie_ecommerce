@@ -17,7 +17,7 @@ productRouter.post(
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
-      name: "sample name " + Date.now(),
+      nameproduct: "sample name " + Date.now(),
       slug: "sample-name-" + Date.now(),
       image: "/images/sample-image.png",
       price: 0,
@@ -38,7 +38,7 @@ productRouter.put(
     const productId = req.params.id;
     const product = await Product.findById(productId);
     if (product) {
-      product.name = req.body.name;
+      product.nameproduct = req.body.nameproduct;
       product.slug = req.body.slug;
       product.price = req.body.price;
       product.image = req.body.image;
@@ -136,7 +136,7 @@ productRouter.get(
     const queryFilter =
       searchQuery && searchQuery !== "all"
         ? {
-            name: {
+            nameproduct: {
               $regex: searchQuery,
               $options: "i",
             },
@@ -203,6 +203,7 @@ productRouter.get(
     res.send(categories);
   })
 );
+
 productRouter.get("/slug/:slug", async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
@@ -211,6 +212,7 @@ productRouter.get("/slug/:slug", async (req, res) => {
     res.status(404).send({ message: "Product Not Found" });
   }
 });
+
 productRouter.get("/:id", async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {

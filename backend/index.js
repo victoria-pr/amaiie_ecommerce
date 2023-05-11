@@ -22,6 +22,7 @@ app.get("/api/products", (req, res) => {
 
 app.get("/api/products/slug/:slug", (req, res) => {
   const product = data.products.find((x) => x.slug === req.params.slug);
+  console.log(product);
   if (product) {
     res.send(product);
   } else {
