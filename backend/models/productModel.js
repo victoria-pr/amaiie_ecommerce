@@ -26,7 +26,8 @@ const productSchema = new mongoose.Schema({
       "soaps and candels",
     ],
   },
-
+},
+  {
   freezeTableName: true,
   typestamps: false,
 });

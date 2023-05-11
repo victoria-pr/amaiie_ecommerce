@@ -22,9 +22,11 @@ const reducer = (state, action) => {
   }
 };
 
+
 function ProductScreen() {
   const params = useParams();
   const { slug } = params;
+
 
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],
@@ -113,5 +115,4 @@ function ProductScreen() {
     </div>
   );
 }
-
-export default ProductScreen;
+export default ProductScreen
