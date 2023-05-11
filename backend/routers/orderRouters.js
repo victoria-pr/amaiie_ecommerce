@@ -1,7 +1,7 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
-import Product from '../models/productModel.js';
+import Product from "../models/productModel.js";
 import Order from "../models/orderModel.js";
 //import { isAuth } from "../utils.js";
 
@@ -9,9 +9,8 @@ const orderRouter = express.Router();
 
 // Ruta para crear una orden
 orderRouter.post(
-
-   "/",
-  /*isAuth, */
+  "/",
+  //isAuth,
 
   expressAsyncHandler(async (req, res) => {
     const {
@@ -48,7 +47,7 @@ orderRouter.post(
 orderRouter.get(
   "/:id",
 
-  /* isAuth, */
+  //isAuth,
 
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id).populate(
@@ -67,7 +66,7 @@ orderRouter.get(
 orderRouter.put(
   "/:id/pay",
 
-  /* isAuth, */
+  //isAuth,
 
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
@@ -95,7 +94,7 @@ orderRouter.put(
 orderRouter.get(
   "/myorders",
 
-  /* isAuth, */
+  //isAuth,
 
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.find({ user: req.user._id });
@@ -107,7 +106,7 @@ orderRouter.get(
 orderRouter.get(
   "/",
 
-  /* isAuth, */
+  //isAuth,
 
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.find({}).populate("user", "id name");
@@ -174,7 +173,7 @@ orderRouter.delete(
 orderRouter.put(
   "/:id/deliver",
 
-  /* isAuth, */
+  //isAuth,
 
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
@@ -193,9 +192,6 @@ orderRouter.put(
 );
 
 export default orderRouter;
-
-
-
 
 /* import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
