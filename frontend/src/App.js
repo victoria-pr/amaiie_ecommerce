@@ -1,22 +1,21 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"; //instalamos librería react-router-dom para navegar entre distintos componentes de un proyecto
 //Añadimos todas las rutas: Home (están todos los productos), ProductScree (están las fichas individuales de los productos)
-import { Link } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import Navbar from "react-bootstrap/Navbar";
-import Badge from "react-bootstrap/esm/Badge";
-import Nav from "react-bootstrap/esm/Nav";
+import Badge from "react-bootstrap/Badge";
+import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
-import CartScreen from "./screens/CartScreen";
+import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Store } from "./Store";
-
+import SigninScreen from "./screens/SigninScreen";
+import CartScreen from "./screens/CartScreen";
 
 function App() {
-  const { state } = useContext(Store);
+  const {state} = useContext(Store);
   const { cart } = state;
-
   return (
     <BrowserRouter>
 
@@ -45,8 +44,9 @@ function App() {
         <main>
           <Container className='mt-3'>
             <Routes>
-              <Route path='/product/:slug' element={<ProductScreen />}></Route>
-                <Route path="/cart" element={<CartScreen/>}/>
+              <Route path='/product/:slug' element={<ProductScreen />}/>
+              <Route path='/cart' element={<CartScreen/>}/> 
+              <Route path='/signin' element={<SigninScreen/>}/>
               <Route path='/' element={<HomeScreen />}></Route>
             </Routes>
           </Container>

@@ -54,9 +54,11 @@ h2 {
   font-weight: bold;
   text-decoration: none;
 }
+.img-large{
+  max-width: 100%;
+}
 button {
-  background-color: #F3F3F3
-;
+  background-color: #F3F3F3;
   border: 1px solid #ddd;
   color: black;
   padding: 10px 20px;
@@ -68,6 +70,7 @@ button {
   width: 80%; /* Ancho de cada botón */
   line-height: 1.5; /* Centrar texto verticalmente */
   text-align: center; /* Centrar texto horizontalmente */
+}
 
 
 
@@ -78,6 +81,6 @@ button {
   max-width: 100%;
 }
 
-.img-thumbnail{
-  height: 80px;
+.small-container {
+  max-width: 600px;
 }

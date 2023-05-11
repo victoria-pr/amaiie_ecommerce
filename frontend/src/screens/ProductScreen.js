@@ -14,7 +14,6 @@ import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
 import { Store } from "../Store";
 
-
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -50,14 +49,13 @@ function ProductScreen() {
     fetchData();
   }, [slug]);
 
-  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const {state, dispatch: ctxDispatch} = useContext(Store);
   const addToCartHandler = () => {
     ctxDispatch({
-      type: "CART_ADD_ITEM",
+      type: 'CART_ADD_ITEM',
       payload: { ...product, quantity: 1 },
     });
   };
-
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -111,9 +109,7 @@ function ProductScreen() {
                     {product.countInStock > 0 && (
                       <ListGroup.Item>
                         <div classname='d-grid'>
-                          <Button onClick={addToCartHandler} variant='primary'>
-                            add to cart
-                          </Button>
+                          <Button onClick={addToCartHandler} variant='primary'>add to cart</Button>
                         </div>
                       </ListGroup.Item>
                     )}

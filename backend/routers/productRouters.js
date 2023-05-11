@@ -109,7 +109,7 @@ productRouter.delete(
       res.status(404).send({ message: "Product Not Found" });
     }
   })
-);*/
+);*/ 
 const PAGE_SIZE = 3;
 productRouter.get(
   "/admin",
@@ -155,14 +155,14 @@ productRouter.get(
           }
         : {};
     const categoryFilter = category && category !== "all" ? { category } : {};
-    /*const ratingFilter =
+    const ratingFilter =
       rating && rating !== "all"
         ? {
             rating: {
               $gte: Number(rating),
             },
           }
-        : {};*/
+        : {};
     const priceFilter =
       price && price !== "all"
         ? {
@@ -190,7 +190,7 @@ productRouter.get(
       ...categoryFilter,
       ...priceFilter,
       /*...ratingFilter,*/
-    })
+    }) 
       .sort(sortOrder)
       .skip(pageSize * (page - 1))
       .limit(pageSize);
@@ -199,7 +199,7 @@ productRouter.get(
       ...categoryFilter,
       ...priceFilter,
       /*...ratingFilter,*/
-    });
+  }); 
     res.send({
       products,
       countProducts,

@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { store } from '../store';
+import { Store } from '../Store';
 import { Col, Row, ListGroup, Button, Card } from 'react-bootstrap';
-//import MessageBox from '../components/MessageBox';
+import MessageBox from '../components/MessageBox';
 import { Link } from 'react-router-dom';
 
 export default function CartScreen() {
-  const { state, dispatch: ctxDispatch } = useContext(store);
+  const { state} = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
