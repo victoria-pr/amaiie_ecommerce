@@ -23,7 +23,6 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
 function ProductScreen() {
   const params = useParams();
   const { slug } = params;

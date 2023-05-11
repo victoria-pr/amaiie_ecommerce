@@ -9,8 +9,8 @@ const data = {
       password: "123456",
       isAdmin: true,
 
-      /* //password: bcrypt.hashSync("123456"),
-      //role: admin, */
+      /* password: bcrypt.hashSync("123456"),
+      role: admin, */
     },
     {
       username: "John",
