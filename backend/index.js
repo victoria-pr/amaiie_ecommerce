@@ -1,6 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import data from "./data.js";
+
+import orderRoutes from "./routers/orderRouters.js";
 import dotenv from "dotenv";
 
 import orderRouter from './routers/orderRouters.js'; 
@@ -34,6 +36,7 @@ app.use((error, req, res, next) => {
 });
 
 app.get("/api/users", (req, res) => {
+app.get("/api/users", (req, res) => {
   res.send(data.users);
 }); 
 
@@ -55,4 +58,14 @@ app.listen(port, () => {
   console.log(`server at http://localhost:${port}`);
 });
 
-
+// Mongoose server
+dotenv.config();
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Conectado a MongoDB");
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });
+  
