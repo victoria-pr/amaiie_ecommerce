@@ -1,7 +1,9 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
+
 //import { isAuth,isAdmin} from "../utils.js";
+
 //Función Router de Express para manejar las rutas relacionadas con producto
 const productRouter = express.Router();
 productRouter.get("/", async (req, res) => {
@@ -14,6 +16,7 @@ productRouter.post(
   "/",
   //isAuth,
   //isAdmin,
+
   //isArtist,
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
@@ -34,7 +37,9 @@ productRouter.put(
   "/:id",
   //isAuth,
   //isAdmin,
+
   //isArtist,
+
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -58,7 +63,9 @@ productRouter.delete(
   "/:id",
   //isAuth,
   //isAdmin,
+
   //isArtist,
+
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -108,7 +115,9 @@ productRouter.get(
   "/admin",
   //isAuth,
   //isAdmin,
+
   //isArtist,
+
   expressAsyncHandler(async (req, res) => {
     const { query } = req;
     const page = query.page || 1;
@@ -206,6 +215,7 @@ productRouter.get(
     res.send(categories);
   })
 );
+
 productRouter.get("/slug/:slug", async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
@@ -214,6 +224,7 @@ productRouter.get("/slug/:slug", async (req, res) => {
     res.status(404).send({ message: "Product Not Found" });
   }
 });
+
 productRouter.get("/:id", async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {

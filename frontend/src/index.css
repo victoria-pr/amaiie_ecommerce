@@ -8,11 +8,13 @@ body {
 }
 .site-container {
   min-height: 100vh;
+
 }main {
   flex: 1;
 }
 /* header {  background-color: #4E4949
 ;
+
   padding: 1rem;
 }
 header a {
@@ -24,7 +26,9 @@ header a {
  */
 main {
   padding: 1rem;
-}.products {
+}
+
+.products {
   display: flex; /*Para poner los productos uno detrás de otro*/
   flex-wrap: wrap;
   justify-content: center;
@@ -64,7 +68,13 @@ button {
   width: 80%; /* Ancho de cada botón */
   line-height: 1.5; /* Centrar texto verticalmente */
   text-align: center; /* Centrar texto horizontalmente */
-}.mg-large {
+
+
+
+.mg-large {
+  max-width: 100%;
+}
+.img-large {
   max-width: 100%;
 }
 

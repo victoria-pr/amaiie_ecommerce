@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useContext } from "react";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,6 +9,10 @@ import Button from "react-bootstrap/Button";
 import { Helmet } from "react-helmet-async";
 import Card from "react-bootstrap/Card";
 
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import { getError } from "../utils";
+import { Store } from "../Store";
 
 
 const reducer = (state, action) => {
@@ -26,11 +30,13 @@ const reducer = (state, action) => {
 function ProductScreen() {
   const params = useParams();
   const { slug } = params;
+
   const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],
     loading: true,
     error: "",
   });
+
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -38,15 +44,24 @@ function ProductScreen() {
         const result = await axios.get(`/api/products/slug/${slug}`);
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: err.message });
+        dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
     fetchData();
   }, [slug]);
+
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const addToCartHandler = () => {
+    ctxDispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...product, quantity: 1 },
+    });
+  };
+
   return loading ? (
-    <div>loading...</div>
+    <LoadingBox />
   ) : error ? (
-    <div>{error}</div>
+    <MessageBox variant='danger'> {error}</MessageBox>
   ) : (
     <div>
       <Row>
@@ -59,7 +74,6 @@ function ProductScreen() {
         </Col>
         <Col md={3}>
           <ListGroup variant='flush'>
-            <title>{product.nameproduct}</title>
             <ListGroup.Item>
               <Helmet>
                 <title>{product.nameproduct}</title>
@@ -97,7 +111,9 @@ function ProductScreen() {
                     {product.countInStock > 0 && (
                       <ListGroup.Item>
                         <div classname='d-grid'>
-                          <Button variant='primary'>add to cart</Button>
+                          <Button onClick={addToCartHandler} variant='primary'>
+                            add to cart
+                          </Button>
                         </div>
                       </ListGroup.Item>
                     )}
@@ -111,4 +127,4 @@ function ProductScreen() {
     </div>
   );
 }
-export default ProductScreen
+export default ProductScreen;
