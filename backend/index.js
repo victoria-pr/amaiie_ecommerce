@@ -39,6 +39,7 @@ app.get("/api/users", (req, res) => {
   res.send(data.users);
 }); 
 
+
 app.get("/api/products", (req, res) => {
   res.send(data.products);
 });
