@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import orderRoutes from './routers/orderRouters.js';
 
 import userRouter from "./routers/userRouters.js";
+import productRouter from "./routers/productRouters.js";
 
 // Servidor express
 const app = express();
@@ -13,6 +14,8 @@ app.use(express.json()); // middleware que permite recibir json en el body de la
 app.use(express.urlencoded({ extended: true })); // middleware que permite recibir datos de formularios en el body de las peticiones
 
 app.use("/api/users", userRouter);
+app.use("/api/products", productRouter);
+
 
 app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });
@@ -24,6 +27,15 @@ app.use((error, req, res, next) => {
 
 app.get("/api/products", (req, res) => {
   res.send(data.products);
+});
+
+app.get("/api/products/slug/:slug", (req, res) => {
+  const product = data.products.find((x) => x.slug === req.params.slug);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product not found" });
+  }
 });
 
 const port = process.env.PORT || 5000;

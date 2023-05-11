@@ -1,29 +1,35 @@
-
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom"; //instalamos librería react-router-dom para navegar entre distintos componentes de un proyecto
-//Añadimos todas las rutas: Home (están todos los productos), ProductScree (están las fichas individuales de los productos)
-
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
+import Navbar from "react-bootstrap/Navbar";
+import Container from "react-bootstrap/Container";
+import { LinkContainer } from "react-router-bootstrap";
 
-/* import logo from "./logo.svg";
-import "./App.css";
- */
 function App() {
   return (
     <BrowserRouter>
-
-      <div className='App'>
-        <header className='App-header'>
-          <Link to='/'> amaiie</Link>
-        </header>
-        <main>
-          <Routes>
-            <Route path='/product/:slug' element={<ProductScreen />}></Route>
-            <Route path='/' element={<HomeScreen />}></Route>
-
-          </Routes>
-        </main>
-      </div>
+    <div className="d-flex flex-column site-container">
+      <header>
+      <Navbar bg="dark" variant="dark">
+      <Container>
+        <LinkContainer to="/">
+        <Navbar.Brand>Madein90s</Navbar.Brand>
+        </LinkContainer>
+      </Container>
+      </Navbar>
+      </header>
+      <main> 
+        <Container>
+        <Routes>
+          <Route path="/product/:slug" element={<ProductScreen />}/>
+          <Route path="/" element={<HomeScreen />}/>
+        </Routes>
+        </Container>
+      </main>
+      <footer>
+        <div className="text-center">All rights reserved</div>
+      </footer>
+    </div>
     </BrowserRouter>
   );
 }
