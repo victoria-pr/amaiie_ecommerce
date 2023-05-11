@@ -51,6 +51,9 @@ h2 {
   font-weight: bold;
   text-decoration: none;
 }
+.img-large{
+  max-width: 100%;
+}
 button {
   background-color: #f3f3f3;
   border: 1px solid #ddd;

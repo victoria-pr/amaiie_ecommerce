@@ -7,11 +7,11 @@ function Product (props) {
     return (
         <Card key={product.slug}>
             <Link to={`/product/${product.slug}`}>
-            <img src = {product.image}  className="card-img-top" alt={product.name}/>
+            <img src = {product.image}  className="card-img-top" alt={product.nameproduct}/>
             </Link>
             <Card.Body>
                 <Link to={`/product/${product.slug}`}>
-            <Card.Title>{product.name}</Card.Title>
+            <Card.Title>{product.nameproduct}</Card.Title>
             </Link>
             <Card.Text>{product.price}</Card.Text>
             <Button>Add to cart</Button>

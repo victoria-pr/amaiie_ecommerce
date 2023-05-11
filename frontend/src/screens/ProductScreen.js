@@ -32,7 +32,7 @@ function ProductScreen() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await axios.get(`api/products/slug/${slug}`);
+        const result = await axios.get(`/api/products/slug/${slug}`);
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
@@ -40,6 +40,7 @@ function ProductScreen() {
     };
     fetchData();
   }, [slug]);
+
   return loading ? (
     <div>loading...</div>
   ) : error ? (
@@ -56,7 +57,6 @@ function ProductScreen() {
         </Col>
         <Col md={3}>
           <ListGroup variant='flush'>
-            <title>{product.nameproduct}</title>
             <ListGroup.Item>
               <Helmet>
                 <title>{product.nameproduct}</title>

@@ -2,6 +2,7 @@ import { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import logger from "use-reducer-logger"; //ayuda a ver los cambios en el estado de la aplicación en la consola 
 import Product from "../components/Product"; 
+import { Helmet } from "react-helmet-async";
 
 //import data from "../data";
 
@@ -43,6 +44,9 @@ function HomeScreen() {
 
   return (
     <div>
+      <Helmet>
+        <title>Home</title>
+        </Helmet>
       <h1>Featured Products</h1>
         <div className="products">
           {loading ? (
