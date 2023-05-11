@@ -4,9 +4,9 @@ import data from "./data.js";
 
 import orderRoutes from "./routers/orderRouters.js";
 import dotenv from "dotenv";
-
 import userRouter from "./routers/userRouters.js";
 import productRouter from "./routers/productRouters.js";
+
 
 // Servidor express
 const app = express();
@@ -20,7 +20,9 @@ app.use((error, req, res, next) => {
 
 app.get("/api/users", (req, res) => {
   res.send(data.users);
-});
+
+}); 
+
 
 app.get("/api/products", (req, res) => {
   res.send(data.products);
