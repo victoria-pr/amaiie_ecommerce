@@ -3,10 +3,9 @@ import mongoose from "mongoose";
 import data from "./data.js";
 import orderRoutes from './routers/orderRouters.js';
 import dotenv from "dotenv";
-
 import userRouter from "./routers/userRouters.js";
-
 import productRouter from "./routers/productRouters.js";
+
 
 // Servidor express
 const app = express();
@@ -14,20 +13,13 @@ const app = express();
 app.use(express.json()); // middleware que permite recibir json en el body de las peticiones 
 app.use(express.urlencoded({ extended: true })); // middleware que permite recibir datos de formularios en el body de las peticiones
 
-app.use("/api/users", userRouter);
-app.use("/api/products", productRouter);
-
-
-
 app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });
-
-
 });
 
-/* app.get("/api/users", (req, res) => {
+app.get("/api/users", (req, res) => {
   res.send(data.users);
-}); */
+}); 
 
 app.get("/api/products", (req, res) => {
   res.send(data.products);
