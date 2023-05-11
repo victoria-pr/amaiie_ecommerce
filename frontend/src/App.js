@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"; //instalamos librería react-router-dom para navegar entre distintos componentes de un proyecto
 //Añadimos todas las rutas: Home (están todos los productos), ProductScree (están las fichas individuales de los productos)
-import { Link } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import Navbar from "react-bootstrap/Navbar";
@@ -12,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Store } from "./Store";
 import SigninScreen from "./screens/SigninScreen";
+import CartScreen from "./screens/CartScreen";
 
 function App() {
   const {state} = useContext(Store);
@@ -45,7 +45,7 @@ function App() {
           <Container className='mt-3'>
             <Routes>
               <Route path='/product/:slug' element={<ProductScreen />}/>
-              {/* <Route path='/cart' element={<CartScreen/>}/> */}
+              <Route path='/cart' element={<CartScreen/>}/> 
               <Route path='/signin' element={<SigninScreen/>}/>
               <Route path='/' element={<HomeScreen />}></Route>
             </Routes>
