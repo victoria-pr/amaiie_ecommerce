@@ -1,10 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import data from "./data.js";
-import dotenv from "dotenv";
 import orderRoutes from './routers/orderRouters.js';
+import dotenv from "dotenv";
 
 import userRouter from "./routers/userRouters.js";
+
 import productRouter from "./routers/productRouters.js";
 
 // Servidor express
@@ -17,8 +18,11 @@ app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 
 
+
 app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });
+
+
 });
 
 /* app.get("/api/users", (req, res) => {
@@ -28,6 +32,7 @@ app.use((error, req, res, next) => {
 app.get("/api/products", (req, res) => {
   res.send(data.products);
 });
+
 
 app.get("/api/products/slug/:slug", (req, res) => {
   const product = data.products.find((x) => x.slug === req.params.slug);
@@ -52,5 +57,7 @@ mongoose
   })
   .catch((error) => {
     console.log(error.message);
+
   });
+
 
