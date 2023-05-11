@@ -36,7 +36,6 @@ app.use((error, req, res, next) => {
 });
 
 app.get("/api/users", (req, res) => {
-app.get("/api/users", (req, res) => {
   res.send(data.users);
 }); 
 
@@ -68,4 +67,4 @@ mongoose
   .catch((error) => {
     console.log(error.message);
   });
-  
+

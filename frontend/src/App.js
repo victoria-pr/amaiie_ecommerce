@@ -4,10 +4,18 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"; //instalamos li
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import Navbar from "react-bootstrap/Navbar";
+import Badge from "react-bootstrap/Badge";
+import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Store } from "./Store";
+import SigninScreen from "./screens/SigninScreen";
 
 function App() {
+  const {state} = useContext(Store);
+  const { cart } = state;
   return (
     <BrowserRouter>
       <div className='d-flex flex-column site-container' /* className='App' */>
@@ -16,6 +24,16 @@ function App() {
             <LinkContainer to='/'>
               <Navbar.Brand>amaiie</Navbar.Brand>
             </LinkContainer>
+            <Nav className='me-auto'>
+              <Link to="/cart" className="nav-link">
+                Cart
+                {cart.cartItems.length > 0 && (
+                 <Badge pill bg="danger">
+                  {cart.cartItems.length}
+                 </Badge> 
+                )}
+              </Link>
+            </Nav>
           </Container>
         </Navbar>
         <header className='App-header'>
@@ -24,7 +42,9 @@ function App() {
         <main>
           <Container className='mt-3'>
             <Routes>
-              <Route path='/product/:slug' element={<ProductScreen />}></Route>
+              <Route path='/product/:slug' element={<ProductScreen />}/>
+              {/* <Route path='/cart' element={<CartScreen/>}/> */}
+              <Route path='/signin' element={<SigninScreen/>}/>
               <Route path='/' element={<HomeScreen />}></Route>
             </Routes>
           </Container>
