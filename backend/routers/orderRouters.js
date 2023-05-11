@@ -9,8 +9,10 @@ const orderRouter = express.Router();
 
 // Ruta para crear una orden
 orderRouter.post(
-  "/",
-  //isAuth,
+
+   "/",
+  /*isAuth, */
+
   expressAsyncHandler(async (req, res) => {
     const {
       orderItems,
@@ -45,7 +47,9 @@ orderRouter.post(
 // Ruta para obtener los detalles de una orden por su ID
 orderRouter.get(
   "/:id",
-  //isAuth,
+
+  /* isAuth, */
+
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id).populate(
       "user",
@@ -62,7 +66,9 @@ orderRouter.get(
 // Ruta para marcar una orden como pagada
 orderRouter.put(
   "/:id/pay",
-  //isAuth,
+
+  /* isAuth, */
+
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
 
@@ -88,7 +94,9 @@ orderRouter.put(
 // Ruta para obtener las órdenes de un usuario
 orderRouter.get(
   "/myorders",
-  //isAuth,
+
+  /* isAuth, */
+
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.find({ user: req.user._id });
     res.send(orders);
@@ -98,7 +106,9 @@ orderRouter.get(
 // Ruta para obtener todas las órdenes (solo para administradores)
 orderRouter.get(
   "/",
-  //isAuth,
+
+  /* isAuth, */
+
   expressAsyncHandler(async (req, res) => {
     const orders = await Order.find({}).populate("user", "id name");
     res.send(orders);
@@ -163,7 +173,9 @@ orderRouter.delete(
 // Ruta para marcar una orden como enviada (solo para administradores)
 orderRouter.put(
   "/:id/deliver",
-  //isAuth,
+
+  /* isAuth, */
+
   expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
 

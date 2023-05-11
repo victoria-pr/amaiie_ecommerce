@@ -1,6 +1,6 @@
 import express from 'express';
 import User from '../models/userModel.js';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import { generateToken } from '../utils.js';
 import expressAsyncHandler from 'express-async-handler';
 
@@ -15,7 +15,6 @@ userRouter.post(
                     _id: user._id,
                     username: user.username,
                     email: user.email,
-                    role: user.role,
                     token: generateToken(user),
                 });
                 return; // si la contraseña es correcta, se envia la respuesta y se termina la funcion
