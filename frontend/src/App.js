@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"; //instalamos librería react-router-dom para navegar entre distintos componentes de un proyecto
 //Añadimos todas las rutas: Home (están todos los productos), ProductScree (están las fichas individuales de los productos)
 import HomeScreen from "./screens/HomeScreen";
+import Axios from "axios";
 import ProductScreen from "./screens/ProductScreen";
 import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
@@ -18,25 +19,22 @@ import SearchScreen from "./screens/SearchScreen";
 import AdminRoute from "./components/AdminRoute";
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "./utils";
 import ShippingAddressScreen from "./components/ShippingAddressScreen";
-import PaymentMethodScreen from "./components/PaymentMethodScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 
-
-
 function App() {
-  const { state } = useContext(Store);
-  const { cart } = state;
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get(`/api/products/categories`);
+        const { data } = await Axios.get(`/api/products/categories`);
         setCategories(data);
       } catch (err) {
         toast.error(getError(err));
@@ -44,12 +42,6 @@ function App() {
     };
     fetchCategories();
   }, []);
-
-
-
-function App() {
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { cart, userInfo } = state;
 
   const signoutHanlder = () => {
     ctxDispatch({ type: "  USER_SIGNOUT" });
@@ -87,7 +79,6 @@ function App() {
             <Routes>
               <Route path='/product/:slug' element={<ProductScreen />} />
               <Route path='/cart' element={<CartScreen />} />
-
               <Route path='/search' element={<SearchScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />

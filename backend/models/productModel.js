@@ -6,14 +6,13 @@ const productSchema = new mongoose.Schema(
     slug: { type: String, required: true, unique: true },
     image: { type: String, required: false },
     description: { type: String, required: true },
-    countinStock: { type: Number, required: true },
+    countInStock: { type: Number, required: true },
     price: { type: Number, required: true },
     createdate: { type: Date, required: true },
     idartist: { type: mongoose.Types.ObjectId, ref: "owner", required: true },
 
     category: {
       type: String,
-      required: false,
       required: true,
       enum: [
         "clothing",

@@ -1,7 +1,7 @@
 //import data from "../data";
 //import { Link } from "react-router-dom";
 import { useEffect, useReducer } from "react";
-import axios from "axios";
+import Axios from "axios";
 import logger from "use-reducer-logger";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -36,7 +36,7 @@ function HomeScreen() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await axios.get("api/products/");
+        const result = await Axios.get("api/products/");
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: err.message });

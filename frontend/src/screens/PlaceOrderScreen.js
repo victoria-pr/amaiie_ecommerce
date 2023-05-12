@@ -43,8 +43,8 @@ function PlaceOrderScreen() {
   );
 
   cart.shippingPrice = cart.itemPrice > 100 ? round2(0) : round2(10);
-  cart.taxPrice = round2(0.21 * cart.itemsPrice);
-  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+  cart.taxPrice = round2(0.21 * cart.itemPrice);
+  cart.totalPrice = cart.itemPrice + cart.shippingPrice + cart.taxPrice;
 
   const placeOrderHandler = async () => {
     try {
@@ -151,19 +151,19 @@ function PlaceOrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>{cart.itemPrice.tofixed(2)}€</Col>
+                    <Col>{cart.itemPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>shipping</Col>
-                    <Col>{cart.shippingPrice.tofixed(2)}€</Col>
+                    <Col>{cart.shippingPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
-                    <Col>{cart.taxPrice.tofixed(2)}€</Col>
+                    <Col>{cart.taxPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -171,7 +171,7 @@ function PlaceOrderScreen() {
                     <Col>
                       <strong>Order Total</strong>
                     </Col>
-                    <Col>{cart.totalPrice.tofixed(2)}€</Col>
+                    <Col>{cart.totalPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
 

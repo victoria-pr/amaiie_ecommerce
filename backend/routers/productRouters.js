@@ -25,12 +25,11 @@ productRouter.post(
       nameproduct: "sample name " + Date.now(),
       slug: "sample-name-" + Date.now(),
       image: "/images/sample-image.png",
-      description: "sample description",
-      countinStock: 0,
       price: 0,
-      createdate: "sample date",
-      idartist: "sample idartist",
       category: "sample category",
+      brand: "sample brand",
+      countInStock: 0,
+      description: "sample description",
     });
     //Guardamos el producto en la base de datos  para enviar posteriormente un mensaje de que el producto se ha creado
     const product = await newProduct.save();
@@ -52,13 +51,12 @@ productRouter.put(
     if (product) {
       product.nameproduct = req.body.nameproduct;
       product.slug = req.body.slug;
-      product.image = req.body.image;
-      product.description = req.body.description;
-      productRouter.countinStock = req.body.countinStock;
       product.price = req.body.price;
-      product.createdate = req.body.createdate;
-      product.idartist = req.body.idartist;
+      product.image = req.body.image;
       product.category = req.body.category;
+      product.brand = req.body.brand;
+      product.countInStock = req.body.countInStock;
+      product.description = req.body.description;
 
       //Una vez actualizado el producto se guarda y envía la respuesta de producto actualizado o en su caso de producto no encontrado
       await product.save();
@@ -167,14 +165,14 @@ productRouter.get(
           }
         : {};
     const categoryFilter = category && category !== "all" ? { category } : {};
-    const ratingFilter =
+    /* const ratingFilter =
       rating && rating !== "all"
         ? {
             rating: {
               $gte: Number(rating),
             },
           }
-        : {};
+        : {}; */
     const priceFilter =
       price && price !== "all"
         ? {
@@ -193,9 +191,9 @@ productRouter.get(
         : order === "highest"
         ? { price: -1 }
         : order === "toprated"
-        ? { rating: -1 }
-        : order === "newest"
-        ? { createdAt: -1 }
+        ? /*  ? { rating: -1 }
+        : order === "newest" */
+          { createdAt: -1 }
         : { _id: -1 };
     const products = await Product.find({
       ...queryFilter,

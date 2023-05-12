@@ -57,7 +57,7 @@ const data = {
       category: "decoration",
       image: "/images/santa1.png",
       price: 65,
-      countInStock: 5,
+      countInStock: 0,
       brand: "Unai",
       description: "high quality product",
     },
