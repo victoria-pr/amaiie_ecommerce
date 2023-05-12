@@ -8,14 +8,44 @@ import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Store } from "./Store";
 import SigninScreen from "./screens/SigninScreen";
 import SignupScreen from "./screens/SignupScreen";
 import CartScreen from "./screens/CartScreen";
+import SearchBox from "./components/SearchBox";
+import SearchScreen from "./screens/SearchScreen";
+import AdminRoute from "./components/AdminRoute";
+import ProductListScreen from "./screens/ProductListScreen";
+import ProductEditScreen from "./screens/ProductEditScreen";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { getError } from "./utils";
 import ShippingAddressScreen from "./components/ShippingAddressScreen";
 import PaymentMethodScreen from "./components/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+
+
+
+function App() {
+  const { state } = useContext(Store);
+  const { cart } = state;
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get(`/api/products/categories`);
+        setCategories(data);
+      } catch (err) {
+        toast.error(getError(err));
+      }
+    };
+    fetchCategories();
+  }, []);
+
+
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -57,15 +87,48 @@ function App() {
             <Routes>
               <Route path='/product/:slug' element={<ProductScreen />} />
               <Route path='/cart' element={<CartScreen />} />
+
+              <Route path='/search' element={<SearchScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />
               <Route path='/placeorder' element={<PlaceOrderScreen />} />
               <Route path='/shipping' element={<ShippingAddressScreen />} />
               <Route path='/payment' element={<PaymentMethodScreen />} />
-
               <Route path='/' element={<HomeScreen />}></Route>
+
+              <Route
+                path='/admin/products'
+                element={
+                  <AdminRoute>
+                    <ProductListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+              <Route
+                path='/admin/product/:id'
+                element={
+                  <AdminRoute>
+                    <ProductEditScreen />
+                  </AdminRoute>
+                }
+              ></Route>
             </Routes>
           </Container>
+          <Nav className='flex-column text-white w-100 p-2'>
+            <Nav.Item>
+              <strong>Categories</strong>
+            </Nav.Item>
+            {categories.map((category) => (
+              <Nav.Item key={category}>
+                <LinkContainer
+                  to={{ pathname: "/search", search: `category=${category}` }}
+                  onClick={() => setSidebarIsOpen(false)}
+                >
+                  <Nav.Link>{category}</Nav.Link>
+                </LinkContainer>
+              </Nav.Item>
+            ))}
+          </Nav>
         </main>
         <footer>
           <div className='text-center'>All right reseved</div>

@@ -12,46 +12,55 @@ productRouter.get("/", async (req, res) => {
   res.send(products); //muestra los productos en formato JSON
 });
 
+//Ruta POST para crear un nuevo producto
 productRouter.post(
   "/",
   //isAuth,
   //isAdmin,
-
   //isArtist,
+
+  //Función del controlador asíncrona que garantiza que las respuestas sean devueltas correctamente
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
       nameproduct: "sample name " + Date.now(),
       slug: "sample-name-" + Date.now(),
       image: "/images/sample-image.png",
-      price: 0,
-      category: "sample category",
-      idartist: "sample idartist",
-      createdate: "sample date",
       description: "sample description",
+      countinStock: 0,
+      price: 0,
+      createdate: "sample date",
+      idartist: "sample idartist",
+      category: "sample category",
     });
+    //Guardamos el producto en la base de datos  para enviar posteriormente un mensaje de que el producto se ha creado
     const product = await newProduct.save();
     res.send({ message: "Product Created", product });
   })
 );
+
+//Ruta PUT que actualiza los productos con identificador id
 productRouter.put(
   "/:id",
   //isAuth,
   //isAdmin,
-
   //isArtist,
-
+  //para manejar de manera asíncrona la función del controlador para la ruta PUT
   expressAsyncHandler(async (req, res) => {
+    //identificamos el producto específico por su id
     const productId = req.params.id;
     const product = await Product.findById(productId);
     if (product) {
       product.nameproduct = req.body.nameproduct;
       product.slug = req.body.slug;
-      product.price = req.body.price;
       product.image = req.body.image;
-      product.category = req.body.category;
-      product.idartist = req.body.idartist;
-      product.createdate = req.body.createdate;
       product.description = req.body.description;
+      productRouter.countinStock = req.body.countinStock;
+      product.price = req.body.price;
+      product.createdate = req.body.createdate;
+      product.idartist = req.body.idartist;
+      product.category = req.body.category;
+
+      //Una vez actualizado el producto se guarda y envía la respuesta de producto actualizado o en su caso de producto no encontrado
       await product.save();
       res.send({ message: "Product Updated" });
     } else {
@@ -59,13 +68,15 @@ productRouter.put(
     }
   })
 );
+
+//Ruta DELETE que elimina un producto según su identificador
 productRouter.delete(
   "/:id",
   //isAuth,
   //isAdmin,
-
   //isArtist,
 
+  //función asíncrona del controlador para la ruta DELETE
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
@@ -109,32 +120,33 @@ productRouter.delete(
       res.status(404).send({ message: "Product Not Found" });
     }
   })
-);*/ 
-const PAGE_SIZE = 3;
+);*/
+
+// Ruta GET que obtiene la lista de productos
+const PAGE_SIZE = 3; //elementos que se muestran por página
 productRouter.get(
   "/admin",
   //isAuth,
   //isAdmin,
-
   //isArtist,
-
+  //función asíncrona para manejar la función del controlador para la ruta GET
   expressAsyncHandler(async (req, res) => {
     const { query } = req;
-    const page = query.page || 1;
+    const page = query.page || 1; //página actual por defecto
     const pageSize = query.pageSize || PAGE_SIZE;
     const products = await Product.find()
-      .skip(pageSize * (page - 1))
-      .limit(pageSize);
+      .skip(pageSize * (page - 1)) //para omitir los productos de páginas anteriores
+      .limit(pageSize); //limita el número de productos devueltos según el tamaño de la página
     const countProducts = await Product.countDocuments();
     res.send({
       products,
       countProducts,
       page,
-      pages: Math.ceil(countProducts / pageSize),
+      pages: Math.ceil(countProducts / pageSize), //objeto JSON con los productos, número página actual y número total de páginas
     });
   })
 );
-//BUSCADOR DE PRODUCTOS
+//BUSCADOR DE PRODUCTOS: con filtros por nombre, categoría, rating y precio
 productRouter.get(
   "/search",
   expressAsyncHandler(async (req, res) => {
@@ -190,7 +202,7 @@ productRouter.get(
       ...categoryFilter,
       ...priceFilter,
       /*...ratingFilter,*/
-    }) 
+    })
       .sort(sortOrder)
       .skip(pageSize * (page - 1))
       .limit(pageSize);
@@ -199,7 +211,7 @@ productRouter.get(
       ...categoryFilter,
       ...priceFilter,
       /*...ratingFilter,*/
-  }); 
+    });
     res.send({
       products,
       countProducts,
@@ -208,14 +220,16 @@ productRouter.get(
     });
   })
 );
+
+//ruta GET para acceder a través de las categorías
 productRouter.get(
   "/categories",
   expressAsyncHandler(async (req, res) => {
     const categories = await Product.find().distinct("category");
-    res.send(categories);
+    res.send(categories); //lista de categorías en formato JSON
   })
 );
-
+//ruta GET para acceder a través del slug
 productRouter.get("/slug/:slug", async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
@@ -224,7 +238,7 @@ productRouter.get("/slug/:slug", async (req, res) => {
     res.status(404).send({ message: "Product Not Found" });
   }
 });
-
+//ruta GET para acceder a través del id
 productRouter.get("/:id", async (req, res) => {
   const product = await Product.findById(req.params.id);
   if (product) {
