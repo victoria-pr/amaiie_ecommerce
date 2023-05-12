@@ -1,4 +1,5 @@
-import { useParams } from "react-router-dom";
+
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useReducer, useContext } from "react";
 import axios from "axios";
 import Row from "react-bootstrap/Row";
@@ -27,6 +28,7 @@ const reducer = (state, action) => {
   }
 };
 function ProductScreen() {
+  const navigate = useNavigate();
   const params = useParams();
   const { slug } = params;
 
@@ -49,12 +51,25 @@ function ProductScreen() {
     fetchData();
   }, [slug]);
 
-  const {state, dispatch: ctxDispatch} = useContext(Store);
-  const addToCartHandler = () => {
+
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const {cart} = state;
+  const addToCartHandler = async() => {
+    const existItem = cart.cartItems.find((x) => x._id === product._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock < quantity){
+      return alert("Sorry. Product is out ohf stock");
+        return;
+      }
+
     ctxDispatch({
       type: 'CART_ADD_ITEM',
       payload: { ...product, quantity: 1 },
     });
+
+    navigate("/cart")
+
   };
   return loading ? (
     <LoadingBox />
@@ -79,14 +94,13 @@ function ProductScreen() {
               <h1>{product.nameproduct}</h1>
             </ListGroup.Item>
             <ListGroup.Item>Precio : {product.price}€</ListGroup.Item>
-            <ListGroup.Item>Descripción : {product.description}</ListGroup.Item>
+            <ListGroup.Item>Descripción : <p>{product.description}</p></ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={3}>
           <Card>
             <Card.Body>
               <ListGroup variant='flush'>
-                <ListGroup>
                   <ListGroup.Item>
                     <Row>
                       <Col>Precio:</Col>
@@ -98,14 +112,14 @@ function ProductScreen() {
                       <Col>Status:</Col>
                       <Col>
                         {product.countInStock > 0 ? (
-                          <Badge bg='success'>In stock</Badge>
+                          <Badge bg='success'>In Stock</Badge>
                         ) : (
                           <Badge bg='danger'>Unavailable</Badge>
                         )}
                       </Col>
                     </Row>
                   </ListGroup.Item>
-                  <ListGroup.Item>
+
                     {product.countInStock > 0 && (
                       <ListGroup.Item>
                         <div classname='d-grid'>
@@ -113,10 +127,8 @@ function ProductScreen() {
                         </div>
                       </ListGroup.Item>
                     )}
-                  </ListGroup.Item>
-                </ListGroup>
-              </ListGroup>
-            </Card.Body>
+                    </ListGroup>
+              </Card.Body>
           </Card>
         </Col>
       </Row>

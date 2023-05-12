@@ -63,23 +63,7 @@ function HomeScreen() {
           <Row>
             {products.map((product) => (
               <Col key={product.slug} sm={6} md={4} lg={3} className='mb-3'>
-
                 <Product product={product}></Product>
-
-                {/* <div className='product' key={product.slug}>
-                  <Link to={`/product/${product.slug}`}>
-                    <img src={product.image} alt={product.nameproduct} />
-                  </Link>
-                  <div className='product-info'>
-                    <Link to={`/product/${product.slug}`}>
-                      <p>{product.nameproduct}</p>
-                    </Link>
-                    <p>
-                      <strong>{product.price}€</strong>
-                    </p>
-                    <button>Add to cart</button>
-                  </div>
-                </div> */}
               </Col>
             ))}
           </Row>
