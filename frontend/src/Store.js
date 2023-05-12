@@ -29,6 +29,15 @@ function reducer(state, action) {
           cartItems: [...state.cart.cartItems, action.payload],
         },
       };
+    case "CART_REMOVE_ITEM": {
+      const cartItems = state.cart.cartItems.filter(
+        (item) => item._id !== action.payload._id
+      );
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      return { ...state, cart: { ...state.cart, cartItems } };
+    }
+    case "CART_CLEAR":
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
 
     case "USER_SIGNIN":
       return { ...state, userInfo: action.payload };

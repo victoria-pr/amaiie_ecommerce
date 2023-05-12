@@ -1,14 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import data from "./data.js";
-
-import orderRoutes from "./routers/orderRouters.js";
 import dotenv from "dotenv";
-
-import orderRouter from './routers/orderRouters.js'; 
-import userRouter from "./routers/userRouters.js"; 
+import orderRouter from "./routers/orderRouters.js";
+import userRouter from "./routers/userRouters.js";
 import productRouter from "./routers/productRouters.js";
-
 
 // Mongoose server
 dotenv.config();
@@ -37,8 +33,11 @@ app.use((error, req, res, next) => {
 
 app.get("/api/users", (req, res) => {
   res.send(data.users);
-}); 
+});
 
+app.get("/api/orders", (req, res) => {
+  res.send(data.orders);
+});
 
 app.get("/api/products", (req, res) => {
   res.send(data.products);
@@ -49,7 +48,7 @@ app.get("/api/products/slug/:slug", (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: 'Product Not Found' });
+    res.status(404).send({ message: "Product Not Found" });
   }
 });
 
@@ -68,4 +67,3 @@ mongoose
   .catch((error) => {
     console.log(error.message);
   });
-
