@@ -4,15 +4,32 @@ import data from "./data.js";
 
 import orderRoutes from "./routers/orderRouters.js";
 import dotenv from "dotenv";
-import userRouter from "./routers/userRouters.js";
+
+import orderRouter from './routers/orderRouters.js'; 
+import userRouter from "./routers/userRouters.js"; 
 import productRouter from "./routers/productRouters.js";
 
 
+// Mongoose server
+dotenv.config();
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("Conectado a MongoDB");
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });
+
 // Servidor express
 const app = express();
-
-app.use(express.json()); // middleware que permite recibir json en el body de las peticiones
+/* 
+app.use(express.json()); // middleware que permite recibir json en el body de las peticiones 
 app.use(express.urlencoded({ extended: true })); // middleware que permite recibir datos de formularios en el body de las peticiones
+
+app.use("/api/products", productRouter);
+app.use("/api/users", userRouter);
+app.use("/api/orders", orderRouter); */
 
 app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });
@@ -20,7 +37,6 @@ app.use((error, req, res, next) => {
 
 app.get("/api/users", (req, res) => {
   res.send(data.users);
-
 }); 
 
 
@@ -33,7 +49,7 @@ app.get("/api/products/slug/:slug", (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: "Product not found" });
+    res.status(404).send({ message: 'Product Not Found' });
   }
 });
 
@@ -53,6 +69,3 @@ mongoose
     console.log(error.message);
   });
 
-app.use((error, req, res, next) => {
-  res.status(500).send({ message: error.message });
-});
