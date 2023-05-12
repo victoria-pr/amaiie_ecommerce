@@ -72,6 +72,9 @@ button {
   text-align: center; /* Centrar texto horizontalmente */
 }
 
+.img-thumbnail {
+  height: 80px;
+}
 
 
 .mg-large {
