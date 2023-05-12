@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Store } from "./Store";
 import SigninScreen from "./screens/SigninScreen";
+import SignupScreen from "./screens/SignupScreen";
 import CartScreen from "./screens/CartScreen";
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
@@ -19,8 +20,12 @@ import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import axios from "axios";
 import { toast } from "react-toastify";
-
 import { getError } from "./utils";
+import ShippingAddressScreen from "./components/ShippingAddressScreen";
+import PaymentMethodScreen from "./components/PaymentMethodScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+
+
 
 function App() {
   const { state } = useContext(Store);
@@ -39,6 +44,20 @@ function App() {
     };
     fetchCategories();
   }, []);
+
+
+
+function App() {
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
+
+  const signoutHanlder = () => {
+    ctxDispatch({ type: "  USER_SIGNOUT" });
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
+  };
+
   return (
     <BrowserRouter>
       <div className='d-flex flex-column site-container' /* className='App' */>
@@ -68,8 +87,13 @@ function App() {
             <Routes>
               <Route path='/product/:slug' element={<ProductScreen />} />
               <Route path='/cart' element={<CartScreen />} />
+
               <Route path='/search' element={<SearchScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
+              <Route path='/signup' element={<SignupScreen />} />
+              <Route path='/placeorder' element={<PlaceOrderScreen />} />
+              <Route path='/shipping' element={<ShippingAddressScreen />} />
+              <Route path='/payment' element={<PaymentMethodScreen />} />
               <Route path='/' element={<HomeScreen />}></Route>
 
               <Route
