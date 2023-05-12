@@ -19,17 +19,17 @@ import {
 export default function CartScreen() {
   const navigate = useNavigate();
 
-  const { state, ctxDispatch } = useContext(Store);
+  const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
 
   const updateCartHandler = async (item, quantity) => {
-    const { data } = await Axios.get(`/api/products/${item._id}`);
+    /* const { data } = await Axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");
       return;
-    }
+    } */
 
     ctxDispatch({ type: "CART_ADD_ITEM", payload: { ...item, quantity } });
   };
@@ -82,7 +82,7 @@ export default function CartScreen() {
                       <Button
                         variant='light'
                         onClick={
-                          () => updateCartHandler(item, item.quantity - 1) //onClick={() => updateCartHandler(item, item.quantity + 1)}}
+                          () => updateCartHandler(item, item.quantity + 1) //onClick={() => updateCartHandler(item, item.quantity + 1)}}
                         }
                         disabled={item.quantity === item.countInStock} // puedes añadir unidades hasta alcanzar el stock que hay
                       >

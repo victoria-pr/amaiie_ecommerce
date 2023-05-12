@@ -7,7 +7,7 @@ import { Store } from "../Store";
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "./CheckoutSteps";
 
-export default function ShippingAddressScreen() {
+function ShippingAddressScreen() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
@@ -114,3 +114,5 @@ export default function ShippingAddressScreen() {
     </div>
   );
 }
+
+export default ShippingAddressScreen;

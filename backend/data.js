@@ -26,7 +26,7 @@ const data = {
       slug: "armario siglo XI",
       image: "/images/deco.png",
       description: "high quality",
-      countInStock: 1,
+      countInStock: 2,
       price: 120,
       createDate: "13/02/2023",
       brand: "Idoya",
@@ -38,7 +38,7 @@ const data = {
       slug: "decoracion friends",
       image: "/images/mueble.png",
       description: "high quality",
-      countInStock: 1,
+      countInStock: 2,
       price: 250,
       createDate: "13/02/2023",
       brand: "Vicky",
@@ -50,7 +50,7 @@ const data = {
       slug: "navidad miki",
       image: "/images/miki.png",
       description: "high quality product",
-      countInStock: 1,
+      countInStock: 2,
       price: 25,
       createDate: "13/02/2023",
       brand: "Unai",
@@ -70,4 +70,5 @@ const data = {
     },
   ],
 };
+
 export default data;
