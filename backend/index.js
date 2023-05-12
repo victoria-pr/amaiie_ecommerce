@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import orderRouter from "./routers/orderRouters.js";
 import userRouter from "./routers/userRouters.js";
 import productRouter from "./routers/productRouters.js";
+import seedRouter from "./routers/seedRouters.js";
 
 // Mongoose server
 dotenv.config();
@@ -19,13 +20,21 @@ mongoose
 
 // Servidor express
 const app = express();
-/* 
-app.use(express.json()); // middleware que permite recibir json en el body de las peticiones 
+app.use("/api/seed", seedRouter);
+
+/* app.use(express.json()); // middleware que permite recibir json en el body de las peticiones
 app.use(express.urlencoded({ extended: true })); // middleware que permite recibir datos de formularios en el body de las peticiones
+
 
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
-app.use("/api/orders", orderRouter); */
+app.use("/api/orders", orderRouter);
+
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/frontend/build")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
+); */
 
 app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });
@@ -38,7 +47,6 @@ app.get("/api/users", (req, res) => {
 app.get("/api/orders", (req, res) => {
   res.send(data.orders);
 });
-
 
 app.get("/api/products", (req, res) => {
   res.send(data.products);
@@ -57,14 +65,3 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`server at http://localhost:${port}`);
 });
-
-// Mongoose server
-dotenv.config();
-mongoose
-  .connect(process.env.MONGODB_URI)
-  .then(() => {
-    console.log("Conectado a MongoDB");
-  })
-  .catch((error) => {
-    console.log(error.message);
-  });
