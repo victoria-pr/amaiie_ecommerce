@@ -12,7 +12,6 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 
 const reducer = (state, action) => {
-
   switch (action.type) {
     case "FETCH_REQUEST":
       return { ...state, loading: true };
@@ -24,7 +23,6 @@ const reducer = (state, action) => {
     default:
       return state;
   }
-
 };
 
 function HomeScreen() {
@@ -44,16 +42,16 @@ function HomeScreen() {
         dispatch({ type: "FETCH_FAIL", payload: err.message });
       }
 
-      // setProducts(result.data);    
-
+      // setProducts(result.data);
     };
     fetchData();
-  }, []);  return (
+  }, []);
+  return (
     <div>
       <Helmet>
         <title>Amaiie</title>
       </Helmet>
-      <h1>featured Products</h1>
+      <h1>Productos</h1>
       <div className='products'>
         {loading ? (
           <LoadingBox />
@@ -63,7 +61,6 @@ function HomeScreen() {
           <Row>
             {products.map((product) => (
               <Col key={product.slug} sm={6} md={4} lg={3} className='mb-3'>
-
                 <Product product={product}></Product>
 
                 {/* <div className='product' key={product.slug}>
@@ -84,10 +81,8 @@ function HomeScreen() {
             ))}
           </Row>
         )}
-
-      </div>    
-      
       </div>
-
+    </div>
   );
-}export default HomeScreen;
+}
+export default HomeScreen;
