@@ -23,6 +23,7 @@ export default function Signinscreen() {
         <Form.Group className="mb-3" controlId="password">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" required />
+        </Form.Group>
             <div className="mb-3">
                 <Button type="submit">Sign In</Button>
             </div>
@@ -30,7 +31,6 @@ export default function Signinscreen() {
                 New Customer?{' '}
                 <Link to={`/signup?redirect=${redirect}`}>Create your account</Link>
             </div>
-        </Form.Group>
         </Form>
     </Container>
   )

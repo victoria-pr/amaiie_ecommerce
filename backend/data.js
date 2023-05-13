@@ -1,9 +1,5 @@
-
-//import bcrypt from "bcrypt";
-
-
 const data = {
-  users: [
+  /* users: [
     {
       username: "Basir",
       email: "admin@example.com",
@@ -12,7 +8,7 @@ const data = {
       isAdmin: true,
 
       /* password: bcrypt.hashSync("123456"),
-      role: admin, */
+      role: admin, *//*
     },
     {
       username: "John",
@@ -20,51 +16,51 @@ const data = {
       //password: bcrypt.hashSync("123456"),
       //role: user,
     },
-  ],
+  ], */
   products: [
     {
-      _id: '1',
-      nameproduct: "Armario antiguo",
+      //_id: '1',
+      nameproduct: "Armario antiguo", 
       slug: "armario-siglo-XI",
-      category: "decoration",
       image: "/images/deco.png", // 679px × 829px
+      category: "decoration",
+      description: "high quality",
       price: 120,
       countInStock: 10,
       brand: "Idoya",
-      description: "high quality",
     },
     {
-       _id: '2',
+      //_id: '2',
       nameproduct: "Deco friends",
       slug: "decoracion-friends",
-      category: "decoration",
       image: "/images/mueble.png",
+      category: "decoration",
+      description: "high quality",
       price: 250,
       countInStock: 0,
       brand: "Vicky",
-      description: "high quality",
     },
     {
-      _id: '3',
+      //_id: '3',
       nameproduct: "Bola Navidad Miki",
       slug: "navidad-miki",
-      category: "decoration",
       image: "/images/miki.png",
+      category: "decoration",
+      description: "high quality product",
       price: 25,
       countInStock: 15,
       brand: "Unai",
-      description: "high quality product",
     },
     {
-      _id: '4',
+      //_id: '4',
       nameproduct: "bola navidad",
       slug: "bola-santa",
-      category: "decoration",
       image: "/images/santa1.png",
+      category: "decoration",
+      description: "high quality product",
       price: 65,
       countInStock: 5,
       brand: "Unai",
-      description: "high quality product",
     },
   ],
 };
