@@ -12,6 +12,26 @@ productRouter.get("/", async (req, res) => {
   res.send(products); //muestra los productos en formato JSON
 });
 
+//ruta GET para acceder a través del slug
+productRouter.get("/slug/:slug", async (req, res) => {
+  const product = await Product.findOne({ slug: req.params.slug });
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product Not Found" });
+  }
+});
+
+//ruta GET para acceder a través del id
+productRouter.get("/:id", async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product Not Found" });
+  }
+});
+
 //Ruta POST para crear un nuevo producto
 productRouter.post(
   "/",
@@ -85,7 +105,8 @@ productRouter.delete(
     }
   })
 );
-productRouter.post(
+
+/* productRouter.post(
   "/:id/reviews",
   //isAuth,
   expressAsyncHandler(async (req, res) => {
@@ -118,7 +139,7 @@ productRouter.post(
       res.status(404).send({ message: "Product Not Found" });
     }
   })
-);
+); */
 
 // Ruta GET que obtiene la lista de productos
 const PAGE_SIZE = 3; //elementos que se muestran por página
@@ -227,23 +248,5 @@ productRouter.get(
     res.send(categories); //lista de categorías en formato JSON
   })
 );
-//ruta GET para acceder a través del slug
-productRouter.get("/slug/:slug", async (req, res) => {
-  const product = await Product.findOne({ slug: req.params.slug });
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
-//ruta GET para acceder a través del id
-productRouter.get("/:id", async (req, res) => {
-  const product = await Product.findById(req.params.id);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
 
 export default productRouter;

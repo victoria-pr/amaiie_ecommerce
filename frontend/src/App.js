@@ -6,10 +6,11 @@ import ProductScreen from "./screens/ProductScreen";
 import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
 import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useReducer, useContext, useEffect, useState } from "react";
 import { Store } from "./Store";
 import SigninScreen from "./screens/SigninScreen";
 import SignupScreen from "./screens/SignupScreen";
@@ -20,6 +21,8 @@ import AdminRoute from "./components/AdminRoute";
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import { toast } from "react-toastify";
+/* import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; */
 import { getError } from "./utils";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
@@ -28,10 +31,18 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
+  const signoutHanlder = () => {
+    ctxDispatch({ type: "USER_SIGNOUT" });
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
+  };
+
+  /*  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+ */
+  /*  useEffect(() => {
     const fetchCategories = async () => {
       try {
         const { data } = await Axios.get(`/api/products/categories`);
@@ -41,18 +52,12 @@ function App() {
       }
     };
     fetchCategories();
-  }, []);
-
-  const signoutHanlder = () => {
-    ctxDispatch({ type: "  USER_SIGNOUT" });
-    localStorage.removeItem("userInfo");
-    localStorage.removeItem("shippingAddress");
-    localStorage.removeItem("paymentMethod");
-  };
+  }, []); */
 
   return (
     <BrowserRouter>
       <div className='d-flex flex-column site-container' /* className='App' */>
+        {/*    <ToastContainer position='bottom-center' limit={1} /> */}
         <Navbar bg='dark' variant='dark'>
           <Container>
             <LinkContainer to='/'>
@@ -67,6 +72,28 @@ function App() {
                   </Badge>
                 )}
               </Link>
+              {userInfo ? (
+                <NavDropdown title={userInfo.username} id='basic-nav-dropdown'>
+                  <LinkContainer to='/profile'>
+                    <NavDropdown.Item>User Profile</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/orderhistory'>
+                    <NavDropdown.Item>Order History</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Divider />
+                  <Link
+                    className='dropdown-item'
+                    to='/signout'
+                    onClick={signoutHanlder}
+                  >
+                    Sign Out
+                  </Link>
+                </NavDropdown>
+              ) : (
+                <Link className='nav-link' to='/signin'>
+                  Sign In
+                </Link>
+              )}
             </Nav>
           </Container>
         </Navbar>
@@ -85,7 +112,6 @@ function App() {
               <Route path='/shipping' element={<ShippingAddressScreen />} />
               <Route path='/payment' element={<PaymentMethodScreen />} />
               <Route path='/' element={<HomeScreen />}></Route>
-
               <Route
                 path='/admin/products'
                 element={
@@ -104,7 +130,7 @@ function App() {
               ></Route>
             </Routes>
           </Container>
-          <Nav className='flex-column text-white w-100 p-2'>
+          {/*  <Nav className='flex-column text-white w-100 p-2'>
             <Nav.Item>
               <strong>Categories</strong>
             </Nav.Item>
@@ -118,7 +144,7 @@ function App() {
                 </LinkContainer>
               </Nav.Item>
             ))}
-          </Nav>
+          </Nav> */}
         </main>
         <footer>
           <div className='text-center'>All right reseved</div>

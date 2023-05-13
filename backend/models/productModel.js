@@ -17,6 +17,7 @@ const productSchema = new mongoose.Schema(
 );
 const Product = mongoose.model("Product", productSchema);
 export default Product;
+
 /*   idartist: { type: mongoose.Types.ObjectId, ref: "owner", required: true }, */
 
 /* category: {

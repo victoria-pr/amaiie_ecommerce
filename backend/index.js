@@ -1,11 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
+import seedRouter from "./routers/seedRouters.js";
 import data from "./data.js";
 import dotenv from "dotenv";
 import orderRouter from "./routers/orderRouters.js";
 import userRouter from "./routers/userRouters.js";
 import productRouter from "./routers/productRouters.js";
-import seedRouter from "./routers/seedRouters.js";
+import path from "path";
 import orderRoutes from "./routers/orderRouters.js";
 
 // Mongoose server
@@ -23,35 +24,39 @@ mongoose
 const app = express();
 app.use("/api/seed", seedRouter);
 
-/* app.use(express.json()); // middleware que permite recibir json en el body de las peticiones
+app.use(express.json()); // middleware que permite recibir json en el body de las peticiones
 app.use(express.urlencoded({ extended: true })); // middleware que permite recibir datos de formularios en el body de las peticiones
-
 
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
- 
-const __dirname = path.resolve();
+
+/* const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/frontend/build")));
 app.get("*", (req, res) =>
   res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
-);
-*/
+); */
+
 app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });
+});
+
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`server at http://localhost:${port}`);
 });
 
 app.get("/api/users", (req, res) => {
   res.send(data.users);
 });
-
+/* 
 app.get("/api/orders", (req, res) => {
   res.send(data.orders);
 });
 
 app.get("/api/products", (req, res) => {
   res.send(data.products);
-});
+}); 
 
 app.get("/api/products/slug/:slug", (req, res) => {
   const product = data.products.find((x) => x.slug === req.params.slug);
@@ -61,8 +66,4 @@ app.get("/api/products/slug/:slug", (req, res) => {
     res.status(404).send({ message: "Product Not Found" });
   }
 });
-
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`server at http://localhost:${port}`);
-});
+*/

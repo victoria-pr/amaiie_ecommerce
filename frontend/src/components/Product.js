@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import { useContext } from "react";
+import { useContext, useReducer } from "react";
 import { Store } from "../Store";
 
 function Product(props) {

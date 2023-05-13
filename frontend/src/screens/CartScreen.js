@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useReducer } from "react";
 import { Helmet } from "react-helmet-async";
 import { Store } from "../Store";
 import Axios from "axios";
