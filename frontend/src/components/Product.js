@@ -21,6 +21,11 @@ function Product(props) {
       window.alert("Sorry. Product is out of stock");
       return;
     } */
+
+    if (item.countInStock < quantity) {
+      window.alert("Sorry. Product is out of stock");
+      return;
+    }
     ctxDispatch({
       type: "CART_ADD_ITEM",
       payload: { ...item, quantity },

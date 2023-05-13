@@ -85,9 +85,9 @@ productRouter.delete(
     }
   })
 );
-/*productRouter.post(
+productRouter.post(
   "/:id/reviews",
-  isAuth,
+  //isAuth,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -118,7 +118,7 @@ productRouter.delete(
       res.status(404).send({ message: "Product Not Found" });
     }
   })
-);*/
+);
 
 // Ruta GET que obtiene la lista de productos
 const PAGE_SIZE = 3; //elementos que se muestran por página
@@ -165,14 +165,14 @@ productRouter.get(
           }
         : {};
     const categoryFilter = category && category !== "all" ? { category } : {};
-    /* const ratingFilter =
+    const ratingFilter =
       rating && rating !== "all"
         ? {
             rating: {
               $gte: Number(rating),
             },
           }
-        : {}; */
+        : {};
     const priceFilter =
       price && price !== "all"
         ? {
@@ -191,15 +191,15 @@ productRouter.get(
         : order === "highest"
         ? { price: -1 }
         : order === "toprated"
-        ? /*  ? { rating: -1 }
-        : order === "newest" */
-          { createdAt: -1 }
+        ? { rating: -1 }
+        : order === "newest"
+        ? { createdAt: -1 }
         : { _id: -1 };
     const products = await Product.find({
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-      /*...ratingFilter,*/
+      ...ratingFilter,
     })
       .sort(sortOrder)
       .skip(pageSize * (page - 1))

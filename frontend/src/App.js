@@ -21,7 +21,7 @@ import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import { toast } from "react-toastify";
 import { getError } from "./utils";
-import ShippingAddressScreen from "./components/ShippingAddressScreen";
+import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 
@@ -63,8 +63,7 @@ function App() {
                 Cart
                 {cart.cartItems.length > 0 && (
                   <Badge pill bg='danger'>
-                    {/* {cart.cartItems.reduce((a,c) => a + c.quantity, 0)}*/}
-                    {cart.cartItems.length}
+                    {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                   </Badge>
                 )}
               </Link>

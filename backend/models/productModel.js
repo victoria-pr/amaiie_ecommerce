@@ -4,14 +4,22 @@ const productSchema = new mongoose.Schema(
   {
     nameproduct: { type: String, required: true, unique: true },
     slug: { type: String, required: true, unique: true },
-    image: { type: String, required: false },
+    image: { type: String, required: true },
+    brand: { type: String, required: true },
+    category: { type: String, required: true },
     description: { type: String, required: true },
-    countInStock: { type: Number, required: true },
     price: { type: Number, required: true },
-    createdate: { type: Date, required: true },
-    idartist: { type: mongoose.Types.ObjectId, ref: "owner", required: true },
+    countInStock: { type: Number, required: true },
+  },
+  {
+    timestamps: true,
+  }
+);
+const Product = mongoose.model("Product", productSchema);
+export default Product;
+/*   idartist: { type: mongoose.Types.ObjectId, ref: "owner", required: true }, */
 
-    category: {
+/* category: {
       type: String,
       required: true,
       enum: [
@@ -23,15 +31,15 @@ const productSchema = new mongoose.Schema(
         "ceramic",
         "paper",
         "miniatures",
-        "soaps and candels",
-      ],
-    },
-  },
+        "soaps and candels", 
+      ],*/
+/*   },
+
   {
-    freezeTableName: true,
-    tymestamps: false, //el último dato actualizado de los productos
+    tymestamps: true, //el último dato actualizado de los productos
   }
 );
 
 const Product = mongoose.model("Product", productSchema);
 export default Product;
+ */
