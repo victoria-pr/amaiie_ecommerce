@@ -23,9 +23,9 @@ const data = {
   ],
   products: [
     {
-      // _id: '1',
+      _id: '1',
       nameproduct: "Armario antiguo",
-      slug: "armario siglo XI",
+      slug: "armario-siglo-XI",
       category: "decoration",
       image: "/images/deco.png", // 679px × 829px
       price: 120,
@@ -34,9 +34,9 @@ const data = {
       description: "high quality",
     },
     {
-      // _id: '2',
+       _id: '2',
       nameproduct: "Deco friends",
-      slug: "decoracion friends",
+      slug: "decoracion-friends",
       category: "decoration",
       image: "/images/mueble.png",
       price: 250,
@@ -45,9 +45,9 @@ const data = {
       description: "high quality",
     },
     {
-      // _id: '3',
+      _id: '3',
       nameproduct: "Bola Navidad Miki",
-      slug: "navidad miki",
+      slug: "navidad-miki",
       category: "decoration",
       image: "/images/miki.png",
       price: 25,
@@ -56,9 +56,9 @@ const data = {
       description: "high quality product",
     },
     {
-      // _id: '4',
+      _id: '4',
       nameproduct: "bola navidad",
-      slug: "bola santa",
+      slug: "bola-santa",
       category: "decoration",
       image: "/images/santa1.png",
       price: 65,
@@ -68,4 +68,5 @@ const data = {
     },
   ],
 };
+
 export default data;
