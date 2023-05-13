@@ -118,7 +118,7 @@ function ProductScreen() {
 
                     {product.countInStock > 0 && (
                       <ListGroup.Item>
-                        <div classname='d-grid'>
+                        <div className='d-grid'>
                           <Button onClick={addToCartHandler} variant='primary'>add to cart</Button>
                         </div>
                       </ListGroup.Item>
