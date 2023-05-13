@@ -1,4 +1,33 @@
-import express from "express";
+import express from 'express';
+import Product from '../models/productModel.js';
+
+const productRouter = express.Router();
+
+productRouter.get('/', async (req, res) => {
+  const products = await Product.find();
+  res.send(products);
+});
+
+productRouter.get('/slug/:slug', async (req, res) => {
+  const product = await Product.findOne({ slug: { $eq: req.params.slug } });
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product Not Found' });
+  }
+});
+productRouter.get('/:id', async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: 'Product Not Found' });
+  }
+});
+
+export default productRouter;
+
+/*import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
 
@@ -118,10 +147,12 @@ productRouter.delete(
       res.status(404).send({ message: "Product Not Found" });
     }
   })
-);*/
 
+);*/ 
+/*
 // Ruta GET que obtiene la lista de productos
 const PAGE_SIZE = 3; //elementos que se muestran por página
+
 productRouter.get(
   "/admin",
   //isAuth,
@@ -172,7 +203,7 @@ productRouter.get(
               $gte: Number(rating),
             },
           }
-        : {}; */
+        : {};
     const priceFilter =
       price && price !== "all"
         ? {
@@ -192,15 +223,17 @@ productRouter.get(
         ? { price: -1 }
         : order === "toprated"
         ? /*  ? { rating: -1 }
-        : order === "newest" */
+        : order === "newest" 
           { createdAt: -1 }
         : { _id: -1 };
     const products = await Product.find({
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-      /*...ratingFilter,*/
-    })
+
+      /*...ratingFilter,*//*
+    })  /*
+
       .sort(sortOrder)
       .skip(pageSize * (page - 1))
       .limit(pageSize);
@@ -208,8 +241,10 @@ productRouter.get(
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-      /*...ratingFilter,*/
-    });
+
+      /*...ratingFilter,*//*
+  }); /*
+
     res.send({
       products,
       countProducts,
@@ -246,4 +281,6 @@ productRouter.get("/:id", async (req, res) => {
   }
 });
 
-export default productRouter;
+
+export default productRouter;*/
+

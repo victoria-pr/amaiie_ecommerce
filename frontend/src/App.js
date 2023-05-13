@@ -6,6 +6,7 @@ import ProductScreen from "./screens/ProductScreen";
 import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
 import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
@@ -24,13 +25,17 @@ import { getError } from "./utils";
 import ShippingAddressScreen from "./components/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
-  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const {state, dispatch: ctxDispatch} = useContext(Store);
   const { cart, userInfo } = state;
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
+  
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -43,16 +48,21 @@ function App() {
     fetchCategories();
   }, []);
 
-  const signoutHanlder = () => {
-    ctxDispatch({ type: "  USER_SIGNOUT" });
-    localStorage.removeItem("userInfo");
-    localStorage.removeItem("shippingAddress");
+  
+  const signoutHandler = () => {
+    ctxDispatch({ type: 'USER_SIGNOUT' });
+    localStorage.removeItem('userInfo');
+     localStorage.removeItem("shippingAddress");
     localStorage.removeItem("paymentMethod");
   };
-
+  
+  
+  
   return (
     <BrowserRouter>
-      <div className='d-flex flex-column site-container' /* className='App' */>
+      <div className='d-flex flex-column site-container'>
+        <ToastContainer position="bottom-center" limit={1} />
+
         <Navbar bg='dark' variant='dark'>
           <Container>
             <LinkContainer to='/'>
@@ -63,11 +73,33 @@ function App() {
                 Cart
                 {cart.cartItems.length > 0 && (
                   <Badge pill bg='danger'>
-                    {/* {cart.cartItems.reduce((a,c) => a + c.quantity, 0)}*/}
-                    {cart.cartItems.length}
+
+                  {cart.cartItems.reduce((a,c) => a + c.quantity, 0)} 
+
                   </Badge>
                 )}
               </Link>
+              {userInfo ? (
+                <NavDropdown title={userInfo.username} id="basic-nav-dropdown">
+                  <LinkContainer to='/profile'>
+                    <NavDropdown.Item>User Profile</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/orderhistory'>
+                    <NavDropdown.Item>Order History</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Divider />
+                  <Link
+                    className='dropdown-item'
+                    to='/signout'
+                    onClick={signoutHandler}>
+                    Sign Out
+                    </Link>
+                  </NavDropdown>
+              ):(
+                <Link className='nav-link' to='/signin'>
+                  Sign In
+                </Link>
+              )}
             </Nav>
           </Container>
         </Navbar>

@@ -1,11 +1,14 @@
 import jwt from "jsonwebtoken";
 
 export const generateToken = (user) => {
-  return jwt.sign(
-    {
-      _id: user._id,
-      username: user.username,
-      email: user.email,
+
+    return jwt.sign( 
+    { 
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        isAdmin: user.isAdmin,
+
     },
     process.env.JWT_SECRET,
     {
@@ -14,7 +17,7 @@ export const generateToken = (user) => {
   );
 };
 
-export const isAuth = (req, res, next) => {
+/*export const isAuth = (req, res, next) => {
   const authorization = req.headers.authorization;
   if (authorization) {
     const token = authorization.slice(7, authorization.length); // Bearer XXXXXX
@@ -37,3 +40,4 @@ export const isAdmin = (req, res, next) => {
     res.status(401).send({ message: "Invalid Admin Token" });
   }
 };
+*/
