@@ -1,4 +1,6 @@
+
 import bcrypt from 'bcryptjs';
+
 
 const data = {
    users: [
@@ -17,15 +19,17 @@ const data = {
   ],
   products: [
     {
+
       //_id: '1',
       nameproduct: "Armario antiguo", 
       slug: "armario-siglo-XI",
       image: "/images/deco.png", // 679px × 829px
       category: "decoration",
+      countInStock: 2,
       description: "high quality",
       price: 120,
-      countInStock: 10,
       brand: "Idoya",
+
     },
     {
       //_id: '2',
@@ -33,10 +37,11 @@ const data = {
       slug: "decoracion-friends",
       image: "/images/mueble.png",
       category: "decoration",
+      countInStock: 2,
       description: "high quality",
       price: 250,
-      countInStock: 0,
       brand: "Vicky",
+
     },
     {
       //_id: '3',
@@ -44,23 +49,28 @@ const data = {
       slug: "navidad-miki",
       image: "/images/miki.png",
       category: "decoration",
+      countInStock: 2,
       description: "high quality product",
       price: 25,
-      countInStock: 15,
       brand: "Unai",
     },
     {
       //_id: '4',
       nameproduct: "bola navidad",
+
       slug: "bola-santa",
       image: "/images/santa1.png",
       category: "decoration",
+      countInStock: 0,
       description: "high quality product",
+
       price: 65,
-      countInStock: 5,
       brand: "Unai",
+
     },
   ],
 };
 
+
 export default data;
+

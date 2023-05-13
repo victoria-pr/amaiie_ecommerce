@@ -1,4 +1,5 @@
 
+
 import express from 'express';
 import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs';
@@ -6,12 +7,15 @@ import { generateToken } from '../utils.js';
 import expressAsyncHandler from 'express-async-handler';
 
 
+
 const userRouter = express.Router();
 
 userRouter.post(
   "/signin",
   expressAsyncHandler(async (req, res) => {
+    // expressAsyncHandler es un middleware que maneja errores asyncronos
     const user = await User.findOne({ username: req.body.username });
+
     if (user) {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         // bcrypt.compareSync compara la contraseña ingresada con la contraseña encriptada en la base de datos
@@ -26,6 +30,25 @@ userRouter.post(
       }
     }
     res.status(401).send({ message: "Invalid username or password" });
+  })
+);
+
+userRouter.post(
+  "/signup",
+  expressAsyncHandler(async (req, res) => {
+    const newUser = new User({
+      username: req.body.username,
+      email: req.body.email,
+      pasword: bcrypt.hashSync(req.body.password),
+    });
+    const user = await newUser.save();
+    res.send({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user),
+    });
   })
 );
 
