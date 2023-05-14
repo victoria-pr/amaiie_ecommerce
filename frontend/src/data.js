@@ -1,66 +1,70 @@
-/*import bcrypt from "bcryptjs";*/
+/*import bcrypt from "bcryptjs";
 
 const data = {
-  /* users: [
+  users: [
     {
-      name: "Basir",
-      email: "admin@example.com",
-      password: bcrypt.hashSync("123456"),
-      isAdmin: true,
-    },
-    {
-      name: "John",
-      email: "user@example.com",
-      password: bcrypt.hashSync("123456"),
-      isAdmin: false,
-    },
+      username: "Idoya",
+      email: "idoya@gmail.com",
 
-  ], */
+      password: "12345",
+      isAdmin: true,
+
+      password: bcrypt.hashSync("123456"),
+      role: admin,
+    },
+    /*{
+      username: "John",
+      email: "user@example.com",
+      //password: bcrypt.hashSync("123456"),
+      //role: user,
+    },
+  ],
   products: [
     {
-      // _id: '1',
+      //_id: '1',
       nameproduct: "Armario antiguo",
-      slug: "armario siglo XI",
-      category: "decoration",
+      slug: "armario-siglo-XI",
       image: "/images/deco.png", // 679px × 829px
+      category: "decoration",
+      description: "high quality",
       price: 120,
       countInStock: 10,
       brand: "Idoya",
-      description: "high quality",
     },
     {
-      // _id: '2',
+      //_id: '2',
       nameproduct: "Deco friends",
-      slug: "decoracion friends",
-      category: "decoration",
+      slug: "decoracion-friends",
       image: "/images/mueble.png",
+      category: "decoration",
+      description: "high quality",
       price: 250,
       countInStock: 0,
       brand: "Vicky",
-      description: "high quality",
     },
     {
-      // _id: '3',
+      //_id: '3',
       nameproduct: "Bola Navidad Miki",
-      slug: "navidad miki",
-      category: "decoration",
+      slug: "navidad-miki",
       image: "/images/miki.png",
+      category: "decoration",
+      description: "high quality product",
       price: 25,
       countInStock: 15,
       brand: "Unai",
-      description: "high quality product",
     },
     {
-      // _id: '4',
+      //_id: '4',
       nameproduct: "bola navidad",
-      slug: "bola santa",
-      category: "decoration",
+      slug: "bola-santa",
       image: "/images/santa1.png",
+      category: "decoration",
+      description: "high quality product",
       price: 65,
       countInStock: 5,
       brand: "Unai",
-      description: "high quality product",
     },
   ],
 };
-export default data;
+
+export default data;*/

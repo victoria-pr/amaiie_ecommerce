@@ -5,116 +5,118 @@ import ProductScreen from "./screens/ProductScreen";
 import Navbar from "react-bootstrap/Navbar";
 import Badge from "react-bootstrap/Badge";
 import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Store } from "./Store";
 import SigninScreen from "./screens/SigninScreen";
-import SignupScreen from "./screens/SignupScreen";
 import CartScreen from "./screens/CartScreen";
-import SearchBox from "./components/SearchBox";
-import SearchScreen from "./screens/SearchScreen";
-import AdminRoute from "./components/AdminRoute";
-import ProductListScreen from "./screens/ProductListScreen";
-import ProductEditScreen from "./screens/ProductEditScreen";
+import { toast, ToastContainer } from "react-toastify"; //importamos toast para el Sidebar, pero da error
+import "react-toastify/dist/ReactToastify.css";
+import Button from "react-bootstrap/esm/Button"; //Para el Sidebar
 import axios from "axios";
-import { toast } from "react-toastify";
 import { getError } from "./utils";
-import ShippingAddressScreen from "./components/ShippingAddressScreen";
-import PaymentMethodScreen from "./components/PaymentMethodScreen";
-import PlaceOrderScreen from "./screens/PlaceOrderScreen";
-
-
-
+import SearchBox from "./components/SearchBox";
 function App() {
-  const { state } = useContext(Store);
-  const { cart } = state;
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart, userInfo } = state;
+
+  const signoutHandler = () => {
+    ctxDispatch({ type: "USER_SIGNOUT" });
+    localStorage.removeItem("userInfo");
+  };
+
+  //Creamos el sideBar para las categorías
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
     const fetchCategories = async () => {
       try {
         const { data } = await axios.get(`/api/products/categories`);
         setCategories(data);
       } catch (err) {
-        toast.error(getError(err));
+        toast.error(getError(err)); //Daba error, sustituido por un console.log(error)
+        //console.log(err);
       }
     };
     fetchCategories();
   }, []);
-
-
-
-function App() {
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { cart, userInfo } = state;
-
-  const signoutHanlder = () => {
-    ctxDispatch({ type: "  USER_SIGNOUT" });
-    localStorage.removeItem("userInfo");
-    localStorage.removeItem("shippingAddress");
-    localStorage.removeItem("paymentMethod");
-  };
-
   return (
     <BrowserRouter>
-      <div className='d-flex flex-column site-container' /* className='App' */>
+      <div
+        className={
+          sidebarIsOpen //Si está abierto el sideBar aplica active-cont (css en index.css)
+            ? "d-flex flex-column site-container active-cont"
+            : "d-flex flex-column site-container"
+        }
+      >
+        <ToastContainer position='bottom-center' limit={1} />
         <Navbar bg='dark' variant='dark'>
           <Container>
+            <Button
+              variant='dark'
+              onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
+            >
+              <i className='fas fa-bars'></i>
+            </Button>
             <LinkContainer to='/'>
               <Navbar.Brand>amaiie</Navbar.Brand>
             </LinkContainer>
-            <Nav className='me-auto'>
-              <Link to='/cart' className='nav-link'>
-                Cart
-                {cart.cartItems.length > 0 && (
-                  <Badge pill bg='danger'>
-                    {/* {cart.cartItems.reduce((a,c) => a + c.quantity, 0)}*/}
-                    {cart.cartItems.length}
-                  </Badge>
+            <Navbar.Toggle aria-controls='basic-navbar-nav' />
+            <Navbar.Collapse id='basic-navbar-nav'>
+              <SearchBox />
+              <Nav className='me-auto'>
+                <Link to='/cart' className='nav-link'>
+                  Cart
+                  {cart.cartItems.length > 0 && (
+                    <Badge pill bg='danger'>
+                      {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
+                    </Badge>
+                  )}
+                </Link>
+                {userInfo ? (
+                  <NavDropdown
+                    title={userInfo.username}
+                    id='basic-nav-dropdown'
+                  >
+                    <LinkContainer to='/profile'>
+                      <NavDropdown.Item>User Profile</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to='/orderhistory'>
+                      <NavDropdown.Item>Order History</NavDropdown.Item>
+                    </LinkContainer>
+                    <NavDropdown.Divider />
+                    <Link
+                      className='dropdown-item'
+                      to='/signout'
+                      onClick={signoutHandler}
+                    >
+                      Sign Out
+                    </Link>
+                  </NavDropdown>
+                ) : (
+                  <Link className='nav-link' to='/signin'>
+                    Sign In
+                  </Link>
                 )}
-              </Link>
-            </Nav>
+              </Nav>
+            </Navbar.Collapse>
           </Container>
         </Navbar>
         <header className='App-header'>
           {/*  <Link to='/'> amaiie</Link> */}
         </header>
-        <main>
-          <Container className='mt-3'>
-            <Routes>
-              <Route path='/product/:slug' element={<ProductScreen />} />
-              <Route path='/cart' element={<CartScreen />} />
-
-              <Route path='/search' element={<SearchScreen />} />
-              <Route path='/signin' element={<SigninScreen />} />
-              <Route path='/signup' element={<SignupScreen />} />
-              <Route path='/placeorder' element={<PlaceOrderScreen />} />
-              <Route path='/shipping' element={<ShippingAddressScreen />} />
-              <Route path='/payment' element={<PaymentMethodScreen />} />
-              <Route path='/' element={<HomeScreen />}></Route>
-
-              <Route
-                path='/admin/products'
-                element={
-                  <AdminRoute>
-                    <ProductListScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-              <Route
-                path='/admin/product/:id'
-                element={
-                  <AdminRoute>
-                    <ProductEditScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-            </Routes>
-          </Container>
-          <Nav className='flex-column text-white w-100 p-2'>
+        {/* Sidebar por categorias------------------------------------------ */}
+        <div
+          className={
+            sidebarIsOpen
+              ? "active.nav side-navbar d-flex justify-content-betwen flex-wrap flex-column"
+              : "side-navbar d-flex justify-content-between flex-wrap flex-colum"
+          }
+        >
+          <Nav className='flex-colum text-white w-100 p-2'>
             <Nav.Item>
               <strong>Categories</strong>
             </Nav.Item>
@@ -129,6 +131,16 @@ function App() {
               </Nav.Item>
             ))}
           </Nav>
+        </div>
+        <main>
+          <Container className='mt-3'>
+            <Routes>
+              <Route path='/product/:slug' element={<ProductScreen />} />
+              <Route path='/cart' element={<CartScreen />} />
+              <Route path='/signin' element={<SigninScreen />} />
+              <Route path='/' element={<HomeScreen />}></Route>
+            </Routes>
+          </Container>
         </main>
         <footer>
           <div className='text-center'>All right reseved</div>
