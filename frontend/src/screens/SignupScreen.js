@@ -90,7 +90,7 @@ export default function SignupScreen() {
           <Button type='submit'>Sign Up</Button>
         </div>
         <div className='mb-3'>
-          Already have an acount?{" "}
+          Already have an acount?
           <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
         </div>
       </Form>

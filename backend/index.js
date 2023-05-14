@@ -45,25 +45,3 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`server at http://localhost:${port}`);
 });
-
-app.get("/api/users", (req, res) => {
-  res.send(data.users);
-});
-/* 
-app.get("/api/orders", (req, res) => {
-  res.send(data.orders);
-});
-
-app.get("/api/products", (req, res) => {
-  res.send(data.products);
-}); 
-
-app.get("/api/products/slug/:slug", (req, res) => {
-  const product = data.products.find((x) => x.slug === req.params.slug);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
-*/
