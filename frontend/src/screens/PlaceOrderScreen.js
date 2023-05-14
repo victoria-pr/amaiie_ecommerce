@@ -1,4 +1,4 @@
-import Axios from "axios";
+import axios from "axios";
 import { useContext, useEffect, useReducer } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
@@ -38,24 +38,24 @@ function PlaceOrderScreen() {
   const { cart, userInfo } = state;
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
-  cart.itemPrice = round2(
+  cart.itemsPrice = round2(
     cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
   );
 
-  cart.shippingPrice = cart.itemPrice > 100 ? round2(0) : round2(10);
-  cart.taxPrice = round2(0.21 * cart.itemPrice);
-  cart.totalPrice = cart.itemPrice + cart.shippingPrice + cart.taxPrice;
+  cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
+  cart.taxPrice = round2(0.21 * cart.itemsPrice);
+  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
   const placeOrderHandler = async () => {
     try {
       dispatch({ type: "CREATE_REQUEST" });
-      const { data } = await Axios.post(
+      const { data } = await axios.post(
         "/api/orders",
         {
           orderItems: cart.cartItems,
           shippingAddress: cart.shippingAddress,
           paymentMethod: cart.paymentMethod,
-          itemsPrice: cart.itemsPrice,
+          itemPrice: cart.itemPrice,
           shippingPrice: cart.shippingPrice,
           taxPrice: cart.taxPrice,
           totalPrice: cart.totalPrice,
@@ -151,7 +151,7 @@ function PlaceOrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>{cart.itemPrice.toFixed(2)}€</Col>
+                    <Col>{cart.itemsPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
