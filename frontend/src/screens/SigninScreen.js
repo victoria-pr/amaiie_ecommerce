@@ -9,7 +9,7 @@ import { Store } from "../Store";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
 
-export default function Signinscreen() {
+export default function SigninScreen() {
   const navigate = useNavigate();
 
   const { search } = useLocation();

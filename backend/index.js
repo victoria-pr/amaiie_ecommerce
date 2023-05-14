@@ -24,6 +24,10 @@ mongoose
 const app = express();
 app.use("/api/seed", seedRouter);
 
+app.use("/api/keys/paypal", (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID || "sb");
+});
+
 app.use(express.json()); // middleware que permite recibir json en el body de las peticiones
 app.use(express.urlencoded({ extended: true })); // middleware que permite recibir datos de formularios en el body de las peticiones
 
