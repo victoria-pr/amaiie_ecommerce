@@ -7,6 +7,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { StoreProvider } from "./Store";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import GalleryScreen from "./screens/GalleryScreen";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +15,7 @@ root.render(
     <StoreProvider>
       <HelmetProvider>
         <PayPalScriptProvider deferLoading={true}>
-          <App />
+          <GalleryScreen />
         </PayPalScriptProvider>
       </HelmetProvider>
     </StoreProvider>

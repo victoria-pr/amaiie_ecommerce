@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"; //instalamos librería react-router-dom para navegar entre distintos componentes de un proyecto
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"; //instalamos librería react-router-dom para navegar entre distintos componentes de un proyecto
 //Añadimos todas las rutas: Home (están todos los productos), ProductScree (están las fichas individuales de los productos)
 import HomeScreen from "./screens/HomeScreen";
 import Axios from "axios";
@@ -28,6 +28,8 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
+import AvisoLegal from "./screens/AvisoLegal";
+import GalleryScreen from "./screens/GalleryScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -95,6 +97,9 @@ function App() {
                   Sign In
                 </Link>
               )}
+              <Link className='nav-link' to='/gallery'>
+                Gallery
+              </Link>
             </Nav>
           </Container>
         </Navbar>
@@ -104,8 +109,10 @@ function App() {
         <main>
           <Container className='mt-3'>
             <Routes>
+              <Route path='/' element={<HomeScreen />}></Route>
               <Route path='/product/:slug' element={<ProductScreen />} />
               <Route path='/cart' element={<CartScreen />} />
+
               <Route path='/search' element={<SearchScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />
@@ -113,7 +120,6 @@ function App() {
               <Route path='/order/:id' element={<OrderScreen />} />
               <Route path='/shipping' element={<ShippingAddressScreen />} />
               <Route path='/payment' element={<PaymentMethodScreen />} />
-              <Route path='/' element={<HomeScreen />}></Route>
               <Route
                 path='/admin/products'
                 element={
@@ -149,7 +155,17 @@ function App() {
           </Nav> */}
         </main>
         <footer>
-          <div className='text-center'>All right reseved</div>
+          <div className='text-center'>
+            <p>
+              Copyright © 2023 ·
+              {/* <Routes>
+                <Route path='/aviso-legal' component={AvisoLegal} />
+              </Routes>
+              <Link to='/screens/AvisoLegal.js'>Aviso legal</Link> .
+              <a href='#'>Política de privacidad</a> .
+              <a href='#'>Política de cookies</a> */}
+            </p>
+          </div>
         </footer>
       </div>
     </BrowserRouter>
