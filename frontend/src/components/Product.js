@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+<<<<<<< HEAD
 import axios from "axios";
 import { useContext } from "react";
 import { Store } from "../Store"; 
+=======
+import { useContext, useReducer } from "react";
+import { Store } from "../Store";
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
 
 function Product(props) {
   const { product } = props;
@@ -15,6 +21,7 @@ function Product(props) {
   const addToCartHandler = async (item) => {
     const existItem = cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
+<<<<<<< HEAD
     const { data } = await axios.get(`/api/products/${item._id}`)
     if (data.countInStock < quantity) {
       window.alert('Sorry. Product is out of stock');
@@ -26,6 +33,24 @@ function Product(props) {
       payload: { ...item, quantity },
     });
   } 
+=======
+
+    /*  const { data } = await axios.get(`/api/products/${item._id}`);
+    if (data.countInStock < quantity) {
+      window.alert("Sorry. Product is out of stock");
+      return;
+    } */
+
+    if (item.countInStock < quantity) {
+      window.alert("Sorry. Product is out of stock");
+      return;
+    }
+    ctxDispatch({
+      type: "CART_ADD_ITEM",
+      payload: { ...item, quantity },
+    });
+  };
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
 
   return (
     <Card key={product.slug}>
@@ -41,12 +66,17 @@ function Product(props) {
           <Card.Title>{product.nameproduct}</Card.Title>
         </Link>
         <Card.Text>{product.price}€</Card.Text>
+
         {product.countInStock === 0 ? (
           <Button variant='light' disabled>
             Out of stock
           </Button>
         ) : (
+<<<<<<< HEAD
         <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
+=======
+          <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
         )}
       </Card.Body>
     </Card>

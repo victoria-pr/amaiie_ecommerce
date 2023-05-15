@@ -15,4 +15,8 @@ function CheckoutSteps(props) {
   );
 }
 
+<<<<<<< HEAD
 export default CheckoutSteps; 
+=======
+export default CheckoutSteps;
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
