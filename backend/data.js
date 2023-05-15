@@ -1,23 +1,25 @@
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
+
+const saltRounds = 10; // Número de rondas para generar el salt
 
 const data = {
   users: [
     {
       username: "Basir",
       email: "admin@example.com",
-      password: bcrypt.hashSync("123456"),
+      password: bcrypt.hashSync("123456", saltRounds),
       isAdmin: true,
     },
     {
       username: "John",
       email: "user@example.com",
-      password: bcrypt.hashSync("1"),
+      password: bcrypt.hashSync("123456", saltRounds),
       isAdmin: false,
     },
   ],
   products: [
     {
-      //_id: '1',
+      // _id: '1',
       nameproduct: "Armario antiguo",
       slug: "armario-siglo-XI",
       image: "/images/deco.png", // 679px × 829px
@@ -28,7 +30,7 @@ const data = {
       brand: "Idoya",
     },
     {
-      //_id: '2',
+      // _id: '2',
       nameproduct: "Deco friends",
       slug: "decoracion-friends",
       image: "/images/mueble.png",
@@ -39,7 +41,7 @@ const data = {
       brand: "Vicky",
     },
     {
-      //_id: '3',
+      // _id: '3',
       nameproduct: "Bola Navidad Miki",
       slug: "navidad-miki",
       image: "/images/miki.png",
@@ -50,7 +52,7 @@ const data = {
       brand: "Unai",
     },
     {
-      //_id: '4',
+      // _id: '4',
       nameproduct: "bola navidad",
       slug: "bola-santa",
       image: "/images/santa1.png",

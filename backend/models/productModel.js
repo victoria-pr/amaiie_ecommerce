@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-
+import mongoose from "mongoose"; //Importamos la librería mongoose para la base de datos del los productos
+//Esquema de la base de datos de productos
 const productSchema = new mongoose.Schema(
   {
     nameproduct: { type: String, required: true, unique: true },
@@ -15,6 +15,32 @@ const productSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+const Product = mongoose.model("Product", productSchema);
+export default Product;
+
+/*   idartist: { type: mongoose.Types.ObjectId, ref: "owner", required: true }, */
+
+/* category: {
+      type: String,
+      required: true,
+      enum: [
+        "clothing",
+        "decoration",
+        "painting",
+        "photography",
+        "jewelry",
+        "ceramic",
+        "paper",
+        "miniatures",
+        "soaps and candels", 
+      ],*/
+/*   },
+
+  {
+    tymestamps: true, //el último dato actualizado de los productos
+  }
+);
 
 const Product = mongoose.model("Product", productSchema);
 export default Product;
+ */

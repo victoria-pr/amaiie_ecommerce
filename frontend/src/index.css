@@ -26,12 +26,6 @@ header a {
  */
 main {
   padding: 1rem;
-  flex: 1;
-}
-.btn-primary,
-.btn-outline-primary {
-  background-color: blue;
-  color: #fff;
 }
 
 .products {
@@ -92,45 +86,12 @@ button {
 .small-container {
   max-width: 600px;
 }
-/*CSS del Sidebar*/
 
-.btn-dark {
-  width: 15px;
-  color: #fff;
+.checkout-steps > div {
+  border-bottom: 0.2rem solid #a0a0a0;
+  color: #a0a0a0;
 }
-.bs-btn-hover-bg {
-  color: #fff;
-}
-.navbar-brand {
-  font-weight: bold;
-}
-.side-navbar {
-  width: 240px;
-  height: 100%;
-  position: absolute;
-  left: -300px;
-  background-color: #100901;
-  transition: 0.5s;
-}
-
-.site-container {
-  transition: 0.4s;
-}
-.active-cont {
-  margin-left: 240px;
-}
-.active-nav {
-  left: 0;
-}
-.text-bold {
-  font-weight: bold;
-}
-
-.q.form-control {
-  width: 150px;
-}
-/*Botón del buscador y placeholder*/
-#button-search {
-  width: 40px;
-  height: 40px;
+.checkout-steps > div.active {
+  border-bottom: 02rem solid #f08000;
+  color: #f08000;
 }

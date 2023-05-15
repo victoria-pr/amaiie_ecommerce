@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useReducer } from "react";
-import axios from "axios";
+import Axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -80,7 +80,7 @@ export default function ProductListScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/products/admin?page=${page} `, {
+        const { data } = await Axios.get(`/api/products/admin?page=${page} `, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
 
@@ -99,7 +99,7 @@ export default function ProductListScreen() {
     if (window.confirm("Are you sure to create?")) {
       try {
         dispatch({ type: "CREATE_REQUEST" });
-        const { data } = await axios.post(
+        const { data } = await Axios.post(
           "/api/products",
           {},
           {
@@ -121,7 +121,7 @@ export default function ProductListScreen() {
   const deleteHandler = async (product) => {
     if (window.confirm("Are you sure to delete?")) {
       try {
-        await axios.delete(`/api/products/${product._id}`, {
+        await Axios.delete(`/api/products/${product._id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         toast.success("product deleted successfully");
@@ -149,8 +149,10 @@ export default function ProductListScreen() {
           </div>
         </Col>
       </Row>
+
       {loadingCreate && <LoadingBox></LoadingBox>}
       {loadingDelete && <LoadingBox></LoadingBox>}
+
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -210,7 +212,6 @@ export default function ProductListScreen() {
           </div>
         </>
       )}
-      S
     </div>
   );
 }

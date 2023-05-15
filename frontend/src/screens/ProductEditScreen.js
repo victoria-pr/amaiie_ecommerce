@@ -1,138 +1,289 @@
-import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useReducer, useContext } from "react";
 import axios from "axios";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { useContext, useEffect, useReducer, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Store } from "../Store";
+import { getError } from "../utils";
+import Container from "react-bootstrap/Container";
 import ListGroup from "react-bootstrap/ListGroup";
-import Badge from "react-bootstrap/Badge";
-import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import { Helmet } from "react-helmet-async";
-import Card from "react-bootstrap/Card";
-
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { getError } from "../utils";
-import { Store } from "../Store";
+import Button from "react-bootstrap/Button";
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
       return { ...state, loading: true };
     case "FETCH_SUCCESS":
-      return { ...state, product: action.payload, loading: false };
+      return { ...state, loading: false };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
+    case "UPDATE_REQUEST":
+      return { ...state, loadingUpdate: true };
+    case "UPDATE_SUCCESS":
+      return { ...state, loadingUpdate: false };
+    case "UPDATE_FAIL":
+      return { ...state, loadingUpdate: false };
+    case "UPLOAD_REQUEST":
+      return { ...state, loadingUpload: true, errorUpload: "" };
+    case "UPLOAD_SUCCESS":
+      return {
+        ...state,
+        loadingUpload: false,
+        errorUpload: "",
+      };
+    case "UPLOAD_FAIL":
+      return { ...state, loadingUpload: false, errorUpload: action.payload };
+
     default:
       return state;
   }
 };
-function ProductScreen() {
+export default function ProductEditScreen() {
   const navigate = useNavigate();
-  const params = useParams();
-  const { slug } = params;
+  const params = useParams(); // /product/:id
+  const { id: productId } = params;
 
-  const [{ loading, error, product }, dispatch] = useReducer(reducer, {
-    product: [],
+  const { state } = useContext(Store);
+  const { userInfo } = state;
+  const { loading, error, loadingUpdate, loadingUpload } = productState;
+
+  const [productState, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
+    loadingUpdate: false,
+    loadingUpload: false,
   });
+
+  const [name, setName] = useState("");
+  const [slug, setSlug] = useState("");
+  const [price, setPrice] = useState("");
+  const [image, setImage] = useState("");
+  const [images, setImages] = useState([]);
+  const [category, setCategory] = useState("");
+  const [countInStock, setCountInStock] = useState("");
+  const [brand, setBrand] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await axios.get(`/api/products/slug/${slug}`);
-        dispatch({ type: "FETCH_SUCCESS", payload: result.data });
+        dispatch({ type: "FETCH_REQUEST" });
+        const { data } = await axios.get(`/api/products/${productId}`);
+        setName(data.name);
+        setSlug(data.slug);
+        setPrice(data.price);
+        setImage(data.image);
+        setCategory(data.category);
+        setCountInStock(data.countInStock);
+        setBrand(data.brand);
+        setDescription(data.description);
+        dispatch({ type: "FETCH_SUCCESS" });
       } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: getError(err) });
+        dispatch({
+          type: "FETCH_FAIL",
+          payload: getError(err),
+        });
       }
     };
     fetchData();
-  }, [slug]);
+  }, [productId]);
 
-  const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { cart } = state;
-
-  const addToCartHandler = async () => {
-    const existItem = cart.cartItems.find((x) => x._id === product._id);
-    const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${product._id}`);
-    if (data.countInStock < quantity) {
-      window.alert("Sorry. Product is out of stock");
-      return;
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      dispatch({ type: "UPDATE_REQUEST" });
+      await axios.put(
+        `/api/products/${productId}`,
+        {
+          _id: productId,
+          name,
+          slug,
+          price,
+          image,
+          category,
+          brand,
+          countInStock,
+          description,
+        },
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({
+        type: "UPDATE_SUCCESS",
+      });
+      toast.success("Product updated successfully");
+      navigate("/admin/products");
+    } catch (err) {
+      toast.error(getError(err));
+      dispatch({ type: "UPDATE_FAIL" });
     }
-    ctxDispatch({
-      type: "CART_ADD_ITEM",
-      payload: { ...product, quantity: 1 },
-    });
-    navigate("/cart");
   };
-  return loading ? (
-    <LoadingBox />
-  ) : error ? (
-    <MessageBox variant='danger'> {error}</MessageBox>
-  ) : (
-    <div>
-      <Row>
-        <Col md={6}>
-          <img
-            className='img-large'
-            src={product.image}
-            alt={product.nameproduct}
-          ></img>
-        </Col>
-        <Col md={3}>
-          <ListGroup variant='flush'>
-            <ListGroup.Item>
-              <Helmet>
-                <title>{product.nameproduct}</title>
-              </Helmet>
-              <h1>{product.nameproduct}</h1>
-            </ListGroup.Item>
-            <ListGroup.Item>Precio : {product.price}€</ListGroup.Item>
-            <ListGroup.Item>
-              Descripción : <p>{product.description}</p>
-            </ListGroup.Item>
-          </ListGroup>
-        </Col>
-        <Col md={3}>
-          <Card>
-            <Card.Body>
-              <ListGroup variant='flush'>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Precio:</Col>
-                    <Col>{product.price}€</Col>
-                  </Row>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <Row>
-                    <Col>Status:</Col>
-                    <Col>
-                      {product.countInStock > 0 ? (
-                        <Badge bg='success'>In Stock</Badge>
-                      ) : (
-                        <Badge bg='danger'>Unavailable</Badge>
-                      )}
-                    </Col>
-                  </Row>
-                </ListGroup.Item>
+  const uploadFileHandler = async (e, forImages) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append("file", file);
+    try {
+      dispatch({ type: "UPLOAD_REQUEST" });
+      const { data } = await axios.post("/api/upload", bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: "UPLOAD_SUCCESS" });
 
-                {product.countInStock > 0 && (
-                  <ListGroup.Item>
-                    <div className='d-grid'>
-                      <Button onClick={addToCartHandler} variant='primary'>
-                        add to cart
-                      </Button>
-                    </div>
-                  </ListGroup.Item>
-                )}
-              </ListGroup>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </div>
+      if (forImages) {
+        setImages([...images, data.secure_url]);
+      } else {
+        setImage(data.secure_url);
+      }
+      toast.success("Image uploaded successfully. click Update to apply it");
+    } catch (err) {
+      toast.error(getError(err));
+      dispatch({ type: "UPLOAD_FAIL", payload: getError(err) });
+    }
+  };
+  const deleteFileHandler = async (fileName, f) => {
+    try {
+      const { data } = await axios.post(
+        "/api/delete",
+        { file: fileName },
+        {
+          headers: {
+            authorization: `Bearer ${userInfo.token}`,
+          },
+        }
+      );
+
+      if (data.success) {
+        setImages(images.filter((x) => x !== fileName));
+        toast.success("Image removed successfully. Click Update to apply it.");
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (err) {
+      toast.error(getError(err));
+    }
+  };
+
+  return (
+    <Container className='small-container'>
+      <Helmet>
+        <title>Edit Product ${productId}</title>
+      </Helmet>
+      <h1>Edit Product {productId}</h1>
+
+      {loading ? (
+        <LoadingBox></LoadingBox>
+      ) : error ? (
+        <MessageBox variant='danger'>{error}</MessageBox>
+      ) : (
+        <Form onSubmit={submitHandler}>
+          <Form.Group className='mb-3' controlId='name'>
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='slug'>
+            <Form.Label>Slug</Form.Label>
+            <Form.Control
+              value={slug}
+              onChange={(e) => setSlug(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='name'>
+            <Form.Label>Price</Form.Label>
+            <Form.Control
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='image'>
+            <Form.Label>Image File</Form.Label>
+            <Form.Control
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='imageFile'>
+            <Form.Label>Upload Image</Form.Label>
+            <Form.Control type='file' onChange={uploadFileHandler} />
+            {loadingUpload && <LoadingBox></LoadingBox>}
+          </Form.Group>
+
+          <Form.Group className='mb-3' controlId='additionalImage'>
+            <Form.Label>Additional Images</Form.Label>
+            {images.length === 0 && <MessageBox>No image</MessageBox>}
+            <ListGroup variant='flush'>
+              {images.map((x) => (
+                <ListGroup.Item key={x}>
+                  {x}
+                  <Button variant='light' onClick={() => deleteFileHandler(x)}>
+                    <i className='fa fa-times-circle'></i>
+                  </Button>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='additionalImageFile'>
+            <Form.Label>Upload Aditional Image</Form.Label>
+            <Form.Control
+              type='file'
+              onChange={(e) => uploadFileHandler(e, true)}
+            />
+            {loadingUpload && <LoadingBox></LoadingBox>}
+          </Form.Group>
+
+          <Form.Group className='mb-3' controlId='category'>
+            <Form.Label>Category</Form.Label>
+            <Form.Control
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='brand'>
+            <Form.Label>Brand</Form.Label>
+            <Form.Control
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='countInStock'>
+            <Form.Label>Count In Stock</Form.Label>
+            <Form.Control
+              value={countInStock}
+              onChange={(e) => setCountInStock(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='description'>
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <div className='mb-3'>
+            <Button disabled={loadingUpdate} type='submit'>
+              Update
+            </Button>
+            {loadingUpdate && <LoadingBox></LoadingBox>}
+          </div>
+        </Form>
+      )}
+    </Container>
   );
 }
-export default ProductScreen;

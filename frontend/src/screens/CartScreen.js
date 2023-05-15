@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useContext, useReducer } from "react";
 import { Helmet } from "react-helmet-async";
 import { Store } from "../Store";
+import Axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -14,32 +15,28 @@ import {
   faPlusCircle,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
 export default function CartScreen() {
   const navigate = useNavigate();
+
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
 
   const updateCartHandler = async (item, quantity) => {
-    const { data } = await axios.get(`/api/products/${item._id}`);
+    const { data } = await Axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");
       return;
     }
-    ctxDispatch({
-      type: "CART_ADD_ITEM",
-      payload: { ...item, quantity },
-    });
+
+    ctxDispatch({ type: "CART_ADD_ITEM", payload: { ...item, quantity } });
   };
   const removeItemHandler = (item) => {
-    ctxDispatch({
-      type: "CART_REMOVE_ITEM",
-      payload: item,
-    });
+    ctxDispatch({ type: "CART_REMOVE_ITEM", payload: item });
   };
+
   const checkoutHandler = () => {
     navigate("/signin?redirect=/shipping");
   };
@@ -84,21 +81,19 @@ export default function CartScreen() {
                       <span>{item.quantity}</span>{" "}
                       <Button
                         variant='light'
-                        onClick={() =>
-                          updateCartHandler(item, item.quantity + 1)
+                        onClick={
+                          () => updateCartHandler(item, item.quantity + 1) //onClick={() => updateCartHandler(item, item.quantity + 1)}}
                         }
-                        disabled={item.quantity === item.countInStock}
+                        disabled={item.quantity === item.countInStock} // puedes añadir unidades hasta alcanzar el stock que hay
                       >
-                        {" "}
-                        {/* puedes añadir unidades hasta alcanzar el stock que hay */}
                         <FontAwesomeIcon icon={faPlusCircle} />
                       </Button>
                     </Col>
                     <Col md={3}>${item.price}</Col>
                     <Col md={2}>
                       <Button
-                        onClick={() => removeItemHandler(item)}
                         variant='light'
+                        onClick={() => removeItemHandler(item)}
                       >
                         <FontAwesomeIcon icon={faTrash} />
                       </Button>

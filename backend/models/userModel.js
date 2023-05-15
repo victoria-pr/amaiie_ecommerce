@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    /* resetToken: { type: String }, */
+    /* resetToken: { type: String },*/
 
     image: { type: String, required: false },
     adress: { type: String, required: false },
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, default: false, required: false },
   },
   {
-    typestamps: false,
+    timestamps: false,
   }
 );
 

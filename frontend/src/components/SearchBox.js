@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function SearchBox() {
   const navigate = useNavigate();
-  //HOOK query
   const [query, setQuery] = useState("");
   const submitHandler = (e) => {
     e.preventDefault();
@@ -15,7 +14,6 @@ export default function SearchBox() {
   };
 
   return (
-    //FORMULARIO BUSCADOR
     <Form className='d-flex me-auto' onSubmit={submitHandler}>
       <InputGroup>
         <FormControl
