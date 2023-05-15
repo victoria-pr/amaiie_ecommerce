@@ -1,21 +1,24 @@
 /*import bcrypt from "bcryptjs";*/
 
 const data = {
-  /* users: [
+  users: [
     {
-      name: "Basir",
+      username: "Basir",
       email: "admin@example.com",
-      password: bcrypt.hashSync("123456"),
+
+      password: "123456",
       isAdmin: true,
+
+      /* password: bcrypt.hashSync("123456"),
+      role: admin, */
     },
     {
-      name: "John",
+      username: "John",
       email: "user@example.com",
-      password: bcrypt.hashSync("123456"),
-      isAdmin: false,
+      //password: bcrypt.hashSync("123456"),
+      //role: user,
     },
-
-  ], */
+  ],
   products: [
     {
       // _id: '1',
@@ -24,7 +27,7 @@ const data = {
       category: "decoration",
       image: "/images/deco.png", // 679px × 829px
       price: 120,
-      countInStock: 10,
+      countInStock: 2,
       brand: "Idoya",
       description: "high quality",
     },
@@ -35,7 +38,7 @@ const data = {
       category: "decoration",
       image: "/images/mueble.png",
       price: 250,
-      countInStock: 0,
+      countInStock: 2,
       brand: "Vicky",
       description: "high quality",
     },
@@ -46,7 +49,7 @@ const data = {
       category: "decoration",
       image: "/images/miki.png",
       price: 25,
-      countInStock: 15,
+      countInStock: 2,
       brand: "Unai",
       description: "high quality product",
     },
@@ -57,7 +60,7 @@ const data = {
       category: "decoration",
       image: "/images/santa1.png",
       price: 65,
-      countInStock: 5,
+      countInStock: 0,
       brand: "Unai",
       description: "high quality product",
     },

@@ -9,8 +9,7 @@ const userRouter = express.Router();
 userRouter.post(
   "/signin",
   expressAsyncHandler(async (req, res) => {
-    // expressAsyncHandler es un middleware que maneja errores asyncronos
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ username: req.body.username });
     if (user) {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         // bcrypt.compareSync compara la contraseña ingresada con la contraseña encriptada en la base de datos
@@ -34,7 +33,7 @@ userRouter.post(
     const newUser = new User({
       username: req.body.username,
       email: req.body.email,
-      pasword: bcrypt.hashSync(req.body.password),
+      password: bcrypt.hashSync(req.body.password, 10),
     });
     const user = await newUser.save();
     res.send({
@@ -46,5 +45,4 @@ userRouter.post(
     });
   })
 );
-
 export default userRouter;

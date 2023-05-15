@@ -1,15 +1,14 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import CheckoutSteps from "../components/CheckoutSteps";
+import { useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import CheckoutSteps from "../components/CheckoutSteps";
 import { Store } from "../Store";
 
-function PaymentMethodScreen() {
+export default function PaymentMethodScreen() {
   const navigate = useNavigate();
-
-  const [state, dispatch: ctxDispatch] = useContext(Store);
+  const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { shippingAddress, paymentMethod },
   } = state;
@@ -25,20 +24,18 @@ function PaymentMethodScreen() {
   }, [shippingAddress, navigate]);
   const submitHandler = (e) => {
     e.preventDefault();
-    ctxDispatch({ type: "SAVE_PAYMENT_METOD", payload: paymentMethodName });
+    ctxDispatch({ type: "SAVE_PAYMENT_METHOD", payload: paymentMethodName });
     localStorage.setItem("paymentMethod", paymentMethodName);
-    navigate("/palceorder");
+    navigate("/placeorder");
   };
-
   return (
     <div>
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
-
       <div className='container small-container'>
         <Helmet>
           <title>Payment Method</title>
         </Helmet>
-        <h1 className='my-3'> Payment Method</h1>
+        <h1 className='my-3'>Payment Method</h1>
         <Form onSubmit={submitHandler}>
           <div className='mb-3'>
             <Form.Check
@@ -61,12 +58,10 @@ function PaymentMethodScreen() {
             />
           </div>
           <div className='mb-3'>
-            <Button type='submit'> Continue</Button>
+            <Button type='submit'>Continue</Button>
           </div>
         </Form>
       </div>
     </div>
   );
 }
-
-export default PaymentMethodScreen;

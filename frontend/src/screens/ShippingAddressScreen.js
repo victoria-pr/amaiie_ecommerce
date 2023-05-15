@@ -1,34 +1,30 @@
-import React from "react";
 import { Helmet } from "react-helmet-async";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useContext, useEffect } from "react";
 import { Store } from "../Store";
 import { useNavigate } from "react-router-dom";
-import CheckoutSteps from "./CheckoutSteps";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     userInfo,
-    cart: { ShippingAddress },
+    cart: { shippingAddress },
   } = state;
-
-  const [fullName, setFullName] = useState(ShippingAddress.fullName || "");
-  const [address, setAddress] = useState(ShippingAddress.address || "");
-  const [city, setCity] = useState(ShippingAddress.city || "");
+  const [fullName, setFullName] = useState(shippingAddress.fullName || "");
+  const [address, setAddress] = useState(shippingAddress.address || "");
+  const [city, setCity] = useState(shippingAddress.city || "");
   const [postalCode, setPostalCode] = useState(
-    ShippingAddress.postalCode || ""
+    shippingAddress.postalCode || ""
   );
   useEffect(() => {
     if (!userInfo) {
       navigate("/signin?redirect=/shipping");
     }
   }, [userInfo, navigate]);
-
-  const [country, setCountry] = useState(ShippingAddress.country || "");
-
+  const [country, setCountry] = useState(shippingAddress.country || "");
   const submitHandler = (e) => {
     e.preventDefault();
     ctxDispatch({
@@ -51,9 +47,8 @@ export default function ShippingAddressScreen() {
         country,
       })
     );
+    navigate("/payment");
   };
-
-  navigate("/payment");
 
   return (
     <div>

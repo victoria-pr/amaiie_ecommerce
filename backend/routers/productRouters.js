@@ -12,6 +12,26 @@ productRouter.get("/", async (req, res) => {
   res.send(products); //muestra los productos en formato JSON
 });
 
+//ruta GET para acceder a través del slug
+productRouter.get("/slug/:slug", async (req, res) => {
+  const product = await Product.findOne({ slug: req.params.slug });
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product Not Found" });
+  }
+});
+
+//ruta GET para acceder a través del id
+productRouter.get("/:id", async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product Not Found" });
+  }
+});
+
 //Ruta POST para crear un nuevo producto
 productRouter.post(
   "/",
@@ -25,12 +45,11 @@ productRouter.post(
       nameproduct: "sample name " + Date.now(),
       slug: "sample-name-" + Date.now(),
       image: "/images/sample-image.png",
-      description: "sample description",
-      countinStock: 0,
       price: 0,
-      createdate: "sample date",
-      idartist: "sample idartist",
       category: "sample category",
+      brand: "sample brand",
+      countInStock: 0,
+      description: "sample description",
     });
     //Guardamos el producto en la base de datos  para enviar posteriormente un mensaje de que el producto se ha creado
     const product = await newProduct.save();
@@ -52,13 +71,12 @@ productRouter.put(
     if (product) {
       product.nameproduct = req.body.nameproduct;
       product.slug = req.body.slug;
-      product.image = req.body.image;
-      product.description = req.body.description;
-      productRouter.countinStock = req.body.countinStock;
       product.price = req.body.price;
-      product.createdate = req.body.createdate;
-      product.idartist = req.body.idartist;
+      product.image = req.body.image;
       product.category = req.body.category;
+      product.brand = req.body.brand;
+      product.countInStock = req.body.countInStock;
+      product.description = req.body.description;
 
       //Una vez actualizado el producto se guarda y envía la respuesta de producto actualizado o en su caso de producto no encontrado
       await product.save();
@@ -87,9 +105,10 @@ productRouter.delete(
     }
   })
 );
-/*productRouter.post(
+
+/* productRouter.post(
   "/:id/reviews",
-  isAuth,
+  //isAuth,
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
@@ -120,7 +139,7 @@ productRouter.delete(
       res.status(404).send({ message: "Product Not Found" });
     }
   })
-);*/
+); */
 
 // Ruta GET que obtiene la lista de productos
 const PAGE_SIZE = 3; //elementos que se muestran por página
@@ -201,7 +220,7 @@ productRouter.get(
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-      /*...ratingFilter,*/
+      ...ratingFilter,
     })
       .sort(sortOrder)
       .skip(pageSize * (page - 1))
@@ -229,23 +248,5 @@ productRouter.get(
     res.send(categories); //lista de categorías en formato JSON
   })
 );
-//ruta GET para acceder a través del slug
-productRouter.get("/slug/:slug", async (req, res) => {
-  const product = await Product.findOne({ slug: req.params.slug });
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
-//ruta GET para acceder a través del id
-productRouter.get("/:id", async (req, res) => {
-  const product = await Product.findById(req.params.id);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
 
 export default productRouter;
