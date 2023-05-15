@@ -9,16 +9,21 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Store } from "./Store";
 import SigninScreen from "./screens/SigninScreen";
+import SignupScreen from "./screens/SignupScreen";
 import CartScreen from "./screens/CartScreen";
-import { toast, ToastContainer } from "react-toastify"; //importamos toast para el Sidebar, pero da error
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Button from "react-bootstrap/esm/Button"; //Para el Sidebar
+import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import axios from "axios";
 import { getError } from "./utils";
 import SearchBox from "./components/SearchBox";
+import Button from "react-bootstrap/Button";
+
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart, userInfo } = state;
@@ -26,8 +31,10 @@ function App() {
   const signoutHandler = () => {
     ctxDispatch({ type: "USER_SIGNOUT" });
     localStorage.removeItem("userInfo");
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
+    window.location.href = "/signin";
   };
-
   //Creamos el sideBar para las categorías
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -101,6 +108,22 @@ function App() {
                     Sign In
                   </Link>
                 )}
+                {userInfo && userInfo.isAdmin && (
+                  <NavDropdown title='Admin' id='admin-nav-dropdown'>
+                    <LinkContainer to='/admin/dashboard'>
+                      <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to='/admin/products'>
+                      <NavDropdown.Item>Products</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to='/admin/orders'>
+                      <NavDropdown.Item>Orders</NavDropdown.Item>
+                    </LinkContainer>
+                    <LinkContainer to='/admin/users'>
+                      <NavDropdown.Item>Users</NavDropdown.Item>
+                    </LinkContainer>
+                  </NavDropdown>
+                )}
               </Nav>
             </Navbar.Collapse>
           </Container>
@@ -139,6 +162,13 @@ function App() {
               <Route path='/cart' element={<CartScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/' element={<HomeScreen />}></Route>
+              <Route path='/signup' element={<SignupScreen />} />
+              <Route
+                path='/shipping'
+                element={<ShippingAddressScreen />}
+              ></Route>
+              <Route path='/placeorder' element={<PlaceOrderScreen />} />
+              <Route path='/payment' element={<PaymentMethodScreen />}></Route>
             </Routes>
           </Container>
         </main>

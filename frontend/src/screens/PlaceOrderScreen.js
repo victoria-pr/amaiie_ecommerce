@@ -38,11 +38,11 @@ function PlaceOrderScreen() {
   const { cart, userInfo } = state;
 
   const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100; // 123.2345 => 123.23
-  cart.itemPrice = round2(
+  cart.itemsPrice = round2(
     cart.cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
   );
 
-  cart.shippingPrice = cart.itemPrice > 100 ? round2(0) : round2(10);
+  cart.shippingPrice = cart.itemsPrice > 100 ? round2(0) : round2(10);
   cart.taxPrice = round2(0.21 * cart.itemsPrice);
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
@@ -151,19 +151,19 @@ function PlaceOrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>{cart.itemPrice.tofixed(2)}€</Col>
+                    <Col>{cart.itemsPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>shipping</Col>
-                    <Col>{cart.shippingPrice.tofixed(2)}€</Col>
+                    <Col>{cart.shippingPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
-                    <Col>{cart.taxPrice.tofixed(2)}€</Col>
+                    <Col>{cart.taxPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -171,7 +171,7 @@ function PlaceOrderScreen() {
                     <Col>
                       <strong>Order Total</strong>
                     </Col>
-                    <Col>{cart.totalPrice.tofixed(2)}€</Col>
+                    <Col>{cart.totalPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
 
