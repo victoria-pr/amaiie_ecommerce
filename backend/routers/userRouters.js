@@ -8,6 +8,18 @@ import expressAsyncHandler from 'express-async-handler';
 
 const userRouter = express.Router();
 
+userRouter.get("/username/:username", 
+expressAsyncHandler(async (req, res) => {
+  const user = await User.findOne({ username: req.params.username });
+  if (user) {
+    res.send(user);
+  } else {
+    res.status(404).send({ message: "User Not Found" });
+  }
+})
+)
+
+
 userRouter.post(
   "/signin",
   expressAsyncHandler(async (req, res) => {

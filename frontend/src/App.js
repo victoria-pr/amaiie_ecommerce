@@ -30,6 +30,7 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import ArtistScreen from "./screens/ArtistScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -110,6 +111,7 @@ function App() {
           <Container className='mt-3'>
             <Routes>
               <Route path='/product/:slug' element={<ProductScreen />} />
+              <Route path='/user/:username' element={<ArtistScreen />} />
               <Route path='/cart' element={<CartScreen />} />
               {/* <Route path='/search' element={<SearchScreen />} /> */}
               <Route path='/signin' element={<SigninScreen />} />
