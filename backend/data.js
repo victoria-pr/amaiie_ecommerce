@@ -1,68 +1,91 @@
-import bcrypt from "bcrypt";
-
-const saltRounds = 10; // Número de rondas para generar el salt
+/*import bcrypt from "bcryptjs";*/
 
 const data = {
   users: [
     {
       username: "Basir",
       email: "admin@example.com",
-      password: bcrypt.hashSync("123456", saltRounds),
+
+      password: "123456",
       isAdmin: true,
+
+      /* password: bcrypt.hashSync("123456"),
+      role: admin, */
     },
     {
       username: "John",
       email: "user@example.com",
-      password: bcrypt.hashSync("123456", saltRounds),
-      isAdmin: false,
+      //password: bcrypt.hashSync("123456"),
+      //role: user,
     },
   ],
   products: [
     {
       // _id: '1',
       nameproduct: "Armario antiguo",
-      slug: "armario-siglo-XI",
-      image: "/images/deco.png", // 679px × 829px
+      slug: "armario siglo XI",
       category: "decoration",
-      description: "high quality",
+      image: "/images/deco.png", // 679px × 829px
       price: 120,
-      countInStock: 10,
+      countInStock: 2,
       brand: "Idoya",
+      description: "high quality",
     },
     {
       // _id: '2',
       nameproduct: "Deco friends",
-      slug: "decoracion-friends",
-      image: "/images/mueble.png",
+      slug: "decoracion friends",
       category: "decoration",
-      description: "high quality",
+      image: "/images/mueble.png",
       price: 250,
-      countInStock: 0,
+      countInStock: 2,
       brand: "Vicky",
+      description: "high quality",
     },
     {
       // _id: '3',
       nameproduct: "Bola Navidad Miki",
-      slug: "navidad-miki",
-      image: "/images/miki.png",
+      slug: "navidad miki",
       category: "decoration",
-      description: "high quality product",
+      image: "/images/miki.png",
       price: 25,
-      countInStock: 15,
+      countInStock: 2,
       brand: "Unai",
+      description: "high quality product",
     },
     {
       // _id: '4',
       nameproduct: "bola navidad",
-      slug: "bola-santa",
-      image: "/images/santa1.png",
+      slug: "bola santa",
       category: "decoration",
-      description: "high quality product",
+      image: "/images/santa1.png",
       price: 65,
-      countInStock: 5,
+      countInStock: 1,
       brand: "Unai",
+      description: "high quality product",
+    },
+    {
+      // _id: '5',
+      nameproduct: "zapatillas pintura",
+      slug: "zapatillas",
+      category: "pintura",
+      image: "/images/zapatillas.png",
+      price: 65,
+      countInStock: 1,
+      brand: "Marta",
+      description: "Design shoes",
+    },
+    {
+      // _id: '6',
+      nameproduct: "Pulseras de oro",
+      slug: "pulseras",
+      category: "joyeria",
+      image: "/images/pulseras.png",
+      price: 70,
+      countInStock: 2,
+      brand: "María",
+      description: "Joyas de diseño",
     },
   ],
 };
-
 export default data;
