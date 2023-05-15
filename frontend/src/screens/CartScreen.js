@@ -1,39 +1,44 @@
 import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Store } from '../Store';
-import { Col, Row, ListGroup, Button, Card } from 'react-bootstrap';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import MessageBox from '../components/MessageBox';
-import { Link,useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinusCircle, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 export default function CartScreen() {
   const navigate = useNavigate();
-  const { state,dispatch:ctxDispatch } = useContext(Store);
+  const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
 
-    const updateCartHandler = async(item, quantity) => {
-        /* const {data} = await axios.get(`/api/products/${item._id}`);
-        if (data.countInStock < quantity) {
-            window.alert('Sorry. Product is out of stock');
-            return;
-        } */
-
-        ctxDispatch({ type: 'CART_ADD_ITEM',
-         payload: { ...item, quantity } 
-        
-        });
-    };
-         const removeItemHandler = (item) => {
-          ctxDispatch({ type: 'CART_REMOVE_ITEM', payload: item });
-        };
-
-        const checkoutHandler = () => {
-          navigate('/signin?redirect=shipping');
-        };
+  const updateCartHandler = async (item, quantity) => {
+    const { data } = await axios.get(`/api/products/${item._id}`); 
+    if (data.countInStock < quantity) {
+      window.alert('Sorry. Product is out of stock');
+      return;
+    } 
+    ctxDispatch({
+      type: 'CART_ADD_ITEM',
+      payload: { ...item, quantity },
+    });
+  }
+  const removeItemHandler = (item) => {
+    ctxDispatch({
+      type: 'CART_REMOVE_ITEM',
+      payload: item,
+    });
+  };
+  const checkoutHandler = () => {
+    navigate("/signin?redirect=/shipping");
+  };
 
   return (
     <div>
@@ -46,7 +51,7 @@ export default function CartScreen() {
           {cartItems.length === 0 ? (
             <MessageBox>
               Cart is empty. <Link to="/">Go Shopping</Link>
-            </MessageBox>
+            </MessageBox>  
           ) : (
             <ListGroup>
               {cartItems.map((item) => (
@@ -61,14 +66,14 @@ export default function CartScreen() {
                       <Link to={`/product/${item.slug}`}>{item.nameproduct}</Link>
                     </Col>
                     <Col md={3}>
-                      <Button
+                      <Button 
                       onClick={() => updateCartHandler(item, item.quantity - 1)}
                       variant="light"
                       disabled={item.quantity === 1}>
                       <FontAwesomeIcon icon={faMinusCircle} />
                       </Button>{" "}
                       <span>{item.quantity}</span>{" "}
-                      <Button variant="light"
+                      <Button variant="light" 
                       onClick={() => updateCartHandler(item, item.quantity + 1)}
                       disabled={item.quantity === item.countInStock}> {/* puedes añadir unidades hasta alcanzar el stock que hay */}
                         <FontAwesomeIcon icon={faPlusCircle} />
@@ -118,3 +123,6 @@ export default function CartScreen() {
     </div>
   );
 }
+
+
+
