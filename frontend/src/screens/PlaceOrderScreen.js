@@ -62,7 +62,7 @@ function PlaceOrderScreen() {
         },
         {
           headers: {
-            authorization: `Bearer ${userInfo.token}`,
+            authorization: `Bearer ${userInfo.token}`, 
           },
         }
       );
