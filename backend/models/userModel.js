@@ -6,9 +6,9 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   /* resetToken: { type: String }, */
 
-  image: { type: String, required: false },
-  adress: { type: String, required: false },
-  video: { type: String, required: false },
+    image: { type: String, required: false },
+    adress: { type: String, required: false },
+    video: { type: String, required: false },
 
   isArtist: { type: Boolean, default: false, required: false },
   isAdmin: { type: Boolean, default: false, required: false }, 

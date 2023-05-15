@@ -8,8 +8,8 @@
 }
 .site-container {
   min-height: 100vh;
-
-}main {
+}
+main {
   flex: 1;
 }
 /* header {  background-color: #4E4949
@@ -33,10 +33,17 @@ header a {
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
+<<<<<<< HEAD
 }.product {
   border: 0.5px #404040
 solid;
   margin: 1rem; /*espacio entre productos*//*
+=======
+}
+.product {
+  border: 0.5px #404040 solid;
+  margin: 1rem; /*espacio entre productos*/
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
 }
 .product image {
   width: 50%;
@@ -54,11 +61,11 @@ h2 {
   font-weight: bold;
   text-decoration: none;
 }
-.img-large{
+.img-large {
   max-width: 100%;
 }
 button {
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
   border: 1px solid #ddd;
   color: black;
   padding: 10px 20px;
@@ -76,7 +83,6 @@ button {
   height: 80px;
 }
 
-
 .mg-large {
   max-width: 100%;
 }
@@ -93,6 +99,7 @@ button {
   color: #a0a0a0;
 }
 .checkout-steps > div.active {
+<<<<<<< HEAD
   border-bottom: 0.2rem solid #f08000;
   color: #f08000;
 } */
@@ -158,3 +165,8 @@ main {
   border-bottom: 0.2rem solid #f08000;
   color: #f08000;
 }
+=======
+  border-bottom: 02rem solid #f08000;
+  color: #f08000;
+}
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995

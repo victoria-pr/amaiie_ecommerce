@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 import React from "react";
+=======
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
 import { Helmet } from "react-helmet-async";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useState, useContext, useEffect } from "react";
 import { Store } from "../Store";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import CheckoutSteps from "../components/CheckoutSteps"; 
+=======
+import CheckoutSteps from "../components/CheckoutSteps";
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
@@ -17,7 +24,13 @@ export default function ShippingAddressScreen() {
   const [fullName, setFullName] = useState(shippingAddress.fullName || "");
   const [address, setAddress] = useState(shippingAddress.address || "");
   const [city, setCity] = useState(shippingAddress.city || "");
+<<<<<<< HEAD
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || "");
+=======
+  const [postalCode, setPostalCode] = useState(
+    shippingAddress.postalCode || ""
+  );
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
   useEffect(() => {
     if (!userInfo) {
       navigate("/signin?redirect=/shipping");
@@ -26,7 +39,11 @@ export default function ShippingAddressScreen() {
   const [country, setCountry] = useState(shippingAddress.country || "");
   const submitHandler = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
      ctxDispatch({
+=======
+    ctxDispatch({
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
       type: "SAVE_SHIPPING_ADDRESS",
       payload: {
         fullName,
@@ -48,12 +65,19 @@ export default function ShippingAddressScreen() {
     );
     navigate("/payment");
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
   return (
     <div>
       <Helmet>
         <title>Shipping Address</title>
       </Helmet>
+<<<<<<< HEAD
       
+=======
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
       <CheckoutSteps step1 step2></CheckoutSteps>
       <div className='container small-container'>
         <h1 className='my-3'> Shipping Address</h1>
@@ -107,4 +131,8 @@ export default function ShippingAddressScreen() {
       </div>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
