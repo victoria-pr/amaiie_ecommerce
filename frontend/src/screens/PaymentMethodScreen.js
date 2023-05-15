@@ -64,8 +64,4 @@ export default function PaymentMethodScreen() {
       </div>
     </div>
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995

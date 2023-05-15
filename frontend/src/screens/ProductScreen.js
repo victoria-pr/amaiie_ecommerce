@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useReducer, useContext } from "react";
-=======
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useReducer, useContext } from "react";
@@ -16,9 +11,7 @@ import Card from "react-bootstrap/Card";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
-import { Store } from "../Store";
-
-const reducer = (state, action) => {
+import { Store } from "../Store";const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
       return { ...state, loading: true };
@@ -33,15 +26,11 @@ const reducer = (state, action) => {
 function ProductScreen() {
   const navigate = useNavigate();
   const params = useParams();
-  const { slug } = params;
-
-  const [{ loading, error, product }, dispatch] = useReducer(reducer, {
+  const { slug } = params;  const [{ loading, error, product }, dispatch] = useReducer(reducer, {
     product: [],
     loading: true,
     error: "",
-  });
-
-  useEffect(() => {
+  });  useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
@@ -53,47 +42,20 @@ function ProductScreen() {
       }
     };
     fetchData();
-  }, [slug]);
-
-<<<<<<< HEAD
-  const {state, dispatch: ctxDispatch} = useContext(Store);
-  const { cart } = state;
-
-    const addToCartHandler = async () => {
-      const existItem = cart.cartItems.find((x) => x._id === product._id);
-      const quantity = existItem ? existItem.quantity + 1 : 1;
-      const { data } =  await axios.get(`/api/products/${product._id}`);
-      if (data.countInStock < quantity) {
-        window.alert('Sorry. Product is out of stock');
-        return;
-      } 
-=======
-  const { state, dispatch: ctxDispatch } = useContext(Store);
+  }, [slug]);  const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state;
   const addToCartHandler = async () => {
     const existItem = cart.cartItems.find((x) => x._id === product._id);
-    const quantity = existItem ? existItem.quantity + 1 : 1;
-
-    /*  const { data } = await axios.get(`/api/products/${product._id}`);
+    const quantity = existItem ? existItem.quantity + 1 : 1;    /*  const { data } = await axios.get(`/api/products/${product._id}`);
     if (data.countInStock < quantity) { */
     if (product.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");
       return;
-    }
-
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
-    ctxDispatch({
-      type: 'CART_ADD_ITEM',
+    }    ctxDispatch({
+      type: "CART_ADD_ITEM",
       payload: { ...product, quantity: 1 },
-    });
-<<<<<<< HEAD
-    navigate('/cart');
-=======
-
-    navigate("/cart");
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
-  };
-  return loading ? (
+    });    navigate("/cart");
+  };  return loading ? (
     <LoadingBox />
   ) : error ? (
     <MessageBox variant='danger'> {error}</MessageBox>
@@ -116,21 +78,15 @@ function ProductScreen() {
               <h1>{product.nameproduct}</h1>
             </ListGroup.Item>
             <ListGroup.Item>Precio : {product.price}€</ListGroup.Item>
-<<<<<<< HEAD
-            <ListGroup.Item>Descripción : <p>{product.description}</p></ListGroup.Item>
-=======
             <ListGroup.Item>
               Descripción : <p>{product.description}</p>
             </ListGroup.Item>
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
           </ListGroup>
         </Col>
         <Col md={3}>
           <Card>
             <Card.Body>
               <ListGroup variant='flush'>
-<<<<<<< HEAD
-=======
                 <ListGroup.Item>
                   <Row>
                     <Col>Precio:</Col>
@@ -148,10 +104,7 @@ function ProductScreen() {
                       )}
                     </Col>
                   </Row>
-                </ListGroup.Item>
-
-                {product.countInStock > 0 && (
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
+                </ListGroup.Item>                {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <div className='d-grid'>
                       <Button onClick={addToCartHandler} variant='primary'>
@@ -159,34 +112,9 @@ function ProductScreen() {
                       </Button>
                     </div>
                   </ListGroup.Item>
-<<<<<<< HEAD
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Status:</Col>
-                      <Col>
-                        {product.countInStock > 0 ? (
-                          <Badge bg='success'>In Stock</Badge>
-                        ) : (
-                          <Badge bg='danger'>Unavailable</Badge>
-                        )}
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-
-                    {product.countInStock > 0 && (
-                      <ListGroup.Item>
-                        <div className='d-grid'>
-                          <Button onClick={addToCartHandler} variant='primary'>add to cart</Button>
-                        </div>
-                      </ListGroup.Item>
-                    )}
-                    </ListGroup>
-              </Card.Body>
-=======
                 )}
               </ListGroup>
             </Card.Body>
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
           </Card>
         </Col>
       </Row>

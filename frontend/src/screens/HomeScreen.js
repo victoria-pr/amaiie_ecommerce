@@ -62,10 +62,6 @@ function HomeScreen() {
             {products.map((product) => (
               <Col key={product.slug} sm={6} md={4} lg={3} className='mb-3'>
                 <Product product={product}></Product>
-<<<<<<< HEAD
-                
-=======
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
               </Col>
             ))}
           </Row>

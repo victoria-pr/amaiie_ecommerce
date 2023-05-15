@@ -1,5 +1,7 @@
 import express from 'express';
 import Product from '../models/productModel.js';
+import expressAsyncHandler from 'express-async-handler';
+
 
 const productRouter = express.Router();
 
@@ -9,19 +11,9 @@ productRouter.get('/', async (req, res) => {
 
 });
 
-<<<<<<< HEAD
-productRouter.get('/slug/:slug', async (req, res) => {
-  const product = await Product.findOne({ slug: { $eq: req.params.slug } });
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: 'Product Not Found' });
-  }
-});
-
 productRouter.get('/:id', async (req, res) => {
-=======
-//ruta GET para acceder a través del slug
+
+  //ruta GET para acceder a través del slug
 productRouter.get("/slug/:slug", async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
@@ -30,21 +22,15 @@ productRouter.get("/slug/:slug", async (req, res) => {
     res.status(404).send({ message: "Product Not Found" });
   }
 });
+});
 
 //ruta GET para acceder a través del id
 productRouter.get("/:id", async (req, res) => {
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
   const product = await Product.findById(req.params.id);
   if (product) {
     res.send(product);
   } else {
-<<<<<<< HEAD
     res.status(404).send({ message: 'Product Not Found' });
-  }
-});
-
-=======
-    res.status(404).send({ message: "Product Not Found" });
   }
 });
 
@@ -265,8 +251,7 @@ productRouter.get(
   })
 );
 
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
-export default productRouter;
 
+export default productRouter;
 
 

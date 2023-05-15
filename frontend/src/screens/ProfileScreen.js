@@ -6,6 +6,7 @@ import {Helmet} from 'react-helmet-async';
 import { toast } from 'react-toastify';
 import { getError } from '../utils';
 
+
 const reducer = (state, action) => {
     switch (action.type) {
         case 'UPDATE_REQUEST':

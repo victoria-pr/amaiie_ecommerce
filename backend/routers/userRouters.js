@@ -1,17 +1,9 @@
-<<<<<<< HEAD
 import express from 'express';
 import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs';
 import { generateToken } from '../utils.js';
 import expressAsyncHandler from 'express-async-handler';
 
-=======
-import express from "express";
-import User from "../models/userModel.js";
-import bcrypt from "bcryptjs";
-import { generateToken } from "../utils.js";
-import expressAsyncHandler from "express-async-handler";
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
 
 const userRouter = express.Router();
 

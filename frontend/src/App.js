@@ -10,25 +10,11 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
-import { useContext } from "react";
-=======
 import { useReducer, useContext, useEffect, useState } from "react";
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
 import { Store } from "./Store";
 import SigninScreen from "./screens/SigninScreen";
 import SignupScreen from "./screens/SignupScreen";
 import CartScreen from "./screens/CartScreen";
-<<<<<<< HEAD
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ShippingAddressScreen from "./screens/ShippingAddressScreen";
-import PaymentMethodScreen from "./screens/PaymentMethodScreen";
-
-function App() {
-  const {state, dispatch: ctxDispatch} = useContext(Store);
-  const { cart, userInfo } = state;
-=======
 import SearchBox from "./components/SearchBox";
 import SearchScreen from "./screens/SearchScreen";
 import AdminRoute from "./components/AdminRoute";
@@ -42,6 +28,7 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
+import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -68,25 +55,11 @@ function App() {
     };
     fetchCategories();
   }, []); */
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
 
-  
-  const signoutHandler = () => {
-    ctxDispatch({ type: 'USER_SIGNOUT' });
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('shippingAddress');
-    localStorage.removeItem('paymentMethod');
-
-  };
   return (
     <BrowserRouter>
-<<<<<<< HEAD
-      <div className='d-flex flex-column site-container'>
-        <ToastContainer position="bottom-center" limit={1} />
-=======
       <div className='d-flex flex-column site-container' /* className='App' */>
         {/*    <ToastContainer position='bottom-center' limit={1} /> */}
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
         <Navbar bg='dark' variant='dark'>
           <Container>
             <LinkContainer to='/'>
@@ -97,20 +70,12 @@ function App() {
                 Cart
                 {cart.cartItems.length > 0 && (
                   <Badge pill bg='danger'>
-<<<<<<< HEAD
-                  {cart.cartItems.reduce((a,c) => a + c.quantity, 0)} 
-=======
                     {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
                   </Badge>
                 )}
               </Link>
               {userInfo ? (
-<<<<<<< HEAD
-                <NavDropdown title={userInfo.username} id="basic-nav-dropdown">
-=======
                 <NavDropdown title={userInfo.username} id='basic-nav-dropdown'>
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
                   <LinkContainer to='/profile'>
                     <NavDropdown.Item>User Profile</NavDropdown.Item>
                   </LinkContainer>
@@ -121,20 +86,12 @@ function App() {
                   <Link
                     className='dropdown-item'
                     to='/signout'
-<<<<<<< HEAD
-                    onClick={signoutHandler}>
-                    Sign Out
-                    </Link>
-                  </NavDropdown>
-              ):(
-=======
                     onClick={signoutHanlder}
                   >
                     Sign Out
                   </Link>
                 </NavDropdown>
               ) : (
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
                 <Link className='nav-link' to='/signin'>
                   Sign In
                 </Link>
@@ -148,18 +105,6 @@ function App() {
         <main>
           <Container className='mt-3'>
             <Routes>
-<<<<<<< HEAD
-              <Route path='/product/:slug' element={<ProductScreen />}/>
-              <Route path='/cart' element={<CartScreen/>}/> 
-              <Route path='/signin' element={<SigninScreen/>}/>
-              <Route path='/signup' element={<SignupScreen/>}/>
-              <Route
-              path='/shipping' 
-              element={<ShippingAddressScreen/>}
-              ></Route>
-              <Route path='/payment' 
-              element={<PaymentMethodScreen />}
-=======
               <Route path='/product/:slug' element={<ProductScreen />} />
               <Route path='/cart' element={<CartScreen />} />
               <Route path='/search' element={<SearchScreen />} />
@@ -168,6 +113,7 @@ function App() {
               <Route path='/placeorder' element={<PlaceOrderScreen />} />
               <Route path='/order/:id' element={<OrderScreen />} />
               <Route path='/shipping' element={<ShippingAddressScreen />} />
+              <Route path='/orderhistory' element={<OrderHistoryScreen />} />
               <Route path='/payment' element={<PaymentMethodScreen />} />
               <Route path='/' element={<HomeScreen />}></Route>
               <Route
@@ -185,7 +131,6 @@ function App() {
                     <ProductEditScreen />
                   </AdminRoute>
                 }
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
               ></Route>
             </Routes>
           </Container>
@@ -213,4 +158,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;

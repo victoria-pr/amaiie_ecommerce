@@ -26,17 +26,12 @@ header a {
   flex-wrap: wrap;
   justify-content: center;
   text-align: center;
-<<<<<<< HEAD
+
 }.product {
   border: 0.5px #404040
 solid;
   margin: 1rem; /*espacio entre productos*//*
-=======
-}
-.product {
-  border: 0.5px #404040 solid;
-  margin: 1rem; /*espacio entre productos*/
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
+
 }
 .product image {
   width: 50%;
@@ -54,11 +49,7 @@ h2 {
   font-weight: bold;
   text-decoration: none;
 }
-<<<<<<< HEAD
-.img-large{
-=======
 .img-large {
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
   max-width: 100%;
 }
 button {
@@ -73,37 +64,8 @@ button {
   border-radius: 5px;
   width: 80%; /* Ancho de cada botón *//*
   line-height: 1.5; /* Centrar texto verticalmente *//*
-  text-align: center; /* Centrar texto horizontalmente *//*
-}
+  text-align: center; /* Centrar texto horizontalmente */
 
-.img-thumbnail {
-  height: 80px;
-}
-<<<<<<< HEAD
-
-=======
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
-
-.mg-large {
-  max-width: 100%;
-}
-.img-large {
-  max-width: 100%;
-}
-
-.small-container {
-  max-width: 600px;
-}
-
-.checkout-steps > div {
-  border-bottom: 0.2rem solid #a0a0a0;
-  color: #a0a0a0;
-}
-.checkout-steps > div.active {
-<<<<<<< HEAD
-  border-bottom: 0.2rem solid #f08000;
-  color: #f08000;
-} */
 
 
 body {
@@ -164,8 +126,4 @@ main {
   border-bottom: 0.2rem solid #f08000;
   color: #f08000;
 } 
-=======
-  border-bottom: 02rem solid #f08000;
-  color: #f08000;
-}
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
+
