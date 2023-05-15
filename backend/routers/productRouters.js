@@ -1,33 +1,4 @@
-import express from 'express';
-import Product from '../models/productModel.js';
-
-const productRouter = express.Router();
-
-productRouter.get('/', async (req, res) => {
-  const products = await Product.find();
-  res.send(products);
-});
-
-productRouter.get('/slug/:slug', async (req, res) => {
-  const product = await Product.findOne({ slug: { $eq: req.params.slug } });
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: 'Product Not Found' });
-  }
-});
-productRouter.get('/:id', async (req, res) => {
-  const product = await Product.findById(req.params.id);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: 'Product Not Found' });
-  }
-});
-
-export default productRouter;
-
-/*import express from "express";
+import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
 
@@ -168,16 +139,10 @@ productRouter.delete(
       res.status(404).send({ message: "Product Not Found" });
     }
   })
-<<<<<<< HEAD
-);*/ 
-/*
-const PAGE_SIZE = 3;
-=======
 ); */
 
 // Ruta GET que obtiene la lista de productos
 const PAGE_SIZE = 3; //elementos que se muestran por página
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
 productRouter.get(
   "/admin",
   //isAuth,
@@ -238,7 +203,7 @@ productRouter.get(
               $lte: Number(price.split("-")[1]),
             },
           }
-        : {}; /*
+        : {};
     const sortOrder =
       order === "featured"
         ? { featured: -1 }
@@ -255,13 +220,8 @@ productRouter.get(
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-<<<<<<< HEAD
-      /*...ratingFilter,*//*
-    })  /*
-=======
       ...ratingFilter,
     })
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
       .sort(sortOrder)
       .skip(pageSize * (page - 1))
       .limit(pageSize);
@@ -269,13 +229,8 @@ productRouter.get(
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-<<<<<<< HEAD
-      /*...ratingFilter,*//*
-  }); /*
-=======
       /*...ratingFilter,*/
     });
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
     res.send({
       products,
       countProducts,
@@ -294,26 +249,4 @@ productRouter.get(
   })
 );
 
-<<<<<<< HEAD
-productRouter.get("/slug/:slug", async (req, res) => {
-  const product = await Product.findOne({ slug: req.params.slug });
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
-
-productRouter.get("/:id", async (req, res) => {
-  const product = await Product.findById(req.params.id);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
-
-export default productRouter;*/
-=======
 export default productRouter;
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995

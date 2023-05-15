@@ -25,27 +25,14 @@ export default function CartScreen() {
   } = state;
 
   const updateCartHandler = async (item, quantity) => {
-<<<<<<< HEAD
-    const { data } = await axios.get(`/api/products/${item._id}`); 
-=======
     const { data } = await Axios.get(`/api/products/${item._id}`);
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");
       return;
-<<<<<<< HEAD
-    } 
-    ctxDispatch({
-      type: 'CART_ADD_ITEM',
-      payload: { ...item, quantity },
-    });
-  }
-=======
     }
 
     ctxDispatch({ type: "CART_ADD_ITEM", payload: { ...item, quantity } });
   };
->>>>>>> 31851ef7e9a9f5a12d5c73757792042e0ddd3995
   const removeItemHandler = (item) => {
     ctxDispatch({ type: "CART_REMOVE_ITEM", payload: item });
   };
