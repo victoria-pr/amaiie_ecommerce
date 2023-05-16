@@ -20,19 +20,19 @@ import SearchScreen from "./screens/SearchScreen";
 import AdminRoute from "./components/AdminRoute";
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
-import { toast } from "react-toastify";
-/* import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; */
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { getError } from "./utils";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import AvisoLegal from "./screens/AvisoLegal";
+import Button from "react-bootstrap/esm/Button";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
-  const { cart, userInfo } = state;
+  const { fullBox, cart, userInfo } = state;
 
   const signoutHanlder = () => {
     ctxDispatch({ type: "USER_SIGNOUT" });
@@ -41,10 +41,10 @@ function App() {
     localStorage.removeItem("paymentMethod");
   };
 
-  /*  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
- */
-  /*  useEffect(() => {
+
+  useEffect(() => {
     const fetchCategories = async () => {
       try {
         const { data } = await Axios.get(`/api/products/categories`);
@@ -54,17 +54,32 @@ function App() {
       }
     };
     fetchCategories();
-  }, []); */
+  }, []);
 
   return (
     <BrowserRouter>
+      {/* <div
+        className={
+          sidebarIsOpen
+            ? fullBox
+              ? "site-container active-cont d-flex flex-column full-box"
+              : "site-container active-cont d-flex flex-column"
+            : fullBox
+            ? "site-container d-flex flex-column full-box"
+            : "site-container d-flex flex-column"
+        }
+      > */}
       <div className='d-flex flex-column site-container' /* className='App' */>
-        {/*    <ToastContainer position='bottom-center' limit={1} /> */}
+        <ToastContainer position='bottom-center' limit={1} />
         <Navbar bg='dark' variant='dark'>
           <Container>
             <LinkContainer to='/'>
               <Navbar.Brand>amaiie</Navbar.Brand>
             </LinkContainer>
+            {/*  <Navbar.Toggle aria-controls='basic-navbar-nav' />
+              <Navbar.Collapse id='basic-navbar-nav'> */}
+            <SearchBox />
+
             <Nav className='ml-auto'>
               <Link className='nav-link' to='/contact'>
                 Contacto
@@ -102,6 +117,22 @@ function App() {
                   Sign In
                 </Link>
               )}
+              {userInfo && userInfo.isAdmin && (
+                <NavDropdown title='Admin' id='admin-nav-dropdown'>
+                  {/* <LinkContainer to='/admin/dashboard'>
+                    <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                  </LinkContainer> */}
+                  <LinkContainer to='/admin/products'>
+                    <NavDropdown.Item>Products</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/admin/orders'>
+                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                  </LinkContainer>
+                  <LinkContainer to='/admin/users'>
+                    <NavDropdown.Item>Users</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
             </Nav>
           </Container>
         </Navbar>
@@ -109,68 +140,78 @@ function App() {
         <header className='App-header'>
           {/*  <Link to='/'> amaiie</Link> */}
         </header>
-        <main>
-          <Container className='mt-3'>
-            <Routes>
-              <Route path='/' element={<HomeScreen />}></Route>
-              <Route path='/product/:slug' element={<ProductScreen />} />
-              <Route path='/cart' element={<CartScreen />} />
-              <Route path='/search' element={<SearchScreen />} />
-              <Route path='/signin' element={<SigninScreen />} />
-              <Route path='/signup' element={<SignupScreen />} />
-              <Route path='/placeorder' element={<PlaceOrderScreen />} />
-              <Route path='/order/:id' element={<OrderScreen />} />
-              <Route path='/shipping' element={<ShippingAddressScreen />} />
-              <Route path='/payment' element={<PaymentMethodScreen />} />
-              <Route
-                path='/admin/products'
-                element={
-                  <AdminRoute>
-                    <ProductListScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-              <Route
-                path='/admin/product/:id'
-                element={
-                  <AdminRoute>
-                    <ProductEditScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-            </Routes>
-          </Container>
-          {/*  <Nav className='flex-column text-white w-100 p-2'>
-            <Nav.Item>
-              <strong>Categories</strong>
+      </div>
+      <div
+        className={
+          sidebarIsOpen
+            ? "active-nav side-navbar d-flex justify-content-between flex-wrap flex-column"
+            : "side-navbar d-flex justify-content-between flex-wrap flex-column"
+        }
+      >
+        <Nav className='flex-column text-white w-100 p-2'>
+          <Nav.Item>
+            <strong>Categories</strong>
+          </Nav.Item>
+          {categories.map((category) => (
+            <Nav.Item key={category}>
+              <LinkContainer
+                to={{ pathname: "/search", search: `category=${category}` }}
+                onClick={() => setSidebarIsOpen(false)}
+              >
+                <Nav.Link>{category}</Nav.Link>
+              </LinkContainer>
             </Nav.Item>
-            {categories.map((category) => (
-              <Nav.Item key={category}>
-                <LinkContainer
-                  to={{ pathname: "/search", search: `category=${category}` }}
-                  onClick={() => setSidebarIsOpen(false)}
-                >
-                  <Nav.Link>{category}</Nav.Link>
-                </LinkContainer>
-              </Nav.Item>
-            ))}
-          </Nav> */}
-        </main>
+          ))}
+        </Nav>
+      </div>
 
-        <footer>
-          <div className='text-center'>
-            <p>
-              Copyright © 2023 ·
-              {/* <Routes>
+      <main>
+        <Container className='mt-3'>
+          <Routes>
+            <Route path='/' element={<HomeScreen />}></Route>
+            <Route path='/product/:slug' element={<ProductScreen />} />
+            <Route path='/cart' element={<CartScreen />} />
+            <Route path='/search' element={<SearchScreen />} />
+            <Route path='/signin' element={<SigninScreen />} />
+            <Route path='/signup' element={<SignupScreen />} />
+            <Route path='/placeorder' element={<PlaceOrderScreen />} />
+            <Route path='/order/:id' element={<OrderScreen />} />
+            <Route path='/shipping' element={<ShippingAddressScreen />} />
+            <Route path='/payment' element={<PaymentMethodScreen />} />
+            <Route
+              path='/admin/products'
+              element={
+                <AdminRoute>
+                  <ProductListScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route
+              path='/admin/product/:id'
+              element={
+                <AdminRoute>
+                  <ProductEditScreen />
+                </AdminRoute>
+              }
+            ></Route>
+          </Routes>
+        </Container>
+      </main>
+
+      <footer>
+        <div className='text-center'>
+          <p>
+            Copyright © 2023 ·
+            {/* <Routes>
                 <Route path='/aviso-legal' component={AvisoLegal} />
               </Routes>
               <Link to='/screens/AvisoLegal.js'>Aviso legal</Link> .
               <a href='#'>Política de privacidad</a> .
               <a href='#'>Política de cookies</a> */}
-            </p>
-          </div>
-        </footer>
-      </div>
+          </p>
+        </div>
+      </footer>
+      {/*  </div> */}
     </BrowserRouter>
   );
 }
