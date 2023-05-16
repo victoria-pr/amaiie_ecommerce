@@ -31,7 +31,9 @@ userRouter.post(
           _id: user._id,
           username: user.username,
           email: user.email,
+          description: user.description,
           isAdmin: user.isAdmin,
+          isArtist: user.isArtist,
           token: generateToken(user),
         });
         return; // si la contraseña es correcta, se envia la respuesta y se termina la funcion
@@ -54,7 +56,9 @@ userRouter.post(
       _id: user._id,
       username: user.username,
       email: user.email,
+      description: user.description,
       isAdmin: user.isAdmin,
+      isArtist: user.isArtist,
       token: generateToken(user),
     });
   })
@@ -77,13 +81,45 @@ userRouter.put(
         _id: updatedUser._id,
         username: updatedUser.username,
         email: updatedUser.email,
+        description: updatedUser.description,
         isAdmin: updatedUser.isAdmin,
+        isArtist: updatedUser.isArtist,
         token: generateToken(updatedUser),
       });
     } else {
       res.status(404).send({ message: 'User not found' });
     }
   })
+);
+
+  userRouter.put(
+    '/editprofile',
+    isAuth,
+    expressAsyncHandler(async (req, res) => {
+      const user = await User.findById(req.user._id);
+      if (user) {
+        user.username = req.body.username || user.username;
+        user.email = req.body.email || user.email;
+        user.description = req.body.description || user.description;
+        if (req.body.password) {
+          user.password = bcrypt.hashSync(req.body.password, 8);
+        }
+  
+        const updatedUser = await user.save();
+        res.send({
+          _id: updatedUser._id,
+          username: updatedUser.username,
+          email: updatedUser.email,
+          description: updatedUser.description,
+          isAdmin: updatedUser.isAdmin,
+          isArtist: updatedUser.isArtist,
+          token: generateToken(updatedUser),
+        });
+      } else {
+        res.status(404).send({ message: 'User not found' });
+      }
+    })
+
 );
 
 export default userRouter;

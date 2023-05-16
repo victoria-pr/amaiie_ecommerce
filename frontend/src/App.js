@@ -31,6 +31,8 @@ import OrderScreen from "./screens/OrderScreen";
 import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import ArtistScreen from "./screens/ArtistScreen";
+import ProtectedRoute from "./components/ProtectedRoute";
+import EditArtistScreen from "./screens/EditArtistScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -102,6 +104,13 @@ function App() {
                   Sign In
                 </Link>
               )}
+              {userInfo && userInfo.isArtist && (
+                <NavDropdown title='Artist' id='artist-nav-dropdown'>
+                  <LinkContainer to="/editprofile">
+                    <NavDropdown.Item>Edit Profile</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
             </Nav>
             </Navbar.Collapse>
           </Container>
@@ -116,10 +125,23 @@ function App() {
               {/* <Route path='/search' element={<SearchScreen />} /> */}
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />
-              <Route path='/profile' element={<ProfileScreen />} />
+              <Route path='/editprofile' element={<EditArtistScreen />} />
+              <Route path='/profile' 
+              element={
+              <ProtectedRoute>
+                <ProfileScreen />
+                </ProtectedRoute>} />
               <Route path='/placeorder' element={<PlaceOrderScreen />} />
-              <Route path='/order/:id' element={<OrderScreen />} />
-              <Route path="/orderhistory" element={<OrderHistoryScreen />} />
+              <Route path='/order/:id' 
+              element={
+              <ProtectedRoute>
+                <OrderScreen />
+                </ProtectedRoute>} />
+              <Route path="/orderhistory"
+              element={
+                <ProtectedRoute>
+              <OrderHistoryScreen />
+              </ProtectedRoute>} />
               <Route path='/shipping' element={<ShippingAddressScreen />} />
               <Route path='/payment' element={<PaymentMethodScreen />} />
               <Route path='/' element={<HomeScreen />}></Route>

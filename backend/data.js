@@ -6,6 +6,7 @@ const data = {
       username: "Basir",
       email: "admin@example.com",
       password: bcrypt.hashSync("123456"),
+      description: "Basir es un artista de la pintura y la escultura.",
       isAdmin: true
     },
     {
@@ -15,7 +16,7 @@ const data = {
       isAdmin: false
     },
   ],
-  products: [
+  products: [ 
     {
       //_id: '1',
       nameproduct: "Armario antiguo", 
