@@ -14,22 +14,34 @@ import {
   faMinusCircle,
   faPlusCircle,
   faTrash,
-} from "@fortawesome/free-solid-svg-icons";export default function CartScreen() {
-  const navigate = useNavigate();  const { state, dispatch: ctxDispatch } = useContext(Store);
+} from "@fortawesome/free-solid-svg-icons";
+
+export default function CartScreen() {
+  const navigate = useNavigate();
+
+  const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
-  } = state;  const updateCartHandler = async (item, quantity) => {
+  } = state;
+
+  const updateCartHandler = async (item, quantity) => {
     const { data } = await Axios.get(`/api/products/${item._id}`);
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");
       return;
-    }    ctxDispatch({ type: "CART_ADD_ITEM", payload: { ...item, quantity } });
+    }
+
+    ctxDispatch({ type: "CART_ADD_ITEM", payload: { ...item, quantity } });
   };
   const removeItemHandler = (item) => {
     ctxDispatch({ type: "CART_REMOVE_ITEM", payload: item });
-  };  const checkoutHandler = () => {
+  };
+
+  const checkoutHandler = () => {
     navigate("/signin?redirect=/shipping");
-  };  return (
+  };
+
+  return (
     <div>
       <Helmet>
         <title>Shopping Cart</title>
@@ -123,4 +135,3 @@ import {
     </div>
   );
 }
-

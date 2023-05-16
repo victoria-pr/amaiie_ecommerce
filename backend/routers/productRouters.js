@@ -1,19 +1,18 @@
-import express from 'express';
-import Product from '../models/productModel.js';
-import expressAsyncHandler from 'express-async-handler';
+import express from "express";
+import expressAsyncHandler from "express-async-handler";
+import Product from "../models/productModel.js";
 
+//import { isAuth,isAdmin} from "../utils.js";
 
+//Función Router de Express para manejar las rutas relacionadas con producto
 const productRouter = express.Router();
-
-productRouter.get('/', async (req, res) => {
+productRouter.get("/", async (req, res) => {
+  //para buscar los productos
   const products = await Product.find();
-  res.send(products);
-
+  res.send(products); //muestra los productos en formato JSON
 });
 
-productRouter.get('/:id', async (req, res) => {
-
-  //ruta GET para acceder a través del slug
+//ruta GET para acceder a través del slug
 productRouter.get("/slug/:slug", async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   if (product) {
@@ -22,7 +21,6 @@ productRouter.get("/slug/:slug", async (req, res) => {
     res.status(404).send({ message: "Product Not Found" });
   }
 });
-});
 
 //ruta GET para acceder a través del id
 productRouter.get("/:id", async (req, res) => {
@@ -30,7 +28,7 @@ productRouter.get("/:id", async (req, res) => {
   if (product) {
     res.send(product);
   } else {
-    res.status(404).send({ message: 'Product Not Found' });
+    res.status(404).send({ message: "Product Not Found" });
   }
 });
 
@@ -107,41 +105,6 @@ productRouter.delete(
     }
   })
 );
-
-/* productRouter.post(
-  "/:id/reviews",
-  //isAuth,
-  expressAsyncHandler(async (req, res) => {
-    const productId = req.params.id;
-    const product = await Product.findById(productId);
-    if (product) {
-      if (product.reviews.find((x) => x.name === req.user.name)) {
-        return res
-          .status(400)
-          .send({ message: "You already submitted a review" });
-      }
-      const review = {
-        name: req.user.name,
-        rating: Number(req.body.rating),
-        comment: req.body.comment,
-      };
-      product.reviews.push(review);
-      product.numReviews = product.reviews.length;
-      product.rating =
-        product.reviews.reduce((a, c) => c.rating + a, 0) /
-        product.reviews.length;
-      const updatedProduct = await product.save();
-      res.status(201).send({
-        message: "Review Created",
-        review: updatedProduct.reviews[updatedProduct.reviews.length - 1],
-        numReviews: product.numReviews,
-        rating: product.rating,
-      });
-    } else {
-      res.status(404).send({ message: "Product Not Found" });
-    }
-  })
-); */
 
 // Ruta GET que obtiene la lista de productos
 const PAGE_SIZE = 3; //elementos que se muestran por página
@@ -251,7 +214,4 @@ productRouter.get(
   })
 );
 
-
 export default productRouter;
-
-

@@ -1,7 +1,5 @@
-
 import mongoose from "mongoose"; //Importamos la librería mongoose para la base de datos del los productos
 //Esquema de la base de datos de productos
-
 const productSchema = new mongoose.Schema(
   {
     nameproduct: { type: String, required: true, unique: true },
@@ -46,4 +44,3 @@ export default Product;
 const Product = mongoose.model("Product", productSchema);
 export default Product;
  */
-

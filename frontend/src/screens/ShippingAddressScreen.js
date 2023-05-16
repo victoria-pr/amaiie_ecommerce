@@ -1,4 +1,3 @@
-import React from "react";
 import { Helmet } from "react-helmet-async";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -6,7 +5,6 @@ import { useState, useContext, useEffect } from "react";
 import { Store } from "../Store";
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
-
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
@@ -110,4 +108,3 @@ export default function ShippingAddressScreen() {
     </div>
   );
 }
-

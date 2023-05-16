@@ -2,16 +2,14 @@ import express from "express";
 import mongoose from "mongoose";
 import seedRouter from "./routers/seedRouters.js";
 import data from "./data.js";
-import productRouter from "./routers/productRouters.js";
-import userRouter from "./routers/userRouters.js";// Mongoose server
 import dotenv from "dotenv";
 import orderRouter from "./routers/orderRouters.js";
+import userRouter from "./routers/userRouters.js";
+import productRouter from "./routers/productRouters.js";
 import path from "path";
 import orderRoutes from "./routers/orderRouters.js";
 
-
 // Mongoose server
-
 dotenv.config();
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -21,8 +19,6 @@ mongoose
   .catch((error) => {
     console.log(error.message);
   });
-  // Servidor express
-
 
 // Servidor express
 const app = express();
@@ -39,13 +35,17 @@ app.use("/api/keys/paypal", (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || "sb");
 });
 
+/* const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, "/frontend/build")));
+app.get("*", (req, res) =>
+  res.sendFile(path.join(__dirname, "/frontend/build/index.html"))
+); */
+
 app.use((error, req, res, next) => {
   res.status(500).send({ message: error.message });
 });
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+  console.log(`server at http://localhost:${port}`);
 });
-
-

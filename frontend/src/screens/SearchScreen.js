@@ -1,12 +1,12 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
 import { Helmet } from "react-helmet-async";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Rating from "../components/Rating";
+//import Rating from "../components/Rating";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Button from "react-bootstrap/Button";
@@ -49,7 +49,7 @@ const prices = [
   },
 ];
 
-export const ratings = [
+/*export const ratings = [
   {
     name: "4stars & up",
     rating: 4,
@@ -69,7 +69,7 @@ export const ratings = [
     name: "1stars & up",
     rating: 1,
   },
-];
+];*/
 
 export default function SearchScreen() {
   const navigate = useNavigate();
@@ -78,7 +78,7 @@ export default function SearchScreen() {
   const category = sp.get("category") || "all";
   const query = sp.get("query") || "all";
   const price = sp.get("price") || "all";
-  const rating = sp.get("rating") || "all";
+  //const rating = sp.get("rating") || "all";
   const order = sp.get("order") || "newest";
   const page = sp.get("page") || 1;
 
@@ -91,8 +91,8 @@ export default function SearchScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await Axios.get(
-          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&rating=${rating}&order=${order}`
+        const { data } = await axios.get(
+          `/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&order=${order}`
         );
         dispatch({ type: "FETCH_SUCCESS", payload: data });
       } catch (err) {
@@ -103,13 +103,13 @@ export default function SearchScreen() {
       }
     };
     fetchData();
-  }, [category, error, order, page, price, query, rating]);
+  }, [category, error, order, page, price, query /*  rating */]);
 
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await Axios.get(`/api/products/categories`);
+        const { data } = await axios.get(`/api/products/categories`);
         setCategories(data);
       } catch (err) {
         toast.error(getError(err));
@@ -122,30 +122,28 @@ export default function SearchScreen() {
     const filterPage = filter.page || page;
     const filterCategory = filter.category || category;
     const filterQuery = filter.query || query;
-    const filterRating = filter.rating || rating;
+    //const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
     return `${
       skipPathname ? "" : "/search?"
-    }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+    }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&order=${sortOrder}&page=${filterPage}`;
   };
   return (
     <div>
       <Helmet>
-        <title>Search Products</title>
+        <title>Buscar producto</title>
       </Helmet>
       <Row>
         <Col md={3}>
-          <h3>Department</h3>
+          <h3>Categorías</h3>
           <div>
             <ul>
               <li>
                 <Link
                   className={"all" === category ? "text-bold" : ""}
                   to={getFilterUrl({ category: "all" })}
-                >
-                  Any
-                </Link>
+                ></Link>
               </li>
               {categories.map((c) => (
                 <li key={c}>
@@ -182,7 +180,7 @@ export default function SearchScreen() {
               ))}
             </ul>
           </div>
-          <div>
+          {/* <div>
             <h3>Avg. Customer Review</h3>
             <ul>
               {ratings.map((r) => (
@@ -204,7 +202,7 @@ export default function SearchScreen() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </div> */}
         </Col>
         <Col md={9}>
           {loading ? (
@@ -220,10 +218,10 @@ export default function SearchScreen() {
                     {query !== "all" && " : " + query}
                     {category !== "all" && " : " + category}
                     {price !== "all" && " : Price " + price}
-                    {rating !== "all" && " : Rating " + rating + " & up"}
+                    {/*  {rating !== "all" && " : Rating " + rating + " & up"} */}
                     {query !== "all" ||
                     category !== "all" ||
-                    rating !== "all" ||
+                    //rating !== "all" ||
                     price !== "all" ? (
                       <Button
                         variant='light'
@@ -242,10 +240,8 @@ export default function SearchScreen() {
                       navigate(getFilterUrl({ order: e.target.value }));
                     }}
                   >
-                    <option value='newest'>Newest Arrivals</option>
                     <option value='lowest'>Price: Low to High</option>
                     <option value='highest'>Price: High to Low</option>
-                    <option value='toprated'>Avg. Customer Reviews</option>
                   </select>
                 </Col>
               </Row>

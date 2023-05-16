@@ -15,7 +15,6 @@ import { Store } from "../Store";
 import { getError } from "../utils";
 import { toast } from "react-toastify";
 
-
 function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -114,7 +113,6 @@ export default function OrderScreen() {
   function onError(err) {
     toast.error(getError(err));
   }
-
   useEffect(() => {
     const fetchOrder = async () => {
       try {
