@@ -56,7 +56,8 @@ function HomeScreen() {
           <div className='decorative-text-line'></div>
           <div className='decorative-text-content'>
             <div className='artista'>
-              - El Arte habla donde <br></br>las palabras son insuficientes
+              Artistas con Mucho Arte <br></br>que transmiten Inspiración I
+              Emociones
             </div>
             <div className='arte'>01 Arte ...</div>
             <div className='inspiracion'>Emoción esencial capturada</div>

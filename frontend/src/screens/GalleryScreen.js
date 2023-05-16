@@ -85,7 +85,6 @@ const GalleryScreen = () => {
         </div>
         <button onClick={handleButtonClick}>Mostrar App</button>
       </div>
-      )}
     </div>
   );
 };

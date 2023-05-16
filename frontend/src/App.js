@@ -29,6 +29,7 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import AvisoLegal from "./screens/AvisoLegal";
 import Button from "react-bootstrap/esm/Button";
+import ContactoScreen from "./screens/ContactoScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -178,6 +179,8 @@ function App() {
             <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/shipping' element={<ShippingAddressScreen />} />
             <Route path='/payment' element={<PaymentMethodScreen />} />
+            <Route path='/contact' element={<ContactoScreen />} />
+            <Route path='/avisolegal' element={<AvisoLegal />} />
             <Route
               path='/admin/products'
               element={
@@ -205,7 +208,7 @@ function App() {
             <Routes>
               <Route path='/Avisolegal' component={AvisoLegal} />
             </Routes>
-            <Link to='/screens/AvisoLegal'>Aviso legal</Link> .
+            <Link to='/AvisoLegal'>Aviso legal</Link> .
             <a href='#'>Política de privacidad</a> .
             <a href='#'>Política de cookies</a>
           </p>

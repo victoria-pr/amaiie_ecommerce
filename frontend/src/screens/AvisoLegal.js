@@ -1,6 +1,8 @@
+import "../css/AvisoLegalScreen.css";
+
 const Aviso = () => {
   return (
-    <div>
+    <div className='aviso-container'>
       <h2> Titularidad y gestión de este sitio web</h2>
       <br></br>
       <p>
