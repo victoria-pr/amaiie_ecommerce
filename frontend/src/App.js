@@ -149,9 +149,9 @@ function App() {
         }
       >
         <Nav className='flex-column text-white w-100 p-2'>
-          <Nav.Item>
+          {/* <Nav.Item>
             <strong>Categories</strong>
-          </Nav.Item>
+          </Nav.Item> */}
           {categories.map((category) => (
             <Nav.Item key={category}>
               <LinkContainer

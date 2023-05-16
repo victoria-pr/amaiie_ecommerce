@@ -2,6 +2,7 @@
 //import { Link } from "react-router-dom";
 import { useEffect, useReducer } from "react";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 import logger from "use-reducer-logger";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -72,44 +73,56 @@ function HomeScreen() {
                 <div className='gallery-item-text'>Todas</div>
               </div>
             </Col>
+
             <Col md={5} className='gallery-item2'>
               <div className='gallery-item'>
-                <img
-                  src='./images/joyeria.png'
-                  alt='Imagen 2'
-                  className='gallery-image'
-                />
-                <div className='gallery-item-text'>Joyería</div>
+                <Link to='/search?category=joyeria'>
+                  <img
+                    src='./images/joyeria.png'
+                    alt='Imagen 2'
+                    className='gallery-image'
+                  />
+                  <div className='gallery-item-text'>Joyería</div>
+                </Link>
               </div>
             </Col>
+
             <Col md={5} className='gallery-item3'>
               <div className='gallery-item'>
-                <img
-                  src='./images/bolas.png'
-                  alt='Imagen 3'
-                  className='gallery-image'
-                />
-                <div className='gallery-item-text'>Bolas Navidad</div>
+                <Link to='/search?category=navidad'>
+                  <img
+                    src='./images/bolas.png'
+                    alt='Imagen 3'
+                    className='gallery-image'
+                  />
+                  <div className='gallery-item-text'>Bolas Navidad</div>
+                </Link>
               </div>
             </Col>
+
             <Col md={5} className='gallery-item4'>
               <div className='gallery-item'>
-                <img
-                  src='./images/ceramic.png'
-                  alt='Imagen 4'
-                  className='gallery-image-5'
-                />
-                <div className='gallery-item-text'>Jabones</div>
+                <Link to='/search?category=jabones'>
+                  <img
+                    src='./images/ceramic.png'
+                    alt='Imagen 4'
+                    className='gallery-image-5'
+                  />
+                  <div className='gallery-item-text'>Jabones</div>
+                </Link>
               </div>
             </Col>
+
             <Col md={10} className='gallery-item5'>
               <div className='gallery-item'>
-                <img
-                  src='./images/decor.png'
-                  alt='Imagen 5'
-                  className='gallery-image-5'
-                />
-                <div className='gallery-item-text'>Decoración</div>
+                <Link to='/search?category=decoration'>
+                  <img
+                    src='./images/decor.png'
+                    alt='Imagen 5'
+                    className='gallery-image-5'
+                  />
+                  <div className='gallery-item-text'>Decoración</div>
+                </Link>
               </div>
             </Col>
           </Row>
