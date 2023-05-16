@@ -118,7 +118,7 @@ export default function SearchScreen() {
             <>
               <Row className='justify-content-between mb-3'>
                 <Col md={6}>
-                  <div>
+                  <div className='resultados'>
                     {countProducts === 0 ? "No" : countProducts} Results
                     {query !== "all" && " : " + query}
                     {category !== "all" && " : " + category}

@@ -55,9 +55,11 @@ function HomeScreen() {
         <div className='decorative-text'>
           <div className='decorative-text-line'></div>
           <div className='decorative-text-content'>
-            <span className='artista'>- Artistas</span>
-            <span className='arte'>01 Arte ...</span>
-            <span className='inspiracion'>Inspiración</span>
+            <div className='artista'>
+              - El Arte habla donde <br></br>las palabras son insuficientes
+            </div>
+            <div className='arte'>01 Arte ...</div>
+            <div className='inspiracion'>Emoción esencial capturada</div>
           </div>
         </div>
 
@@ -66,7 +68,7 @@ function HomeScreen() {
             <Col md={11} className='gallery-item1'>
               <div className='gallery-item'>
                 <img
-                  src='./images/pintura.png'
+                  src='./images/handmade2.png'
                   alt='Imagen 1'
                   className='gallery-image'
                 />
@@ -91,11 +93,11 @@ function HomeScreen() {
               <div className='gallery-item'>
                 <Link to='/search?category=navidad'>
                   <img
-                    src='./images/bolas.png'
+                    src='./images/bolasanta.png'
                     alt='Imagen 3'
                     className='gallery-image'
                   />
-                  <div className='gallery-item-text'>Bolas Navidad</div>
+                  <div className='gallery-item-text'>Navidad</div>
                 </Link>
               </div>
             </Col>
@@ -104,7 +106,7 @@ function HomeScreen() {
               <div className='gallery-item'>
                 <Link to='/search?category=jabones'>
                   <img
-                    src='./images/ceramic.png'
+                    src='./images/jabones.png'
                     alt='Imagen 4'
                     className='gallery-image-5'
                   />

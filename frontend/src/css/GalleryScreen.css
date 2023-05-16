@@ -30,7 +30,7 @@
 
 .gallery-item-text {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
   width: 100%;
   padding: 10px;
@@ -73,13 +73,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .decorative-text-line {
-  width: 100px;
-  height: 2px;
-  background-color: black;
+  position: absolute;
+  margin-left: -487px;
+  width: 280px;
+  margin-top: 104px;
+  height: 1px;
+  background-color: gray;
 }
 
 /* .decorative-text-content {
@@ -90,11 +92,29 @@
   font-size: 14px;
 } */
 
-.decorative-text-content span {
-  margin: 0 10px;
+.decorative-text-content div {
   color: gray;
 }
 
 .artista {
-  font-size: 40px;
+  position: absolute;
+  font-size: 20px;
+  margin-left: -568px;
+  margin-top: 184px;
+}
+
+.arte {
+  position: absolute;
+  margin-left: -125px;
+  margin-top: 565px;
+}
+
+.inspiracion {
+  position: absolute;
+  margin-left: 253px;
+  margin-top: 453px;
+}
+
+h1 {
+  margin-top: 200px;
 }

@@ -71,7 +71,7 @@ function App() {
       > */}
       <div className='d-flex flex-column site-container' /* className='App' */>
         <ToastContainer position='bottom-center' limit={1} />
-        <Navbar bg='dark' variant='dark'>
+        <Navbar bg='dark' variant='dark' className='fixed-top'>
           <Container>
             <LinkContainer to='/'>
               <Navbar.Brand>amaiie</Navbar.Brand>
@@ -152,7 +152,7 @@ function App() {
           {/* <Nav.Item>
             <strong>Categories</strong>
           </Nav.Item> */}
-          {categories.map((category) => (
+          {/*  {categories.map((category) => (
             <Nav.Item key={category}>
               <LinkContainer
                 to={{ pathname: "/search", search: `category=${category}` }}
@@ -161,7 +161,7 @@ function App() {
                 <Nav.Link>{category}</Nav.Link>
               </LinkContainer>
             </Nav.Item>
-          ))}
+          ))} */}
         </Nav>
       </div>
 
@@ -202,12 +202,12 @@ function App() {
         <div className='text-center'>
           <p>
             Copyright © 2023 ·
-            {/* <Routes>
-                <Route path='/aviso-legal' component={AvisoLegal} />
-              </Routes>
-              <Link to='/screens/AvisoLegal.js'>Aviso legal</Link> .
-              <a href='#'>Política de privacidad</a> .
-              <a href='#'>Política de cookies</a> */}
+            <Routes>
+              <Route path='/Avisolegal' component={AvisoLegal} />
+            </Routes>
+            <Link to='/screens/AvisoLegal'>Aviso legal</Link> .
+            <a href='#'>Política de privacidad</a> .
+            <a href='#'>Política de cookies</a>
           </p>
         </div>
       </footer>

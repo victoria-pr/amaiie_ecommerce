@@ -93,6 +93,18 @@ button {
   color: #a0a0a0;
 }
 .checkout-steps > div.active {
-  border-bottom: 02rem solid #f08000;
+  border-bottom: 0.2rem solid #f08000;
   color: #f08000;
+}
+
+.shoppingcart {
+  margin-top: 50px;
+}
+
+.checkout-steps {
+  margin-top: 30px;
+}
+
+.resultados {
+  margin-top: 50px;
 }
