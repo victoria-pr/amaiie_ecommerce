@@ -6,10 +6,10 @@ import logger from "use-reducer-logger";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Product from "../components/Product";
-
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import "../css/GalleryScreen.css";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -49,6 +49,72 @@ function HomeScreen() {
 
   return (
     <div>
+      <div>
+        {/* Agrega los elementos de texto decorativo aquí */}
+        <div className='decorative-text'>
+          <div className='decorative-text-line'></div>
+          <div className='decorative-text-content'>
+            <span className='artista'>- Artistas</span>
+            <span className='arte'>01 Arte ...</span>
+            <span className='inspiracion'>Inspiración</span>
+          </div>
+        </div>
+
+        <div className='container'>
+          <Row className='gallery-grid'>
+            <Col md={11} className='gallery-item1'>
+              <div className='gallery-item'>
+                <img
+                  src='./images/pintura.png'
+                  alt='Imagen 1'
+                  className='gallery-image'
+                />
+                <div className='gallery-item-text'>Todas</div>
+              </div>
+            </Col>
+            <Col md={5} className='gallery-item2'>
+              <div className='gallery-item'>
+                <img
+                  src='./images/joyeria.png'
+                  alt='Imagen 2'
+                  className='gallery-image'
+                />
+                <div className='gallery-item-text'>Joyería</div>
+              </div>
+            </Col>
+            <Col md={5} className='gallery-item3'>
+              <div className='gallery-item'>
+                <img
+                  src='./images/bolas.png'
+                  alt='Imagen 3'
+                  className='gallery-image'
+                />
+                <div className='gallery-item-text'>Bolas Navidad</div>
+              </div>
+            </Col>
+            <Col md={5} className='gallery-item4'>
+              <div className='gallery-item'>
+                <img
+                  src='./images/ceramic.png'
+                  alt='Imagen 4'
+                  className='gallery-image-5'
+                />
+                <div className='gallery-item-text'>Jabones</div>
+              </div>
+            </Col>
+            <Col md={10} className='gallery-item5'>
+              <div className='gallery-item'>
+                <img
+                  src='./images/decor.png'
+                  alt='Imagen 5'
+                  className='gallery-image-5'
+                />
+                <div className='gallery-item-text'>Decoración</div>
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </div>
       <Helmet>
         <title>Amaiie</title>
       </Helmet>

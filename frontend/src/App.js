@@ -29,7 +29,6 @@ import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import AvisoLegal from "./screens/AvisoLegal";
-import GalleryScreen from "./screens/GalleryScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -66,7 +65,13 @@ function App() {
             <LinkContainer to='/'>
               <Navbar.Brand>amaiie</Navbar.Brand>
             </LinkContainer>
-            <Nav className='me-auto'>
+            <Nav className='ml-auto'>
+              <Link className='nav-link' to='/contact'>
+                Contacto
+              </Link>
+              <Link className='nav-link' to='/nosotros'>
+                Nosotros
+              </Link>
               <Link to='/cart' className='nav-link'>
                 Cart
                 {cart.cartItems.length > 0 && (
@@ -97,12 +102,10 @@ function App() {
                   Sign In
                 </Link>
               )}
-              <Link className='nav-link' to='/gallery'>
-                Gallery
-              </Link>
             </Nav>
           </Container>
         </Navbar>
+
         <header className='App-header'>
           {/*  <Link to='/'> amaiie</Link> */}
         </header>
@@ -112,7 +115,6 @@ function App() {
               <Route path='/' element={<HomeScreen />}></Route>
               <Route path='/product/:slug' element={<ProductScreen />} />
               <Route path='/cart' element={<CartScreen />} />
-
               <Route path='/search' element={<SearchScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />
@@ -154,6 +156,7 @@ function App() {
             ))}
           </Nav> */}
         </main>
+
         <footer>
           <div className='text-center'>
             <p>

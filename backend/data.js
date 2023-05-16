@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const saltRounds = 10; // Número de rondas para generar el salt
 
