@@ -79,11 +79,7 @@ userRouter.put(
     if (user) {
       user.username = req.body.username || user.username;
       user.email = req.body.email || user.email;
-      user.description = req.body.description || user.description;
-      if (req.file) {
-        console.log(req.file);
-        user.image = req.file.filename; // Asigna la ruta de la imagen guardada a 'user.image'
-      }
+
       if (req.body.password) {
         user.password = bcrypt.hashSync(req.body.password, 8);
       }
