@@ -27,6 +27,7 @@ export default function EditArtistScreen() {
   const [username, setUsername] = useState(userInfo.username);
   const [email, setEmail] = useState(userInfo.email);
   
+  const [image, setImage] = useState(null);
   const [description, setDescription] = useState(userInfo.description);
   
   const [password, setPassword] = useState('');
@@ -39,19 +40,20 @@ export default function EditArtistScreen() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(
-        '/api/users/editprofile',
-        {
-          username,
-          email,
-          description,
-          password,
-            
-        },
-        {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
-      );
+        const formData = new FormData();
+        formData.append('image', image);
+        formData.append('username', username);
+        formData.append('email', email);
+        formData.append('description', description);
+        formData.append('password', password);
+        
+        const { data } = await axios.put('/api/users/editprofile', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${userInfo.token}`,
+          },
+        });
+        
       dispatch({
         type: 'UPDATE_SUCCESS',
       });
@@ -72,7 +74,7 @@ export default function EditArtistScreen() {
         <title>User Profile</title>
       </Helmet>
       <h1 className="my-3">User Profile</h1>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} enctype="multipart/form-data">
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -87,6 +89,15 @@ export default function EditArtistScreen() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="image">
+          <Form.Label>Imagen</Form.Label>
+          <Form.Control
+            type="file"
+            /* value={username}*/
+            onChange={(e) => setImage(e.target.files[0])}
             required
           />
         </Form.Group>

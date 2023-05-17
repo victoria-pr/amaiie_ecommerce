@@ -1,15 +1,6 @@
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useReducer, useContext } from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Badge from "react-bootstrap/Badge";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import LoadingBox from "../components/LoadingBox";
-import MessageBox from "../components/MessageBox";
-import { Helmet } from "react-helmet-async";
 import { getError } from "../utils";
 import { Store } from "../Store";
 
@@ -73,6 +64,7 @@ function ArtistScreen() {
     <div> 
         <h1>{user.username}</h1>
         <h1>{user.email}</h1>
+        <img src = {user.image} alt={user.username}/>
         <h1>{user.description}</h1>
     </div>
     );
