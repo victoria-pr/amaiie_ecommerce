@@ -25,6 +25,7 @@ const app = express();
 
 app.use(express.json()); // middleware que permite recibir json en el body de las peticiones
 app.use(express.urlencoded({ extended: true })); // middleware que permite recibir datos de formularios en el body de las peticiones
+app.use(express.static("publicback"));
 
 app.use("/api/seed", seedRouter);
 app.use("/api/products", productRouter);

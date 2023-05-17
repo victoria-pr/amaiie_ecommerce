@@ -9,6 +9,12 @@ import upload from '../middlewares/multer.js';
 
 const userRouter = express.Router();
 
+userRouter.get("/", async (req, res) => {
+  //usuarios
+  const users = await User.find();
+  res.send(users); //usuarios en formato JSON
+});
+
 userRouter.get("/username/:username", 
 expressAsyncHandler(async (req, res) => {
   const user = await User.findOne({ username: req.params.username });
@@ -107,7 +113,7 @@ userRouter.put(
         user.description = req.body.description || user.description;
         if (req.file) {
           console.log(req.file)
-          user.image = req.file.path; // Asigna la ruta de la imagen guardada a 'user.image'
+          user.image = req.file.filename; // Asigna la ruta de la imagen guardada a 'user.image'
         }
 
         if (req.body.password) {

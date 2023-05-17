@@ -88,10 +88,10 @@ button {
 }
 
 .checkout-steps > div {
-  border-bottom: 0.2rem solid #a0a0a0;
+  border-bottom: 1rem solid #a0a0a0;
   color: #a0a0a0;
 }
 .checkout-steps > div.active {
-  border-bottom: 02rem solid #f08000;
+  border-bottom: 1rem solid #f08000;
   color: #f08000;
 }

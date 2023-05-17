@@ -7,9 +7,9 @@ const storage = multer.diskStorage({
         cb(null, path.join(dirname, "publicback", "uploads"));
     }
     , filename: function (req, file, cb) {
-        const username = req.user.username; // Obtén el ID del usuario desde 'req.user._id'
-        const extname = path.extname(file.originalname); // Obtén la extensión del archivo original
-        const fileName = username + extname; // Genera el nombre del archivo usando el ID del usuario y la extensión original
+        const username = req.user.username; // Obtén el username del usuario desde 'req.user.username'
+        const extname = path.extname(file.originalname); // Obtén la extensión del archivo original (jpg en este caso)
+        const fileName = username + extname; // Genera el nombre del archivo usando el username del usuario y la extensión original
         cb(null, fileName);
       },
     });

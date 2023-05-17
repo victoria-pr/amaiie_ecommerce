@@ -41,32 +41,15 @@ function ArtistScreen() {
     fetchData();
   }, [username]);
 
- /*const { state, dispatch: ctxDispatch } = useContext(Store);
- const { cart } = state;
-  const addToCartHandler = async () => {
-    const existItem = cart.cartItems.find((x) => x._id === product._id);
-    const quantity = existItem ? existItem.quantity + 1 : 1;
-
-    if (product.countInStock < quantity) {
-      window.alert("Sorry. Product is out of stock");
-      return;
-    }
-
-    ctxDispatch({
-      type: "CART_ADD_ITEM",
-      payload: { ...product, quantity: 1 },
-    });
-
-    navigate("/cart");
-  }; */
-
   return (
     <div> 
         <h1>{user.username}</h1>
         <h1>{user.email}</h1>
-        <img src = {user.image} alt={user.username}/>
+        <img src={`http://localhost:5000/uploads/${user.image}`} alt={user.username} />
         <h1>{user.description}</h1>
     </div>
     );
 }
 export default ArtistScreen;
+
+/* /Users/Vicky/Desktop/Bootcamp/amaiie/backend/publicback/uploads/unai.jpg */
