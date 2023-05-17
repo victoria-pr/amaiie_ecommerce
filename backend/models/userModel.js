@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema(
     /* resetToken: { type: String },*/
 
     image: { type: String, required: false },
+    description: { type: String, required: false },
     adress: { type: String, required: false },
     video: { type: String, required: false },
 

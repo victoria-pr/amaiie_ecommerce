@@ -1,8 +1,8 @@
-import React, { useContext, useState, useReducer } from "react";
-import { Store } from "../Store";
+import React, { useContext, useReducer, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Helmet } from "react-helmet-async";
+import { Store } from "../Store";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
 import axios from "axios";
@@ -24,7 +24,7 @@ const reducer = (state, action) => {
 export default function ProfileScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
-  const [username, setUserName] = useState(userInfo.username);
+  const [username, setUsername] = useState(userInfo.username);
   const [email, setEmail] = useState(userInfo.email);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -52,7 +52,7 @@ export default function ProfileScreen() {
       });
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
       localStorage.setItem("userInfo", JSON.stringify(data));
-      toast.success("Profile updated successfully");
+      toast.success("User updated successfully");
     } catch (err) {
       dispatch({
         type: "FETCH_FAIL",
@@ -64,7 +64,7 @@ export default function ProfileScreen() {
   return (
     <div className='container small-container'>
       <Helmet>
-        <title>Profile</title>
+        <title>User Profile</title>
       </Helmet>
       <h1 className='my-3'>User Profile</h1>
       <form onSubmit={submitHandler}>
@@ -72,7 +72,7 @@ export default function ProfileScreen() {
           <Form.Label>Name</Form.Label>
           <Form.Control
             value={username}
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
         </Form.Group>
@@ -87,6 +87,13 @@ export default function ProfileScreen() {
         </Form.Group>
         <Form.Group className='mb-3' controlId='password'>
           <Form.Label>Password</Form.Label>
+          <Form.Control
+            type='password'
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className='mb-3' controlId='password'>
+          <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type='password'
             onChange={(e) => setConfirmPassword(e.target.value)}

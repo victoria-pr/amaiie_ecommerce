@@ -5,16 +5,25 @@ const saltRounds = 10; // Número de rondas para generar el salt
 const data = {
   users: [
     {
-      username: "Basir",
+      username: "user",
+      email: "user@example.com",
+      password: bcrypt.hashSync("123", saltRounds),
+      description: "Basir es un artista de la pintura y la escultura.",
+      isAdmin: false,
+    },
+    {
+      username: "admin",
       email: "admin@example.com",
-      password: bcrypt.hashSync("123456", saltRounds),
+      password: bcrypt.hashSync("123", saltRounds),
+      description: "Basir es un artista de la pintura y la escultura.",
       isAdmin: true,
     },
     {
-      username: "John",
-      email: "user@example.com",
-      password: bcrypt.hashSync("123456", saltRounds),
+      username: "unai",
+      email: "unai@example.com",
+      password: bcrypt.hashSync("123", saltRounds),
       isAdmin: false,
+      isArtist: true,
     },
   ],
   products: [
@@ -27,7 +36,7 @@ const data = {
       description: "high quality",
       price: 120,
       countInStock: 10,
-      brand: "Idoya",
+      brand: "idoya",
     },
     {
       // _id: '2',
@@ -38,7 +47,7 @@ const data = {
       description: "high quality",
       price: 250,
       countInStock: 0,
-      brand: "Vicky",
+      brand: "vicky",
     },
     {
       // _id: '3',
@@ -49,7 +58,7 @@ const data = {
       description: "high quality product",
       price: 25,
       countInStock: 15,
-      brand: "Unai",
+      brand: "unai",
     },
     {
       // _id: '4',
@@ -60,7 +69,7 @@ const data = {
       description: "high quality product",
       price: 65,
       countInStock: 5,
-      brand: "Unai",
+      brand: "unai",
     },
   ],
 };

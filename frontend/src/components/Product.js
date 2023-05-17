@@ -49,7 +49,6 @@ function Product(props) {
           <Card.Title>{product.brand}</Card.Title>
         </Link>
         <Card.Text>{product.price}€</Card.Text>
-
         {product.countInStock === 0 ? (
           <Button variant='light' disabled>
             Out of stock

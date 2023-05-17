@@ -1,17 +1,8 @@
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useReducer, useContext } from "react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import ListGroup from "react-bootstrap/ListGroup";
-import Badge from "react-bootstrap/Badge";
-import Button from "react-bootstrap/Button";
-import { Helmet } from "react-helmet-async";
-import Card from "react-bootstrap/Card";
-import LoadingBox from "../components/LoadingBox";
-import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
-import { Store } from "../Store";
+import { Store } from "../Store.js";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -70,7 +61,14 @@ function ArtistScreen() {
     <div>
       <h1>{user.username}</h1>
       <h1>{user.email}</h1>
+      <img
+        src={`http://localhost:5000/uploads/${user.image}`}
+        alt={user.username}
+      />
+      <h1>{user.description}</h1>
     </div>
   );
 }
 export default ArtistScreen;
+
+/* /Users/Vicky/Desktop/Bootcamp/amaiie/backend/publicback/uploads/unai.jpg */
