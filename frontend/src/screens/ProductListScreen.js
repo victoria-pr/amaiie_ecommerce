@@ -110,7 +110,7 @@ export default function ProductListScreen() {
         dispatch({ type: "CREATE_SUCCESS" });
         navigate(`/admin/product/${data.product._id}`);
       } catch (err) {
-        toast.error(getError(error));
+        toast.error(getError(err));
         dispatch({
           type: "CREATE_FAIL",
         });
@@ -127,7 +127,7 @@ export default function ProductListScreen() {
         toast.success("product deleted successfully");
         dispatch({ type: "DELETE_SUCCESS" });
       } catch (err) {
-        toast.error(getError(error));
+        toast.error(getError(err));
         dispatch({
           type: "DELETE_FAIL",
         });
@@ -152,7 +152,6 @@ export default function ProductListScreen() {
 
       {loadingCreate && <LoadingBox></LoadingBox>}
       {loadingDelete && <LoadingBox></LoadingBox>}
-
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -174,7 +173,7 @@ export default function ProductListScreen() {
               {products.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
-                  <td>{product.name}</td>
+                  <td>{product.nameproduct}</td>
                   <td>{product.price}</td>
                   <td>{product.category}</td>
                   <td>{product.brand}</td>

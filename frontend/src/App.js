@@ -140,6 +140,13 @@ function App() {
                   </LinkContainer>
                 </NavDropdown>
               )}
+              {userInfo && userInfo.isArtist && (
+                <NavDropdown title='Artist' id='artist-nav-dropdown'>
+                  <LinkContainer to='/editprofile'>
+                    <NavDropdown.Item>Edit Profile</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
             </Nav>
           </Container>
         </Navbar>

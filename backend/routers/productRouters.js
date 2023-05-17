@@ -1,8 +1,8 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
-
-import { isAuth /* isAdmin */ } from "../utils.js";
+import upload from "../middlewares/multer.js";
+import { isAuth, isAdmin /* isArtist  */ } from "../utils.js";
 
 //Función Router de Express para manejar las rutas relacionadas con producto
 const productRouter = express.Router();
@@ -16,7 +16,7 @@ productRouter.get("/", async (req, res) => {
 productRouter.post(
   "/",
   isAuth,
-  //isAdmin,
+  isAdmin,
   //isArtist,
 
   //Función del controlador asíncrona que garantiza que las respuestas sean devueltas correctamente
@@ -40,8 +40,8 @@ productRouter.post(
 //Ruta PUT que actualiza los productos con identificador id
 productRouter.put(
   "/:id",
-  isAuth,
-  //isAdmin,
+  [isAuth, upload.single("image")],
+  isAdmin,
   //isArtist,
   //para manejar de manera asíncrona la función del controlador para la ruta PUT
   expressAsyncHandler(async (req, res) => {
@@ -71,7 +71,7 @@ productRouter.put(
 productRouter.delete(
   "/:id",
   isAuth,
-  //isAdmin,
+  isAdmin,
   //isArtist,
 
   //función asíncrona del controlador para la ruta DELETE
@@ -126,7 +126,7 @@ const PAGE_SIZE = 3; //elementos que se muestran por página
 productRouter.get(
   "/admin",
   isAuth,
-  //isAdmin,
+  isAdmin,
   //isArtist,
   //función asíncrona para manejar la función del controlador para la ruta GET
   expressAsyncHandler(async (req, res) => {

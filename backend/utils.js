@@ -7,6 +7,7 @@ export const generateToken = (user) => {
       username: user.username,
       email: user.email,
       isAdmin: user.isAdmin,
+      isArtist: user.isArtist,
     },
     process.env.JWT_SECRET,
     {
@@ -31,10 +32,10 @@ export const isAuth = (req, res, next) => {
     res.status(401).send({ message: "No Token" });
   }
 };
-/* export const isAdmin = (req, res, next) => {
+export const isAdmin = (req, res, next) => {
   if (req.user && req.user.isAdmin) {
     next();
   } else {
     res.status(401).send({ message: "Invalid Admin Token" });
   }
-}; */
+};
