@@ -33,6 +33,8 @@ import ContactoScreen from "./screens/ContactoScreen";
 import NosotrosScreen from "./screens/NosotrosScreen";
 import PrivacidadScreen from "./screens/PrivacidadScreen";
 import CookiesScreen from "./screens/CookiesScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import OrderHistoryScreen from "./screens/OrderHistoryScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -43,6 +45,7 @@ function App() {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("shippingAddress");
     localStorage.removeItem("paymentMethod");
+    window.location.href = "/signin";
   };
 
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
@@ -187,6 +190,8 @@ function App() {
             <Route path='/nosotros' element={<NosotrosScreen />} />
             <Route path='/privacidad' element={<PrivacidadScreen />} />
             <Route path='/cookies' element={<CookiesScreen />} />
+            <Route path='/profile' element={<ProfileScreen />} />
+            <Route path='/orderhistory' element={<OrderHistoryScreen />} />
             <Route
               path='/admin/products'
               element={

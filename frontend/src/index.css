@@ -108,3 +108,15 @@ button {
 .resultados {
   margin-top: 50px;
 }
+
+.btn-primary,
+.btn-outline-primary {
+  background-color: #a2d3bd;
+  color: #000000;
+  border-color: #a2d3bd;
+}
+
+#button-search {
+  width: 100px;
+  height: 30px;
+}
