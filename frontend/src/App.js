@@ -30,6 +30,9 @@ import OrderScreen from "./screens/OrderScreen";
 import AvisoLegal from "./screens/AvisoLegal";
 import Button from "react-bootstrap/esm/Button";
 import ContactoScreen from "./screens/ContactoScreen";
+import NosotrosScreen from "./screens/NosotrosScreen";
+import PrivacidadScreen from "./screens/PrivacidadScreen";
+import CookiesScreen from "./screens/CookiesScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -82,7 +85,7 @@ function App() {
             <SearchBox />
 
             <Nav className='ml-auto'>
-              <Link className='nav-link' to='/contact'>
+              <Link className='nav-link' to='/contacto'>
                 Contacto
               </Link>
               <Link className='nav-link' to='/nosotros'>
@@ -179,8 +182,11 @@ function App() {
             <Route path='/order/:id' element={<OrderScreen />} />
             <Route path='/shipping' element={<ShippingAddressScreen />} />
             <Route path='/payment' element={<PaymentMethodScreen />} />
-            <Route path='/contact' element={<ContactoScreen />} />
+            <Route path='/contacto' element={<ContactoScreen />} />
             <Route path='/avisolegal' element={<AvisoLegal />} />
+            <Route path='/nosotros' element={<NosotrosScreen />} />
+            <Route path='/privacidad' element={<PrivacidadScreen />} />
+            <Route path='/cookies' element={<CookiesScreen />} />
             <Route
               path='/admin/products'
               element={
@@ -208,9 +214,9 @@ function App() {
             <Routes>
               <Route path='/Avisolegal' component={AvisoLegal} />
             </Routes>
-            <Link to='/AvisoLegal'>Aviso legal</Link> .
-            <a href='#'>Política de privacidad</a> .
-            <a href='#'>Política de cookies</a>
+            <Link to='/avisolegal'>Aviso legal</Link> .
+            <Link to='/privacidad'>Política de privacidad</Link> .
+            <Link to='/cookies'>Política de cookies</Link>
           </p>
         </div>
       </footer>

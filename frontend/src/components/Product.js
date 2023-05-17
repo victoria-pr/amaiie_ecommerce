@@ -45,8 +45,10 @@ function Product(props) {
         <Link to={`/product/${product.slug}`}>
           <Card.Title>{product.nameproduct}</Card.Title>
         </Link>
+        <Link to={`/user/${product.brand}`}>
+          <Card.Title>{product.brand}</Card.Title>
+        </Link>
         <Card.Text>{product.price}€</Card.Text>
-        <Card.Title>{product.brand}</Card.Title>
 
         {product.countInStock === 0 ? (
           <Button variant='light' disabled>
