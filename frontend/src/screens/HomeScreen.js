@@ -68,12 +68,14 @@ function HomeScreen() {
           <Row className='gallery-grid'>
             <Col md={11} className='gallery-item1'>
               <div className='gallery-item'>
-                <img
-                  src='./images/handmade2.png'
-                  alt='Imagen 1'
-                  className='gallery-image'
-                />
-                <div className='gallery-item-text'>Todas</div>
+                <Link to='/search?category=ceramica'>
+                  <img
+                    src='./images/handmade2.png'
+                    alt='Imagen 1'
+                    className='gallery-image'
+                  />
+                  <div className='gallery-item-text'>Cerámica</div>
+                </Link>
               </div>
             </Col>
 
