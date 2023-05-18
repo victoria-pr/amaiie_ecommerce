@@ -47,21 +47,6 @@ function App() {
     window.location.href = "/signin";
   };
 
-  /*  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
- */
-  /*  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const { data } = await Axios.get(`/api/products/categories`);
-        setCategories(data);
-      } catch (err) {
-        toast.error(getError(err));
-      }
-    };
-    fetchCategories();
-  }, []); */
-
   return (
     <BrowserRouter>
       <div className='d-flex flex-column site-container'>

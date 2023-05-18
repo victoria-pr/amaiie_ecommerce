@@ -31,13 +31,14 @@ export default function ProductArtistScreen() {
       loading: true,
       error: '',
     });
-  
+    
     useEffect(() => {
       const fetchData = async () => {
         dispatch({ type: 'FETCH_REQUEST' });
         try {
-          const response = await axios.get(`/api/users/${user.products}`);
+          const response = await axios.get(`/api/users/${userInfo.username}/products`)
           const userData = response.data;
+          console.log(userData)
           dispatch({ type: 'FETCH_SUCCESS', payload: userData });
         } catch (error) {
           dispatch({
@@ -58,7 +59,7 @@ export default function ProductArtistScreen() {
             <MessageBox variant='danger'> {error}</MessageBox>
           ) : (
             <Row>
-              {user && user.products.map((product) => (
+              {user && user.products.map((product) => ( //comprueba si el usuario existe y si tiene productos los muestra
                 <Col key={product.slug} sm={6} md={4} lg={3} className='mb-3'>
                   <Product product={product}></Product>
                 </Col>

@@ -46,16 +46,16 @@ export default function ProductEditScreen() {
   const params = useParams(); // /product/:id
   const { id: productId } = params;
 
-  const { state } = useContext(Store);
-  const { userInfo } = state;
-  const { loading, error, loadingUpdate, loadingUpload } = productState;
-
   const [productState, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
     loadingUpdate: false,
     loadingUpload: false,
   });
+
+  const { state } = useContext(Store);
+  const { userInfo } = state;
+  const { loading, error, loadingUpdate, loadingUpload } = productState;
 
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");

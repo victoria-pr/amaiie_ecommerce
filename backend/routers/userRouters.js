@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import { isAuth, generateToken } from '../utils.js';
 import expressAsyncHandler from 'express-async-handler';
 import upload from '../middlewares/multer.js';
+import Product from '../models/productModel.js';
 
 
 const userRouter = express.Router();
@@ -27,16 +28,14 @@ expressAsyncHandler(async (req, res) => {
 )
 
 userRouter.get(
-  '/artistproducts',
-  isAuth,
+  '/:username/products',
   expressAsyncHandler(async (req, res) => {
-    const user = await User.findOne({ username: req.params.username }).populate('products');
-    if (user) {
-      res.send(user.products); // Enviar los productos relacionados con el usuario
-    } else {
-      res.status(404).send({ message: "User Not Found" });
-    }
-  })
+    const username = req.params.username;
+    console.log(username)
+    const products = await Product.find({ user: username });
+    console.log(products)
+  res.send(products);
+})
 );
 
 userRouter.post(
