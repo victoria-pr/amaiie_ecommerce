@@ -29,7 +29,7 @@ const data = {
       image: "/images/deco.png", // 679px × 829px
       price: 120,
       countInStock: 2,
-      brand: "Idoya",
+      user: "Idoya",
       description: "high quality",
     },
     {
@@ -40,7 +40,7 @@ const data = {
       image: "/images/mueble.png",
       price: 250,
       countInStock: 2,
-      brand: "Vicky",
+      user: "Vicky",
       description: "high quality",
     },
     {
@@ -51,7 +51,7 @@ const data = {
       image: "/images/miki.png",
       price: 25,
       countInStock: 2,
-      brand: "Unai",
+      user: "Unai",
       description: "high quality product",
     },
     {
@@ -62,7 +62,7 @@ const data = {
       image: "/images/santa1.png",
       price: 65,
       countInStock: 0,
-      brand: "Unai",
+      user: "Unai",
       description: "high quality product",
     },
   ],

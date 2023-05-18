@@ -33,6 +33,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import ArtistScreen from "./screens/ArtistScreen";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditArtistScreen from "./screens/EditArtistScreen";
+import ProductArtistScreen from "./screens/ProductArtistScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -109,6 +110,9 @@ function App() {
                   <LinkContainer to="/editprofile">
                     <NavDropdown.Item>Edit Profile</NavDropdown.Item>
                   </LinkContainer>
+                  <LinkContainer to="/artistproducts">
+                    <NavDropdown.Item>Productos</NavDropdown.Item>
+                  </LinkContainer>
                 </NavDropdown>
               )}
             </Nav>
@@ -126,6 +130,7 @@ function App() {
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />
               <Route path='/editprofile' element={<EditArtistScreen />} />
+              <Route path='/artistproducts' element={<ProductArtistScreen />} />
               <Route path='/profile' 
               element={
               <ProtectedRoute>

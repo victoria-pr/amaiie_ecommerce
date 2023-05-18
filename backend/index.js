@@ -7,7 +7,6 @@ import orderRouter from "./routers/orderRouters.js";
 import userRouter from "./routers/userRouters.js";
 import productRouter from "./routers/productRouters.js";
 import path from "path";
-import orderRoutes from "./routers/orderRouters.js";
 
 // Mongoose server
 dotenv.config();

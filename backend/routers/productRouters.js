@@ -1,6 +1,8 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
+import User from "../models/userModel.js";
+import { isAuth } from "../utils.js";
 
 //import { isAuth,isAdmin} from "../utils.js";
 
@@ -47,7 +49,7 @@ productRouter.post(
       image: "/images/sample-image.png",
       price: 0,
       category: "sample category",
-      brand: "sample brand",
+      user: "user",
       countInStock: 0,
       description: "sample description",
     });
@@ -56,6 +58,7 @@ productRouter.post(
     res.send({ message: "Product Created", product });
   })
 );
+
 
 //Ruta PUT que actualiza los productos con identificador id
 productRouter.put(
@@ -74,7 +77,7 @@ productRouter.put(
       product.price = req.body.price;
       product.image = req.body.image;
       product.category = req.body.category;
-      product.brand = req.body.brand;
+      product.user = req.body.user;
       product.countInStock = req.body.countInStock;
       product.description = req.body.description;
 

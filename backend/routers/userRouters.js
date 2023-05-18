@@ -26,6 +26,18 @@ expressAsyncHandler(async (req, res) => {
 })
 )
 
+userRouter.get(
+  '/artistproducts',
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const user = await User.findOne({ username: req.params.username }).populate('products');
+    if (user) {
+      res.send(user.products); // Enviar los productos relacionados con el usuario
+    } else {
+      res.status(404).send({ message: "User Not Found" });
+    }
+  })
+);
 
 userRouter.post(
   "/signin",
