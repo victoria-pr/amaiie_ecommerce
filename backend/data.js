@@ -5,6 +5,14 @@ const saltRounds = 10; // Número de rondas para generar el salt
 const data = {
   users: [
     {
+      username: "unai",
+      email: "unai@unai.com",
+      password: bcrypt.hashSync("123456", saltRounds),
+      description: "Unai es un artista de la pintura y la escultura.",
+      isAdmin: false,
+      isArtist: true,
+    },
+    {
       username: "user",
       email: "user@example.com",
       password: bcrypt.hashSync("123", saltRounds),

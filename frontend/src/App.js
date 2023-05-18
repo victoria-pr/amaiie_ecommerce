@@ -127,12 +127,21 @@ function App() {
                   Sign In
                 </Link>
               )}
-              {userInfo && userInfo.isAdmin && (
-                <NavDropdown title='Admin' id='admin-nav-dropdown'>
-                  {/* <LinkContainer to='/admin/dashboard'>
+
+              {userInfo && userInfo.isArtist && (
+                <NavDropdown title='Artist' id='artist-nav-dropdown'>
+                  <LinkContainer to='/editprofile'>
+                    <NavDropdown.Item>Edit Profile</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
+
+              {/* {userInfo && userInfo.isAdmin && (
+                <NavDropdown title='Admin' id='admin-nav-dropdown'> */}
+              {/* <LinkContainer to='/admin/dashboard'>
                     <NavDropdown.Item>Dashboard</NavDropdown.Item>
                   </LinkContainer> */}
-                  <LinkContainer to='/admin/products'>
+              {/*  <LinkContainer to='/admin/products'>
                     <NavDropdown.Item>Products</NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to='/admin/orders'>
@@ -142,15 +151,7 @@ function App() {
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
-              )}
-
-              {userInfo && userInfo.isArtist && (
-                <NavDropdown title='Artist' id='artist-nav-dropdown'>
-                  <LinkContainer to='/editprofile'>
-                    <NavDropdown.Item>Edit Profile</NavDropdown.Item>
-                  </LinkContainer>
-                </NavDropdown>
-              )}
+              )} */}
             </Nav>
           </Container>
         </Navbar>
@@ -188,10 +189,12 @@ function App() {
           <Routes>
             <Route path='/' element={<HomeScreen />}></Route>
             <Route path='/product/:slug' element={<ProductScreen />} />
+            <Route path='/user/:username' element={<ArtistScreen />} />
             <Route path='/cart' element={<CartScreen />} />
             <Route path='/search' element={<SearchScreen />} />
             <Route path='/signin' element={<SigninScreen />} />
             <Route path='/signup' element={<SignupScreen />} />
+            <Route path='/editprofile' element={<EditArtistScreen />} />
             <Route path='/placeorder' element={<PlaceOrderScreen />} />
             <Route
               path='/order/:id'
