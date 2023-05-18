@@ -5,5 +5,5 @@ import { Store } from "../Store";
 export default function ArtistRoute({ children }) {
   const { state } = useContext(Store);
   const { userInfo } = state;
-  return userInfo && userInfo.isArtist ? children : <Navigate to="/signin" />;
+  return userInfo && userInfo.isAdmin ? children : <Navigate to='/signin' />;
 }

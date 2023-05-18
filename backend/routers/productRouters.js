@@ -5,8 +5,6 @@ import User from "../models/userModel.js";
 import { isAuth, isAdmin } from "../utils.js";
 import upload from "../middlewares/multer.js";
 
-//import { isAuth,isAdmin} from "../utils.js";
-
 //Función Router de Express para manejar las rutas relacionadas con producto
 const productRouter = express.Router();
 productRouter.get("/", async (req, res) => {
@@ -39,7 +37,6 @@ productRouter.post(
     res.send({ message: "Product Created", product });
   })
 );
-
 
 //Ruta PUT que actualiza los productos con identificador id
 productRouter.put(

@@ -51,7 +51,7 @@ function App() {
     localStorage.removeItem("paymentMethod");
     window.location.href = "/signin";
   };
- 
+
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -130,20 +130,20 @@ function App() {
               )}
               {userInfo && userInfo.isArtist && (
                 <NavDropdown title='Artist' id='artist-nav-dropdown'>
-                  <LinkContainer to="/editprofile">
+                  <LinkContainer to='/editprofile'>
                     <NavDropdown.Item>Edit Profile</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to="/artistproducts">
+                  <LinkContainer to='/artistproducts'>
                     <NavDropdown.Item>Productos</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
               )}
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin' id='admin-nav-dropdown'>
-              {/* <LinkContainer to='/admin/dashboard'>
+                  {/* <LinkContainer to='/admin/dashboard'>
                     <NavDropdown.Item>Dashboard</NavDropdown.Item>
                   </LinkContainer> */}
-               <LinkContainer to='/admin/products'>
+                  <LinkContainer to='/admin/products'>
                     <NavDropdown.Item>Products</NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer to='/admin/orders'>
@@ -157,12 +157,12 @@ function App() {
             </Nav>
           </Container>
         </Navbar>
-        
+
         <header className='App-header'>
           {/*  <Link to='/'> amaiie</Link> */}
         </header>
-        </div>
-        <div
+      </div>
+      <div
         className={
           sidebarIsOpen
             ? "active-nav side-navbar d-flex justify-content-between flex-wrap flex-column"
@@ -185,61 +185,70 @@ function App() {
           ))} */}
         </Nav>
       </div>
-        <main>
-          <Container className='mt-3'>
-            <Routes>
-              <Route path='/' element={<HomeScreen />}></Route>
-              <Route path='/contacto' element={<ContactoScreen />} />
-              <Route path='/avisolegal' element={<AvisoLegal />} />
-              <Route path='/nosotros' element={<NosotrosScreen />} />
-              <Route path='/privacidad' element={<PrivacidadScreen />} />
-              <Route path='/cookies' element={<CookiesScreen />} />
-              <Route path='/product/:slug' element={<ProductScreen />} />
-              <Route path='/user/:username' element={<ArtistScreen />} />
-              <Route path='/cart' element={<CartScreen />} />
-              <Route path='/search' element={<SearchScreen />} /> 
-              <Route path='/signin' element={<SigninScreen />} />
-              <Route path='/signup' element={<SignupScreen />} />
-              <Route path='/editprofile' element={<EditArtistScreen />} />
-              <Route path='/placeorder' element={<PlaceOrderScreen />} />
-              <Route path='/artistproducts' element={<ProductArtistScreen />} />
-              <Route path='/profile' 
-              element={
-              <ProtectedRoute>
-                <ProfileScreen />
-                </ProtectedRoute>} />
-              <Route path='/order/:id' 
-              element={
-              <ProtectedRoute>
-                <OrderScreen />
-                </ProtectedRoute>} />
-              <Route path="/orderhistory"
+      <main>
+        <Container className='mt-3'>
+          <Routes>
+            <Route path='/' element={<HomeScreen />}></Route>
+            <Route path='/contacto' element={<ContactoScreen />} />
+            <Route path='/avisolegal' element={<AvisoLegal />} />
+            <Route path='/nosotros' element={<NosotrosScreen />} />
+            <Route path='/privacidad' element={<PrivacidadScreen />} />
+            <Route path='/cookies' element={<CookiesScreen />} />
+            <Route path='/product/:slug' element={<ProductScreen />} />
+            <Route path='/user/:username' element={<ArtistScreen />} />
+            <Route path='/cart' element={<CartScreen />} />
+            <Route path='/search' element={<SearchScreen />} />
+            <Route path='/signin' element={<SigninScreen />} />
+            <Route path='/signup' element={<SignupScreen />} />
+            <Route path='/editprofile' element={<EditArtistScreen />} />
+            <Route path='/placeorder' element={<PlaceOrderScreen />} />
+            <Route path='/artistproducts' element={<ProductArtistScreen />} />
+            <Route
+              path='/profile'
               element={
                 <ProtectedRoute>
-              <OrderHistoryScreen />
-              </ProtectedRoute>} />
-              <Route path='/shipping' element={<ShippingAddressScreen />} />
-              <Route path='/payment' element={<PaymentMethodScreen />} />
-              <Route
-                path='/admin/products'
-                element={
-                  <AdminRoute>
-                    <ProductListScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-              <Route
-                path='/admin/product/:id'
-                element={
-                  <AdminRoute>
-                    <ProductEditScreen />
-                  </AdminRoute>
-                }
-              ></Route>
-            </Routes>
-          </Container>
-        </main>
-        
+                  <ProfileScreen />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/order/:id'
+              element={
+                <ProtectedRoute>
+                  <OrderScreen />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path='/orderhistory'
+              element={
+                <ProtectedRoute>
+                  <OrderHistoryScreen />
+                </ProtectedRoute>
+              }
+            />
+            <Route path='/shipping' element={<ShippingAddressScreen />} />
+            <Route path='/payment' element={<PaymentMethodScreen />} />
+            <Route
+              path='/admin/products'
+              element={
+                <AdminRoute>
+                  <ProductListScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route
+              path='/admin/product/:id'
+              element={
+                <AdminRoute>
+                  <ProductEditScreen />
+                </AdminRoute>
+              }
+            ></Route>
+          </Routes>
+        </Container>
+      </main>
+
       <footer>
         <div className='text-center'>
           <p>
