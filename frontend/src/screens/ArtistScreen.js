@@ -19,7 +19,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
- 
+
 function ArtistScreen() {
   //const navigate = useNavigate();
   const params = useParams();

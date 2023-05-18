@@ -6,9 +6,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.site-container {
+/* .site-container {
   min-height: 100vh;
 }
+ */
 main {
   flex: 1;
 }
@@ -92,6 +93,30 @@ button {
   color: #a0a0a0;
 }
 .checkout-steps > div.active {
-  border-bottom: 1rem solid #f08000;
+  border-bottom: 0.2rem solid #f08000;
   color: #f08000;
+}
+
+.shoppingcart {
+  margin-top: 50px;
+}
+
+.checkout-steps {
+  margin-top: 30px;
+}
+
+.resultados {
+  margin-top: 50px;
+}
+
+.btn-primary,
+.btn-outline-primary {
+  background-color: #a2d3bd;
+  color: #000000;
+  border-color: #a2d3bd;
+}
+
+#button-search {
+  width: 100px;
+  height: 30px;
 }

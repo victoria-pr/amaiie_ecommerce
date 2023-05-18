@@ -2,7 +2,8 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
 import User from "../models/userModel.js";
-import { isAuth } from "../utils.js";
+import { isAuth, isAdmin } from "../utils.js";
+import upload from "../middlewares/multer.js";
 
 //import { isAuth,isAdmin} from "../utils.js";
 
@@ -14,31 +15,11 @@ productRouter.get("/", async (req, res) => {
   res.send(products); //muestra los productos en formato JSON
 });
 
-//ruta GET para acceder a través del slug
-productRouter.get("/slug/:slug", async (req, res) => {
-  const product = await Product.findOne({ slug: req.params.slug });
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
-
-//ruta GET para acceder a través del id
-productRouter.get("/:id", async (req, res) => {
-  const product = await Product.findById(req.params.id);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "Product Not Found" });
-  }
-});
-
 //Ruta POST para crear un nuevo producto
 productRouter.post(
   "/",
-  //isAuth,
-  //isAdmin,
+  isAuth,
+  isAdmin,
   //isArtist,
 
   //Función del controlador asíncrona que garantiza que las respuestas sean devueltas correctamente
@@ -63,8 +44,8 @@ productRouter.post(
 //Ruta PUT que actualiza los productos con identificador id
 productRouter.put(
   "/:id",
-  //isAuth,
-  //isAdmin,
+  [isAuth, upload.single("image")],
+  isAdmin,
   //isArtist,
   //para manejar de manera asíncrona la función del controlador para la ruta PUT
   expressAsyncHandler(async (req, res) => {
@@ -93,8 +74,8 @@ productRouter.put(
 //Ruta DELETE que elimina un producto según su identificador
 productRouter.delete(
   "/:id",
-  //isAuth,
-  //isAdmin,
+  isAuth,
+  isAdmin,
   //isArtist,
 
   //función asíncrona del controlador para la ruta DELETE
@@ -113,8 +94,8 @@ productRouter.delete(
 const PAGE_SIZE = 3; //elementos que se muestran por página
 productRouter.get(
   "/admin",
-  //isAuth,
-  //isAdmin,
+  isAuth,
+  isAdmin,
   //isArtist,
   //función asíncrona para manejar la función del controlador para la ruta GET
   expressAsyncHandler(async (req, res) => {
@@ -154,14 +135,14 @@ productRouter.get(
           }
         : {};
     const categoryFilter = category && category !== "all" ? { category } : {};
-    const ratingFilter =
+    /*   const ratingFilter =
       rating && rating !== "all"
         ? {
             rating: {
               $gte: Number(rating),
             },
           }
-        : {};
+        : {}; */
     const priceFilter =
       price && price !== "all"
         ? {
@@ -179,16 +160,16 @@ productRouter.get(
         ? { price: 1 }
         : order === "highest"
         ? { price: -1 }
-        : order === "toprated"
-        ? { rating: -1 }
-        : order === "newest"
+        : /* : order === "toprated"
+        ? { rating: -1 } */
+        order === "newest"
         ? { createdAt: -1 }
         : { _id: -1 };
     const products = await Product.find({
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-      ...ratingFilter,
+      /*  ...ratingFilter, */
     })
       .sort(sortOrder)
       .skip(pageSize * (page - 1))
@@ -197,7 +178,7 @@ productRouter.get(
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-      /*...ratingFilter,*/
+      /* ...ratingFilter, */
     });
     res.send({
       products,
@@ -216,5 +197,25 @@ productRouter.get(
     res.send(categories); //lista de categorías en formato JSON
   })
 );
+
+//ruta GET para acceder a través del slug
+productRouter.get("/slug/:slug", async (req, res) => {
+  const product = await Product.findOne({ slug: req.params.slug });
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product Not Found" });
+  }
+});
+
+//ruta GET para acceder a través del id
+productRouter.get("/:id", async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.send(product);
+  } else {
+    res.status(404).send({ message: "Product Not Found" });
+  }
+});
 
 export default productRouter;

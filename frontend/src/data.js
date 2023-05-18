@@ -6,7 +6,6 @@ const data = {
       username: "Basir",
       email: "admin@example.com",
       description: "Basir es un artista de la pintura y la escultura.",
-
       password: "123456",
       isAdmin: true,
 

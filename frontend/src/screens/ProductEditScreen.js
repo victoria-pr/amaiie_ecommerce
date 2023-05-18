@@ -57,7 +57,7 @@ export default function ProductEditScreen() {
   const { userInfo } = state;
   const { loading, error, loadingUpdate, loadingUpload } = productState;
 
-  const [name, setName] = useState("");
+  const [nameproduct, setProductName] = useState("");
   const [slug, setSlug] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
@@ -72,7 +72,7 @@ export default function ProductEditScreen() {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(`/api/products/${productId}`);
-        setName(data.name);
+        setProductName(data.nameproduct);
         setSlug(data.slug);
         setPrice(data.price);
         setImage(data.image);
@@ -94,34 +94,36 @@ export default function ProductEditScreen() {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      dispatch({ type: "UPDATE_REQUEST" });
-      await axios.put(
-        `/api/products/${productId}`,
-        {
-          _id: productId,
-          name,
-          slug,
-          price,
-          image,
-          category,
-          user,
-          countInStock,
-          description,
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("nameproduct", nameproduct);
+      formData.append("slug", slug);
+      formData.append("price", price);
+      formData.append("category", category);
+      formData.append("user", user);
+      formData.append("countInStock", countInStock);
+      formData.append("description", description);
+      const { data } = await axios.put(`/api/products/${productId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userInfo.token}`,
         },
-        {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
-      );
+      });
       dispatch({
         type: "UPDATE_SUCCESS",
       });
+      dispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem("productInfo", JSON.stringify(data));
       toast.success("Product updated successfully");
       navigate("/admin/products");
-    } catch (err) {
-      toast.error(getError(err));
-      dispatch({ type: "UPDATE_FAIL" });
+    } catch (error) {
+      dispatch({
+        type: "FETCH_FAIL",
+      });
+      toast.error(getError(error));
     }
   };
+
   const uploadFileHandler = async (e, forImages) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -186,8 +188,8 @@ export default function ProductEditScreen() {
           <Form.Group className='mb-3' controlId='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={nameproduct}
+              onChange={(e) => setProductName(e.target.value)}
               required
             />
           </Form.Group>
@@ -207,23 +209,17 @@ export default function ProductEditScreen() {
               required
             />
           </Form.Group>
-          <Form.Group className='mb-3' controlId='image'>
+          {/* <Form.Group className='mb-3' controlId='image'>
             <Form.Label>Image File</Form.Label>
             <Form.Control
               value={image}
               onChange={(e) => setImage(e.target.value)}
               required
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='imageFile'>
-            <Form.Label>Upload Image</Form.Label>
-            <Form.Control type='file' onChange={uploadFileHandler} />
-            {loadingUpload && <LoadingBox></LoadingBox>}
-          </Form.Group>
-
-          <Form.Group className='mb-3' controlId='additionalImage'>
+          </Form.Group> */}
+          {/* <Form.Group className='mb-3' controlId='additionalImage'>
             <Form.Label>Additional Images</Form.Label>
-            {images.length === 0 && <MessageBox>No image</MessageBox>}
+            {image.length === 0 && <MessageBox>No image</MessageBox>}
             <ListGroup variant='flush'>
               {images.map((x) => (
                 <ListGroup.Item key={x}>
@@ -234,7 +230,18 @@ export default function ProductEditScreen() {
                 </ListGroup.Item>
               ))}
             </ListGroup>
+          </Form.Group> */}
+
+          <Form.Group className='mb-3' controlId='image'>
+            <Form.Label>Imagen</Form.Label>
+            <Form.Control
+              type='file'
+              /* value={username}*/
+              onChange={(e) => setImage(e.target.files[0])}
+              required
+            />
           </Form.Group>
+          {/* 
           <Form.Group className='mb-3' controlId='additionalImageFile'>
             <Form.Label>Upload Aditional Image</Form.Label>
             <Form.Control
@@ -242,8 +249,7 @@ export default function ProductEditScreen() {
               onChange={(e) => uploadFileHandler(e, true)}
             />
             {loadingUpload && <LoadingBox></LoadingBox>}
-          </Form.Group>
-
+          </Form.Group> */}
           <Form.Group className='mb-3' controlId='category'>
             <Form.Label>Category</Form.Label>
             <Form.Control

@@ -2,14 +2,15 @@
 //import { Link } from "react-router-dom";
 import { useEffect, useReducer } from "react";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 import logger from "use-reducer-logger";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Product from "../components/Product";
-
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import "../css/GalleryScreen.css";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -46,8 +47,90 @@ function HomeScreen() {
     };
     fetchData();
   }, []);
+
   return (
     <div>
+      <div>
+        {/* Agrega los elementos de texto decorativo aquí */}
+        <div className='decorative-text'>
+          <div className='decorative-text-line'></div>
+          <div className='decorative-text-content'>
+            <div className='artista'>
+              Artistas con Mucho Arte <br></br>que transmiten Inspiración I
+              Emociones
+            </div>
+            <div className='arte'>01 Arte ...</div>
+            <div className='inspiracion'>Emoción esencial capturada</div>
+          </div>
+        </div>
+
+        <div className='container'>
+          <Row className='gallery-grid'>
+            <Col md={11} className='gallery-item1'>
+              <div className='gallery-item'>
+                <img
+                  src='./images/handmade2.png'
+                  alt='Imagen 1'
+                  className='gallery-image'
+                />
+                <div className='gallery-item-text'>Todas</div>
+              </div>
+            </Col>
+
+            <Col md={5} className='gallery-item2'>
+              <div className='gallery-item'>
+                <Link to='/search?category=joyeria'>
+                  <img
+                    src='./images/joyeria.png'
+                    alt='Imagen 2'
+                    className='gallery-image'
+                  />
+                  <div className='gallery-item-text'>Joyería</div>
+                </Link>
+              </div>
+            </Col>
+
+            <Col md={5} className='gallery-item3'>
+              <div className='gallery-item'>
+                <Link to='/search?category=navidad'>
+                  <img
+                    src='./images/bolasanta.png'
+                    alt='Imagen 3'
+                    className='gallery-image'
+                  />
+                  <div className='gallery-item-text'>Navidad</div>
+                </Link>
+              </div>
+            </Col>
+
+            <Col md={5} className='gallery-item4'>
+              <div className='gallery-item'>
+                <Link to='/search?category=jabones'>
+                  <img
+                    src='./images/jabones.png'
+                    alt='Imagen 4'
+                    className='gallery-image-5'
+                  />
+                  <div className='gallery-item-text'>Jabones</div>
+                </Link>
+              </div>
+            </Col>
+
+            <Col md={10} className='gallery-item5'>
+              <div className='gallery-item'>
+                <Link to='/search?category=decoration'>
+                  <img
+                    src='./images/decor.png'
+                    alt='Imagen 5'
+                    className='gallery-image-5'
+                  />
+                  <div className='gallery-item-text'>Decoración</div>
+                </Link>
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </div>
       <Helmet>
         <title>Amaiie</title>
       </Helmet>
