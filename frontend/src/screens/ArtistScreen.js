@@ -57,7 +57,7 @@ function ArtistScreen() {
     <div>
       {/* --------------------------
        */}
-      <div className='fotocontainer'>
+      {/*  <div className='fotocontainer'>
         <div className='fotocard fotocard0'>
           <div className='fotoborder'>
             <h2>Unai</h2>
@@ -71,7 +71,7 @@ function ArtistScreen() {
           </div>
         </div>
       </div>
-
+ */}
       {/* -----------------
        */}
 
@@ -97,19 +97,43 @@ function ArtistScreen() {
       <div>
         <h1>{user.email}</h1>
       </div> */}
-      <Col md={5} className='gallery-item5'>
-        <div className='gallery-item'>
+      <div>
+        <div className='infoartist'>
+          <div>
+            <h3>{user.username}</h3>
+          </div>
+          <div>
+            <p>{user.description}</p>
+          </div>
+          <div>
+            <p>{user.email}</p>
+          </div>
+        </div>
+        <div className='infoimagen'>
+          <div className='decorative-line'></div>
+          <div className='decorative-lineh'></div>
+          <div className='decorative-lineV'></div>
+          <div className='item2'>
+            <div className='item'>
+              <img
+                src={`http://localhost:5000/uploads/${user.image}`}
+                alt={user.username}
+                className='image-artist'
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* <div className='item3'>
+        <div className='item'>
           <img
             src={`http://localhost:5000/uploads/${user.image}`}
             alt={user.username}
-            className='gallery-image-5'
+            className='image-artist'
           />
         </div>
-      </Col>
-
-      <div>
-        <h1>{user.description}</h1>
-      </div>
+      </div> */}
 
       <Row>
         {products.map((product) => (
