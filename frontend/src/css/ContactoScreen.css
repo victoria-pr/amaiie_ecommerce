@@ -33,7 +33,7 @@
   width: 100%;
   padding: 10px;
   border: none;
-  background-color: #4caf50;
+  background-color: #af4c4c;
   color: #fff;
   font-weight: bold;
   text-transform: uppercase;
@@ -42,7 +42,7 @@
 
 /* Estilos para el botón de enviar al pasar el mouse */
 .form-container button[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #147587;
 }
 
 /* Estilos para el mensaje de éxito */
