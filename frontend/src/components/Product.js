@@ -5,7 +5,6 @@ import Button from "react-bootstrap/Button";
 import { useContext, useReducer } from "react";
 import { Store } from "../Store";
 import "../css/ArtistScreen.scss";
-import { Icon } from "@iconify/react";
 
 function Product(props) {
   const { product } = props;
@@ -70,7 +69,7 @@ export default Product; */
               <div class='wsk-cp-product'>
                 <div class='wsk-cp-img'>
                   <img
-                    src={product.image}
+                    src={`http://localhost:5000/fotoproducto/${product.image}`}
                     alt='Product'
                     class='img-responsive'
                   />
@@ -121,9 +120,7 @@ export default Product; */
                           Add to cart
                         </span>
                       )}
-                      {/* <a href='#' class='buy-btn'>
-                        <Icon className='icon' icon='zmdi:shopping-basket' />
-                      </a> */}
+        
                     </div>
                   </div>
                 </div>
