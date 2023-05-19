@@ -59,9 +59,6 @@ export default Product; */
 
   return (
     <div>
-      {/* --------------------------
-       */}
-
       <div class='shell'>
         <div class='container'>
           <div class='row'>
