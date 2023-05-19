@@ -32,8 +32,7 @@ function Product(props) {
     <Card key={product.slug}>
       <Link to={`/product/${product.slug}`}>
         <img
-          src={product.image}
-          className='card-img-top'
+          src={`http://localhost:5000/fotoproducto/${product.image}`}
           alt={product.nameproduct}
         />
       </Link>

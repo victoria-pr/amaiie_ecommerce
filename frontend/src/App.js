@@ -1,5 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"; //instalamos librería react-router-dom para navegar entre distintos componentes de un proyecto
-//Añadimos todas las rutas: Home (están todos los productos), ProductScree (están las fichas individuales de los productos)
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import Axios from "axios";
 import ProductScreen from "./screens/ProductScreen";

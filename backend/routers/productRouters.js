@@ -3,7 +3,7 @@ import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
 import User from "../models/userModel.js";
 import { isAuth, isAdmin } from "../utils.js";
-import upload from "../middlewares/multer.js";
+import upload from "../middlewares/multerpro.js";
 
 //Función Router de Express para manejar las rutas relacionadas con producto
 const productRouter = express.Router();
@@ -23,14 +23,14 @@ productRouter.post(
   //Función del controlador asíncrona que garantiza que las respuestas sean devueltas correctamente
   expressAsyncHandler(async (req, res) => {
     const newProduct = new Product({
-      nameproduct: "sample name " + Date.now(),
-      slug: "sample-name-" + Date.now(),
-      image: "/images/sample-image.png",
-      price: 0,
-      category: "sample category",
+      nameproduct: "introducir nombre del producto ",
+      slug: "sample-name-",
       user: "user",
+      price: 0,
+      image: "/images/sample-image.png",
+      category: "añade categoria",
       countInStock: 0,
-      description: "sample description",
+      description: "añade descripcion",
     });
     //Guardamos el producto en la base de datos  para enviar posteriormente un mensaje de que el producto se ha creado
     const product = await newProduct.save();
@@ -41,31 +41,39 @@ productRouter.post(
 //Ruta PUT que actualiza los productos con identificador id
 productRouter.put(
   "/:id",
-  [isAuth, upload.single("image")],
-  isAdmin,
-  //isArtist,
-  //para manejar de manera asíncrona la función del controlador para la ruta PUT
+  [isAuth,isAdmin, upload.single("image")],
   expressAsyncHandler(async (req, res) => {
-    //identificamos el producto específico por su id
     const productId = req.params.id;
     const product = await Product.findById(productId);
     if (product) {
-      product.nameproduct = req.body.nameproduct;
-      product.slug = req.body.slug;
-      product.price = req.body.price;
-      product.image = req.body.image;
-      product.category = req.body.category;
-      product.user = req.body.user;
-      product.countInStock = req.body.countInStock;
-      product.description = req.body.description;
+      product.nameproduct = req.body.nameproduct || product.nameproduct;
+      product.slug = req.body.slug  || product.slug;
+      product.user = req.body.user || product.user;
+      product.price = req.body.price || product.price;
+      product.category = req.body.category || product.category;
+      product.countInStock = req.body.countInStock || product.countInStock;
+      product.description = req.body.description || product.description;
 
-      //Una vez actualizado el producto se guarda y envía la respuesta de producto actualizado o en su caso de producto no encontrado
-      await product.save();
-      res.send({ message: "Product Updated" });
-    } else {
-      res.status(404).send({ message: "Product Not Found" });
-    }
-  })
+      if (req.file) {
+        product.image = req.file.filename; 
+      }
+      
+      const updatedProduct = await product.save();
+        res.send({
+          _id: updatedProduct._id,
+          nameproduct: updatedProduct.nameproduct,
+          slug: updatedProduct.slug,
+          price: updatedProduct.price,
+          image: updatedProduct.image,
+          category: updatedProduct.category,
+          countInStock: updatedProduct.countInStock,
+          description: updatedProduct.description,
+          /* token: generateToken(updatedProduct), */
+        });
+      } else {
+        res.status(404).send({ message: 'Product not found' });
+      }
+    })
 );
 
 //Ruta DELETE que elimina un producto según su identificador
@@ -79,7 +87,7 @@ productRouter.delete(
   expressAsyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
     if (product) {
-      await product.remove();
+      await product.deleteOne(); //CAMBIADO REMOVE POR DELETEONE
       res.send({ message: "Product Deleted" });
     } else {
       res.status(404).send({ message: "Product Not Found" });

@@ -80,8 +80,8 @@ function ProductScreen() {
       <Row>
         <Col md={6}>
           <img
+            src={`http://localhost:5000/fotoproducto/${product.image}`}
             className='img-large'
-            src={product.image}
             alt={product.nameproduct}
           ></img>
         </Col>
