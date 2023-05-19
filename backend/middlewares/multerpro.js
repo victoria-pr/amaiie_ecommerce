@@ -15,14 +15,7 @@ const storage = multer.diskStorage({
       },
     });
 
-const fileFilter = (req, file, cb) => { //middleware para filtrar archivos que no sean .jpg
-    if (!file.originalname.match(/\.(jpg)$/)) {
-        return cb("Solo se permiten archivos .jpg");
-    }
-    cb(null, true);
-}
 
-
-const upload = multer({ storage: storage, fileFilter: fileFilter });
+const upload = multer({ storage: storage });
 
 export default upload;
