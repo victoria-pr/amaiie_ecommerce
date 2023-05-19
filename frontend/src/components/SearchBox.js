@@ -25,9 +25,11 @@ export default function SearchBox() {
           aria-label='Search Products'
           aria-describedby='button-search'
         ></FormControl>
-        <Button variant='outline-primary' type='submit' id='button-search'>
+        {/* <Button variant='outline-primary' type='submit' id='button-search'>
           <AiOutlineSearch />
-        </Button>
+        </Button> */}
+
+        <AiOutlineSearch onClick={submitHandler} id='button-search' />
       </InputGroup>
     </Form>
   );

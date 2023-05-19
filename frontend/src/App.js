@@ -82,7 +82,7 @@ function App() {
       > */}
       <div className='d-flex flex-column site-container' /* className='App' */>
         <ToastContainer position='bottom-center' limit={1} />
-        <Navbar bg='dark' variant='dark' className='fixed-top'>
+        <Navbar bg='light' variant='light' className='fixed-top shadow'>
           <Container>
             <LinkContainer to='/'>
               <Navbar.Brand>amaiie</Navbar.Brand>

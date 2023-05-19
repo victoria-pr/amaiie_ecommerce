@@ -93,8 +93,8 @@ button {
   color: #a0a0a0;
 }
 .checkout-steps > div.active {
-  border-bottom: 0.2rem solid #f08000;
-  color: #f08000;
+  border-bottom: 0.2rem solid #e65932;
+  color: #e65932;
 }
 
 .shoppingcart {
@@ -111,12 +111,13 @@ button {
 
 .btn-primary,
 .btn-outline-primary {
-  background-color: #a2d3bd;
+  background-color: #147587;
   color: #000000;
-  border-color: #a2d3bd;
+  border-color: #147587;
 }
 
 #button-search {
-  width: 100px;
+  width: 49px;
   height: 30px;
+  color: #147587;
 }
