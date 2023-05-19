@@ -55,16 +55,15 @@ export default function ProductEditScreen() {
 
   const { state } = useContext(Store);
   const { userInfo } = state;
-  const { loading, error, loadingUpdate, loadingUpload } = productState;
+  const { loading, error, loadingUpdate } = productState;
 
   const [nameproduct, setProductName] = useState("");
   const [slug, setSlug] = useState("");
+  const [user, setUser] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const [images, setImages] = useState([]);
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState("");
-  const [user, setUser] = useState("");
   const [description, setDescription] = useState("");
 
   useEffect(() => {
@@ -74,11 +73,11 @@ export default function ProductEditScreen() {
         const { data } = await axios.get(`/api/products/${productId}`);
         setProductName(data.nameproduct);
         setSlug(data.slug);
+        setUser(data.user);
         setPrice(data.price);
         setImage(data.image);
         setCategory(data.category);
         setCountInStock(data.countInStock);
-        setUser(data.user);
         setDescription(data.description);
         dispatch({ type: "FETCH_SUCCESS" });
       } catch (err) {
@@ -97,10 +96,10 @@ export default function ProductEditScreen() {
       const formData = new FormData();
       formData.append("image", image);
       formData.append("nameproduct", nameproduct);
+      formData.append("user", user);
       formData.append("slug", slug);
       formData.append("price", price);
       formData.append("category", category);
-      formData.append("user", user);
       formData.append("countInStock", countInStock);
       formData.append("description", description);
       const { data } = await axios.put(`/api/products/${productId}`, formData, {
@@ -124,7 +123,7 @@ export default function ProductEditScreen() {
     }
   };
 
-  const uploadFileHandler = async (e, forImages) => {
+  /* const uploadFileHandler = async (e, forImages) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append("file", file);
@@ -148,29 +147,7 @@ export default function ProductEditScreen() {
       toast.error(getError(err));
       dispatch({ type: "UPLOAD_FAIL", payload: getError(err) });
     }
-  };
-  const deleteFileHandler = async (fileName, f) => {
-    try {
-      const { data } = await axios.post(
-        "/api/delete",
-        { file: fileName },
-        {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        }
-      );
-
-      if (data.success) {
-        setImages(images.filter((x) => x !== fileName));
-        toast.success("Image removed successfully. Click Update to apply it.");
-      } else {
-        throw new Error(data.message);
-      }
-    } catch (err) {
-      toast.error(getError(err));
-    }
-  };
+  }; */
 
   return (
     <Container className='small-container'>
@@ -184,12 +161,20 @@ export default function ProductEditScreen() {
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} enctype="multipart/form-data" >
           <Form.Group className='mb-3' controlId='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
               value={nameproduct}
               onChange={(e) => setProductName(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='user'>
+            <Form.Label>User</Form.Label>
+            <Form.Control
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
               required
             />
           </Form.Group>
@@ -209,60 +194,20 @@ export default function ProductEditScreen() {
               required
             />
           </Form.Group>
-          {/* <Form.Group className='mb-3' controlId='image'>
-            <Form.Label>Image File</Form.Label>
-            <Form.Control
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              required
-            />
-          </Form.Group> */}
-          {/* <Form.Group className='mb-3' controlId='additionalImage'>
-            <Form.Label>Additional Images</Form.Label>
-            {image.length === 0 && <MessageBox>No image</MessageBox>}
-            <ListGroup variant='flush'>
-              {images.map((x) => (
-                <ListGroup.Item key={x}>
-                  {x}
-                  <Button variant='light' onClick={() => deleteFileHandler(x)}>
-                    <i className='fa fa-times-circle'></i>
-                  </Button>
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
-          </Form.Group> */}
 
           <Form.Group className='mb-3' controlId='image'>
             <Form.Label>Imagen</Form.Label>
             <Form.Control
               type='file'
-              /* value={username}*/
               onChange={(e) => setImage(e.target.files[0])}
-              required
+              
             />
           </Form.Group>
-          {/* 
-          <Form.Group className='mb-3' controlId='additionalImageFile'>
-            <Form.Label>Upload Aditional Image</Form.Label>
-            <Form.Control
-              type='file'
-              onChange={(e) => uploadFileHandler(e, true)}
-            />
-            {loadingUpload && <LoadingBox></LoadingBox>}
-          </Form.Group> */}
           <Form.Group className='mb-3' controlId='category'>
             <Form.Label>Category</Form.Label>
             <Form.Control
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='user'>
-            <Form.Label>user</Form.Label>
-            <Form.Control
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
               required
             />
           </Form.Group>
