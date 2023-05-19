@@ -70,8 +70,8 @@ export default Product; */
               <div class='wsk-cp-product'>
                 <div class='wsk-cp-img'>
                   <img
-                    src={product.image}
-                    alt='Product'
+                    src={`http://localhost:5000/fotoproducto/${product.image}`}
+                    alt={product.nameproduct}
                     class='img-responsive'
                   />
                 </div>

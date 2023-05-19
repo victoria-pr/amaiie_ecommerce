@@ -1,0 +1,48 @@
+.parallax {
+  background: url("../css/nosotros.png") repeat fixed 100%;
+  background-size: cover;
+  color: rgb(255, 255, 255);
+}
+.parallax-1 {
+  background: url("../css/experiencia.jpg") repeat fixed 100%;
+  background-size: cover;
+  color: rgb(255, 255, 255);
+}
+.parallax-2 {
+  background: url("../css/compromiso.jpg") repeat fixed 100%;
+  background-size: cover;
+  color: rgb(255, 255, 255);
+}
+.parallax-inner {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+h2 {
+  font-size: 80px;
+  text-align: center;
+  text-shadow: 2px 2px 9px rgba(0, 0, 0, 0.5);
+}
+
+.nosotros-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  /* background: linear-gradient(0deg, #147587 0%, #ffff 100%); */
+  border: 1px solid #147587;
+  border-radius: 5px;
+  font-size: 89px;
+}
+
+.nosotros-container p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.5;
+}
+p {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
