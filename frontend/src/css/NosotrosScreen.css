@@ -1,6 +1,6 @@
 .parallax {
-  background: url("../css/nosotros.png") repeat fixed 100%;
-  background-size: cover;
+  background: url("../css/nosotros.jpg") repeat fixed 50%;
+  background-size: 65%;
   color: rgb(255, 255, 255);
 }
 .parallax-1 {
@@ -28,7 +28,6 @@ h2 {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
   /* background: linear-gradient(0deg, #147587 0%, #ffff 100%); */
   border: 1px solid #147587;
   border-radius: 5px;
