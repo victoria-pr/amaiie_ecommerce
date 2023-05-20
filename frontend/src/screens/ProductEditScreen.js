@@ -155,7 +155,7 @@ export default function ProductEditScreen() {
       <Helmet>
         <title>Edit Product ${productId}</title>
       </Helmet>
-      <h1>Edit Product {productId}</h1>
+      <h1 className='color-verde-edit-product'>Edit Product {productId}</h1>
 
       {loading ? (
         <LoadingBox></LoadingBox>

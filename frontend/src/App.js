@@ -92,12 +92,6 @@ function App() {
             <SearchBox />
 
             <Nav className='ml-auto'>
-              <Link className='nav-link custom-link' to='/contacto'>
-                Contacto
-              </Link>
-              <Link className='nav-link custom-link' to='/nosotros'>
-                Nosotros
-              </Link>
               <Link to='/cart' className='nav-link custom-link'>
                 Cart
                 {cart.cartItems.length > 0 && (
@@ -106,6 +100,13 @@ function App() {
                   </Badge>
                 )}
               </Link>
+              <Link className='nav-link custom-link' to='/contacto'>
+                Contacto
+              </Link>
+              <Link className='nav-link custom-link' to='/nosotros'>
+                Nosotros
+              </Link>
+
               {userInfo ? (
                 <NavDropdown
                   className='custom-link-menu'

@@ -140,7 +140,7 @@ export default function ProductListScreen() {
     <div className='container-create'>
       <Row>
         <Col>
-          <h1>Products</h1>
+          <h1 className='color-verde'>Products</h1>
         </Col>
         <Col className='col text-end'>
           <div>
@@ -164,7 +164,7 @@ export default function ProductListScreen() {
       ) : (
         <>
           <table className='table'>
-            <thead>
+            <thead className='color-verde'>
               <tr>
                 <th>ID</th>
                 <th>NAME</th>

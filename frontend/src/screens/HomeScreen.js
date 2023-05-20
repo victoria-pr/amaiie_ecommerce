@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import "../css/GalleryScreen.css";
+import "../App.css";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -100,13 +101,13 @@ function HomeScreen() {
 
             <Col md={5} className='gallery-item3'>
               <div className='gallery-item'>
-                <Link to='/search?category=navidad'>
+                <Link to='/search?category=artesanal'>
                   <img
                     src='./images/bolasanta.png'
                     alt='Imagen 3'
                     className='gallery-image'
                   />
-                  <div className='gallery-item-text'>Navidad</div>
+                  <div className='gallery-item-text'>Artesanal</div>
                 </Link>
               </div>
             </Col>
@@ -142,7 +143,7 @@ function HomeScreen() {
       <Helmet>
         <title>Amaiie</title>
       </Helmet>
-      <h1>Productos</h1>
+      <h1 className='color-verde'>Productos</h1>
       <div className='products'>
         {loading ? (
           <LoadingBox />

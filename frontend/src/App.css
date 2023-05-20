@@ -15,6 +15,25 @@
 .color-verde {
   color: #147587;
 }
+.color-verde-order {
+  margin-top: 50px;
+  color: #147587;
+}
+
+.color-verde-order-history {
+  margin-top: 100px;
+  color: #147587;
+}
+
+.color-verde-edit-product {
+  margin-top: 50px;
+  color: #147587;
+}
+
+.color-verde-user-profile {
+  margin-top: 50px;
+  color: #147587;
+}
 
 .custom-button {
   background-color: #147587; /* Cambia el color de fondo del botón */
