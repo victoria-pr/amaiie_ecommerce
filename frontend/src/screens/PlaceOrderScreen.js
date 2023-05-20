@@ -12,6 +12,7 @@ import { Store } from "../Store";
 import { getError } from "../utils";
 import CheckoutSteps from "../components/CheckoutSteps";
 import LoadingBox from "../components/LoadingBox";
+import "../App.css";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -62,7 +63,7 @@ function PlaceOrderScreen() {
         },
         {
           headers: {
-            authorization: `Bearer ${userInfo.token}`, 
+            authorization: `Bearer ${userInfo.token}`,
           },
         }
       );
@@ -178,6 +179,7 @@ function PlaceOrderScreen() {
                 <ListGroup.Item>
                   <div className='d-grid'>
                     <Button
+                      className='custom-button'
                       type='button'
                       onClick={placeOrderHandler}
                       disabled={cart.cartItems.length === 0}

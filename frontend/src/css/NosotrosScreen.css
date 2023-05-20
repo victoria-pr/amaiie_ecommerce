@@ -18,7 +18,7 @@
   padding-bottom: 5%;
 }
 
-h2 {
+.parallax-inner h2 {
   font-size: 80px;
   text-align: center;
   text-shadow: 2px 2px 9px rgba(0, 0, 0, 0.5);

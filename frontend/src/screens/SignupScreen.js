@@ -8,6 +8,7 @@ import { useState, useContext, useEffect } from "react";
 import { Store } from "../Store";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
+import "../App.css";
 
 export default function SignupScreen() {
   const navigate = useNavigate();
@@ -88,7 +89,9 @@ export default function SignupScreen() {
           </Form.Group>
         </Form.Group>
         <div className='mb-3'>
-          <Button type='submit'>Sign Up</Button>
+          <Button className='custom-button' type='submit'>
+            Sign Up
+          </Button>
         </div>
         <div className='mb-3'>
           Already have an account?{" "}

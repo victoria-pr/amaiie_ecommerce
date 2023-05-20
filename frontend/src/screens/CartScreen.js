@@ -15,6 +15,7 @@ import {
   faPlusCircle,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import "../App.css";
 
 export default function CartScreen() {
   const navigate = useNavigate();
@@ -118,6 +119,7 @@ export default function CartScreen() {
                 <ListGroup.Item>
                   <div className='d-grid'>
                     <Button
+                      className='custom-button'
                       type='button'
                       variant='primary'
                       onClick={checkoutHandler}

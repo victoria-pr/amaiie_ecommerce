@@ -9,6 +9,7 @@ import { Store } from "../Store";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
+import "../App.css";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -136,14 +137,18 @@ export default function ProductListScreen() {
   };
 
   return (
-    <div>
+    <div className='container-create'>
       <Row>
         <Col>
           <h1>Products</h1>
         </Col>
         <Col className='col text-end'>
           <div>
-            <Button type='button' onClick={createHandler}>
+            <Button
+              className='custom-button custom-button-create'
+              type='button'
+              onClick={createHandler}
+            >
               Create Product
             </Button>
           </div>
@@ -179,6 +184,7 @@ export default function ProductListScreen() {
                   <td>{product.user}</td>
                   <td>
                     <Button
+                      className='custom-button'
                       type='button'
                       variant='light'
                       onClick={() => navigate(`/admin/product/${product._id}`)}
@@ -187,6 +193,7 @@ export default function ProductListScreen() {
                     </Button>
                     &nbsp;
                     <Button
+                      className='custom-button'
                       type='button'
                       variant='light'
                       onClick={() => deleteHandler(product)}

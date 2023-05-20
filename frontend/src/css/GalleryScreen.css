@@ -20,9 +20,6 @@
 .gallery-image-5 {
   clip-path: polygon(0 0, 100% 0, 100% 80%, 80% 100%, 0 100%);
 }
-/* .gallery-item:hover {
-  opacity: 0.2;  */ /* Cambia la opacidad al hacer hover para crear el efecto */
-/* } */
 
 .gallery-item:hover .gallery-item-text {
   opacity: 1; /* Mostrar el texto en hover */
@@ -98,7 +95,7 @@
 
 .artista {
   position: absolute;
-  font-size: 20px;
+  font-size: 18px;
   margin-left: -568px;
   margin-top: 184px;
 }

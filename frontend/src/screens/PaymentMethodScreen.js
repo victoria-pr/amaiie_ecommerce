@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { Store } from "../Store";
+import "../App.css";
 
 export default function PaymentMethodScreen() {
   const navigate = useNavigate();
@@ -58,7 +59,9 @@ export default function PaymentMethodScreen() {
             />
           </div>
           <div className='mb-3'>
-            <Button type='submit'>Continue</Button>
+            <Button className='custom-button' type='submit'>
+              Continue
+            </Button>
           </div>
         </Form>
       </div>

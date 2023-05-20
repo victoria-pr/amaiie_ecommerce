@@ -38,6 +38,7 @@ import ArtistScreen from "./screens/ArtistScreen";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditArtistScreen from "./screens/EditArtistScreen";
 import ProductArtistScreen from "./screens/ProductArtistScreen";
+import "./App.css";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -84,20 +85,20 @@ function App() {
         <Navbar bg='light' variant='light' className='fixed-top shadow'>
           <Container>
             <LinkContainer to='/'>
-              <Navbar.Brand>amaiie</Navbar.Brand>
+              <Navbar.Brand className='color-verde'>Amaiie</Navbar.Brand>
             </LinkContainer>
             {/*  <Navbar.Toggle aria-controls='basic-navbar-nav' />
               <Navbar.Collapse id='basic-navbar-nav'> */}
             <SearchBox />
 
             <Nav className='ml-auto'>
-              <Link className='nav-link' to='/contacto'>
+              <Link className='nav-link custom-link' to='/contacto'>
                 Contacto
               </Link>
-              <Link className='nav-link' to='/nosotros'>
+              <Link className='nav-link custom-link' to='/nosotros'>
                 Nosotros
               </Link>
-              <Link to='/cart' className='nav-link'>
+              <Link to='/cart' className='nav-link custom-link'>
                 Cart
                 {cart.cartItems.length > 0 && (
                   <Badge pill bg='danger'>
@@ -106,12 +107,23 @@ function App() {
                 )}
               </Link>
               {userInfo ? (
-                <NavDropdown title={userInfo.username} id='basic-nav-dropdown'>
-                  <LinkContainer to='/profile'>
-                    <NavDropdown.Item>User Profile</NavDropdown.Item>
+                <NavDropdown
+                  className='custom-link'
+                  title={userInfo.username}
+                  id='basic-nav-dropdown'
+                >
+                  <LinkContainer
+                    className='custom-link custom-link'
+                    to='/profile'
+                  >
+                    <NavDropdown.Item className='custom-link custom-link'>
+                      User Profile
+                    </NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to='/orderhistory'>
-                    <NavDropdown.Item>Order History</NavDropdown.Item>
+                  <LinkContainer className='custom-link' to='/orderhistory'>
+                    <NavDropdown.Item className='custom-link'>
+                      Order History
+                    </NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Divider />
                   <Link
@@ -123,32 +135,40 @@ function App() {
                   </Link>
                 </NavDropdown>
               ) : (
-                <Link className='nav-link' to='/signin'>
+                <Link className='nav-link custom-link' to='/signin'>
                   Sign In
                 </Link>
               )}
               {userInfo && userInfo.isArtist && (
-                <NavDropdown title='Artist' id='artist-nav-dropdown'>
-                  <LinkContainer to='/editprofile'>
+                <NavDropdown
+                  className='custom-link'
+                  title='Artist'
+                  id='artist-nav-dropdown'
+                >
+                  <LinkContainer className='custom-link' to='/editprofile'>
                     <NavDropdown.Item>Edit Profile</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to='/artistproducts'>
+                  <LinkContainer className='custom-link' to='/artistproducts'>
                     <NavDropdown.Item>Productos</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
               )}
               {userInfo && userInfo.isAdmin && (
-                <NavDropdown title='Admin' id='admin-nav-dropdown'>
+                <NavDropdown
+                  className='custom-link'
+                  title='Admin'
+                  id='admin-nav-dropdown'
+                >
                   {/* <LinkContainer to='/admin/dashboard'>
                     <NavDropdown.Item>Dashboard</NavDropdown.Item>
                   </LinkContainer> */}
-                  <LinkContainer to='/admin/products'>
+                  <LinkContainer className='custom-link' to='/admin/products'>
                     <NavDropdown.Item>Products</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to='/admin/orders'>
+                  <LinkContainer className='custom-link' to='/admin/orders'>
                     <NavDropdown.Item>Orders</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer to='/admin/users'>
+                  <LinkContainer className='custom-link' to='/admin/users'>
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
@@ -255,9 +275,17 @@ function App() {
             <Routes>
               <Route path='/Avisolegal' component={AvisoLegal} />
             </Routes>
-            <Link to='/avisolegal'>Aviso legal</Link> .
-            <Link to='/privacidad'>Política de privacidad</Link> .
-            <Link to='/cookies'>Política de cookies</Link>
+            <Link class='text-decoration-none custom-link' to='/avisolegal'>
+              Aviso legal
+            </Link>
+            ·
+            <Link class='text-decoration-none custom-link' to='/privacidad'>
+              Política de privacidad
+            </Link>
+            ·
+            <Link class='text-decoration-none custom-link' to='/cookies'>
+              Política de cookies
+            </Link>
           </p>
         </div>
       </footer>

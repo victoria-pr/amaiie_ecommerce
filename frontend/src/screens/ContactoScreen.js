@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "../css/ContactoScreen.scss";
+import "../App.css";
 
 function Inputs() {
   const [username, setUserName] = useState("");
@@ -58,7 +59,11 @@ function Inputs() {
               rows={10}
             />
           </Form.Group>
-          <Button className='botonenviar' disabled={errorMessage} type='submit'>
+          <Button
+            className='botonenviar custom-button'
+            disabled={errorMessage}
+            type='submit'
+          >
             Enviar
           </Button>
         </Form>

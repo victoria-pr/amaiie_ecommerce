@@ -8,6 +8,7 @@ import { useState, useContext, useEffect } from "react";
 import { Store } from "../Store";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
+import "../App.css";
 
 export default function SigninScreen() {
   const navigate = useNavigate();
@@ -66,7 +67,9 @@ export default function SigninScreen() {
           />
         </Form.Group>
         <div className='mb-3'>
-          <Button type='submit'>Sign In</Button>
+          <Button className='custom-button' type='submit'>
+            Sign In
+          </Button>
         </div>
         <div className='mb-3'>
           New Customer?{" "}

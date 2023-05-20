@@ -56,11 +56,17 @@ function HomeScreen() {
           <div className='decorative-text-line'></div>
           <div className='decorative-text-content'>
             <div className='artista'>
-              Artistas con Mucho Arte <br></br>que transmiten Inspiración I
-              Emociones
+              Artistas con Mucho <strong className='color-verde'>Arte</strong>
+              <br></br>que transmiten Inspiración I
+              <strong className='color-verde'> Emociones</strong>
             </div>
-            <div className='arte'>01 Arte ...</div>
-            <div className='inspiracion'>Emoción esencial capturada</div>
+            <div className='arte'>
+              01 <strong className='color-verde'>Artistas</strong> ...
+            </div>
+            <div className='inspiracion'>
+              <strong className='color-verde'>Esencia </strong>
+              capturada
+            </div>
           </div>
         </div>
 
