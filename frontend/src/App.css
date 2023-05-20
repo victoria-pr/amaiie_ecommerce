@@ -6,10 +6,10 @@
   color: #147587;
 }
 
-.custom-link:active:focus {
+.custom-link-menu:active:focus {
   background-color: #129cb5; /* Cambia el color de fondo del link al hacer clic o estar en foco */
   border-color: #129cb5; /* Cambia el color del borde del link al hacer clic o estar en foco */
-  color: white; /* Cambia el color del texto del link al hacer clic o estar en foco */
+  color: white;
 }
 
 .color-verde {
@@ -50,6 +50,10 @@
 
 .container-create {
   margin-top: -100px;
+}
+
+.cardposition {
+  margin-top: 170px;
 }
 
 /* .App {

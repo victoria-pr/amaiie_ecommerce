@@ -93,12 +93,12 @@ button {
 }
 
 .checkout-steps > div {
-  border-bottom: 1rem solid #a0a0a0;
+  border-bottom: 0.4rem solid #a0a0a0;
   color: #a0a0a0;
 }
 .checkout-steps > div.active {
-  border-bottom: 0.2rem solid #e65932;
-  color: #e65932;
+  border-bottom: 0.2rem solid #147587;
+  color: #147587;
 }
 
 .shoppingcart {

@@ -25,51 +25,51 @@ function Inputs() {
   };
 
   return (
-    <div id='contact-form'>
-      <h1 className='tituloformulario'>CONTACTO</h1>
-      <h3>ponerse en contacto</h3>
-      {sentMessage && <p className='mensaje'>{sentMessage}</p>}
-      <section>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group>
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control
-              type='text'
-              value={username}
-              onChange={(event) => setUserName(event.target.value)}
-              placeholder='Nombre'
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type='email'
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder='Email'
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Mensaje</Form.Label>
-            <Form.Control
-              as='textarea'
-              value={textarea}
-              onChange={(event) => setTextArea(event.target.value)}
-              placeholder='Escribe tu mensaje'
-              rows={10}
-            />
-          </Form.Group>
-          <Button
-            className='botonenviar custom-button'
-            disabled={errorMessage}
-            type='submit'
-          >
-            Enviar
-          </Button>
-        </Form>
-      </section>
-      <section className='mapa'>
-        <div class='Container'>
+    <div calssName='Container'>
+      <div id='contact-form'>
+        <h1 className='tituloformulario'>CONTACTO</h1>
+        <h3>Ponerse en contacto</h3>
+        {sentMessage && <p className='mensaje'>{sentMessage}</p>}
+        <section>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control
+                type='text'
+                value={username}
+                onChange={(event) => setUserName(event.target.value)}
+                placeholder='Nombre'
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type='email'
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder='Email'
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Mensaje</Form.Label>
+              <Form.Control
+                as='textarea'
+                value={textarea}
+                onChange={(event) => setTextArea(event.target.value)}
+                placeholder='Escribe tu mensaje'
+                rows={10}
+              />
+            </Form.Group>
+            <Button
+              className='botonenviar custom-button'
+              disabled={errorMessage}
+              type='submit'
+            >
+              Enviar
+            </Button>
+          </Form>
+        </section>
+        <section className='mapa'>
           <div class='Map-container'>
             <svg
               id='Map-svg'
@@ -275,8 +275,8 @@ function Inputs() {
               <li data-location='BLR'>Bangalore</li>
             </ul>
           </nav>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }

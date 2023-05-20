@@ -14,6 +14,7 @@ import MessageBox from "../components/MessageBox";
 import { Store } from "../Store";
 import { getError } from "../utils";
 import { toast } from "react-toastify";
+import "../App.css";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -195,12 +196,12 @@ export default function OrderScreen() {
       <Helmet>
         <title>Order {orderId}</title>
       </Helmet>
-      <h1 className='my-3'>Order {orderId}</h1>
+      <h1 className='my-3 color-verde'>Order {orderId}</h1>
       <Row>
         <Col md={8}>
           <Card className='mb-3'>
             <Card.Body>
-              <Card.Title>Shipping</Card.Title>
+              <Card.Title className='color-verde'>Shipping</Card.Title>
               <Card.Text>
                 <strong>Name:</strong> {order.shippingAddress.fullName} <br />
                 <strong>Address: </strong> {order.shippingAddress.address},
@@ -228,7 +229,7 @@ export default function OrderScreen() {
           </Card>
           <Card className='mb-3'>
             <Card.Body>
-              <Card.Title>Payment</Card.Title>
+              <Card.Title className='color-verde'>Payment</Card.Title>
               <Card.Text>
                 <strong>Method:</strong> {order.paymentMethod}
               </Card.Text>
@@ -244,7 +245,7 @@ export default function OrderScreen() {
 
           <Card className='mb-3'>
             <Card.Body>
-              <Card.Title>Items</Card.Title>
+              <Card.Title className='color-verde'>Items</Card.Title>
               <ListGroup variant='flush'>
                 {order.orderItems.map((item) => (
                   <ListGroup.Item key={item._id}>
@@ -260,7 +261,7 @@ export default function OrderScreen() {
                       <Col md={3}>
                         <span>{item.quantity}</span>
                       </Col>
-                      <Col md={3}>${item.price}</Col>
+                      <Col md={3}>{item.price}€</Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
@@ -271,33 +272,35 @@ export default function OrderScreen() {
         <Col md={4}>
           <Card className='mb-3'>
             <Card.Body>
-              <Card.Title>Order Summary</Card.Title>
+              <Card.Title className='color-verde'>Order Summary</Card.Title>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>${order.itemsPrice.toFixed(2)}</Col>
+                    <Col>{order.itemsPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Shipping</Col>
-                    <Col>${order.shippingPrice.toFixed(2)}</Col>
+                    <Col>{order.shippingPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
-                    <Col>${order.taxPrice.toFixed(2)}</Col>
+                    <Col>{order.taxPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>
-                      <strong> Order Total</strong>
+                      <strong className='color-verde'> Order Total</strong>
                     </Col>
                     <Col>
-                      <strong>${order.totalPrice.toFixed(2)}</strong>
+                      <strong className='color-verde'>
+                        {order.totalPrice.toFixed(2)}€
+                      </strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>

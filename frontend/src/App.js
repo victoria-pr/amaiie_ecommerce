@@ -108,15 +108,15 @@ function App() {
               </Link>
               {userInfo ? (
                 <NavDropdown
-                  className='custom-link'
+                  className='custom-link-menu'
                   title={userInfo.username}
                   id='basic-nav-dropdown'
                 >
                   <LinkContainer
-                    className='custom-link custom-link'
+                    className='custom-link custom-link-menu'
                     to='/profile'
                   >
-                    <NavDropdown.Item className='custom-link custom-link'>
+                    <NavDropdown.Item className='custom-link custom-link-menu'>
                       User Profile
                     </NavDropdown.Item>
                   </LinkContainer>

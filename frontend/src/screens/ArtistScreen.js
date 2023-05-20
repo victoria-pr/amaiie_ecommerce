@@ -7,6 +7,7 @@ import Product from "../components/Product";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import "../css/ArtistScreen.scss";
+import "../App.css";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -100,13 +101,10 @@ function ArtistScreen() {
       <div>
         <div className='infoartist'>
           <div>
-            <h3>{user.username}</h3>
+            <h3 className='color-verde'>{user.username}</h3>
           </div>
           <div>
             <p>{user.description}</p>
-          </div>
-          <div>
-            <p>{user.email}</p>
           </div>
         </div>
         <div className='infoimagen'>

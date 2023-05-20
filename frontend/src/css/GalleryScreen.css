@@ -1,3 +1,5 @@
+/* ---------------------- gallery home ----------------------*/
+
 .gallery-grid {
   margin: 10px;
   display: grid;
@@ -22,7 +24,7 @@
 }
 
 .gallery-item:hover .gallery-item-text {
-  opacity: 1; /* Mostrar el texto en hover */
+  opacity: 1;
 }
 
 .gallery-item-text {
@@ -66,6 +68,24 @@
   margin-left: -70px;
 }
 
+.arte {
+  position: absolute;
+  margin-left: -125px;
+  margin-top: 565px;
+}
+
+.inspiracion {
+  position: absolute;
+  margin-left: 253px;
+  margin-top: 453px;
+}
+
+h1 {
+  margin-top: 200px;
+}
+
+/* -----------------Artista pagina-------------------------------------------*/
+
 .decorative-text {
   display: flex;
   align-items: center;
@@ -81,14 +101,6 @@
   background-color: gray;
 }
 
-/* .decorative-text-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
-  font-size: 14px;
-} */
-
 .decorative-text-content div {
   color: gray;
 }
@@ -98,20 +110,4 @@
   font-size: 18px;
   margin-left: -568px;
   margin-top: 184px;
-}
-
-.arte {
-  position: absolute;
-  margin-left: -125px;
-  margin-top: 565px;
-}
-
-.inspiracion {
-  position: absolute;
-  margin-left: 253px;
-  margin-top: 453px;
-}
-
-h1 {
-  margin-top: 200px;
 }

@@ -92,7 +92,7 @@ function ProductScreen() {
               <Helmet>
                 <title>{product.nameproduct}</title>
               </Helmet>
-              <h1>{product.nameproduct}</h1>
+              <h1 className='color-verde'>{product.nameproduct}</h1>
             </ListGroup.Item>
             <ListGroup.Item>Precio : {product.price}€</ListGroup.Item>
             <ListGroup.Item>
@@ -104,7 +104,7 @@ function ProductScreen() {
           </ListGroup>
         </Col>
         <Col md={3}>
-          <Card>
+          <Card className='cardposition'>
             <Card.Body>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
@@ -129,7 +129,11 @@ function ProductScreen() {
                 {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <div className='d-grid'>
-                      <Button onClick={addToCartHandler} variant='primary'>
+                      <Button
+                        className='custom-button'
+                        onClick={addToCartHandler}
+                        variant='primary'
+                      >
                         add to cart
                       </Button>
                     </div>
