@@ -139,9 +139,6 @@ function App() {
               )}
               {userInfo && userInfo.isAdmin && (
                 <NavDropdown title='Admin' id='admin-nav-dropdown'>
-                  {/* <LinkContainer to='/admin/dashboard'>
-                    <NavDropdown.Item>Dashboard</NavDropdown.Item>
-                  </LinkContainer> */}
                   <LinkContainer to='/admin/products'>
                     <NavDropdown.Item>Products</NavDropdown.Item>
                   </LinkContainer>
@@ -168,21 +165,6 @@ function App() {
             : "side-navbar d-flex justify-content-between flex-wrap flex-column"
         }
       >
-        <Nav className='flex-column text-white w-100 p-2'>
-          {/* <Nav.Item>
-            <strong>Categories</strong>
-          </Nav.Item> */}
-          {/*  {categories.map((category) => (
-            <Nav.Item key={category}>
-              <LinkContainer
-                to={{ pathname: "/search", search: `category=${category}` }}
-                onClick={() => setSidebarIsOpen(false)}
-              >
-                <Nav.Link>{category}</Nav.Link>
-              </LinkContainer>
-            </Nav.Item>
-          ))} */}
-        </Nav>
       </div>
       <main>
         <Container className='mt-3'>

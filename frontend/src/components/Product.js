@@ -1,8 +1,4 @@
-import { Link } from "react-router-dom";
-import axios from "axios";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import { useContext, useReducer } from "react";
+import { useContext } from "react";
 import { Store } from "../Store";
 import "../css/ArtistScreen.scss";
 
@@ -26,36 +22,6 @@ function Product(props) {
       payload: { ...item, quantity },
     });
   };
-  /* 
-  return (
-    <Card key={product.slug}>
-      <Link to={`/product/${product.slug}`}>
-        <img
-          src={`http://localhost:5000/fotoproducto/${product.image}`}
-          alt={product.nameproduct}
-        />
-      </Link>
-      <Card.Body>
-        <Link to={`/product/${product.slug}`}>
-          <Card.Title>{product.nameproduct}</Card.Title>
-        </Link>
-        <Link to={`/user/${product.user}`}>
-          <Card.Title>{product.user}</Card.Title>
-        </Link>
-        <Card.Text>{product.price}€</Card.Text>
-        {product.countInStock === 0 ? (
-          <Button variant='light' disabled>
-            Out of stock
-          </Button>
-        ) : (
-          <Button onClick={() => addToCartHandler(product)}>Add to cart</Button>
-        )}
-      </Card.Body>
-    </Card>
-  );
-}
-
-export default Product; */
 
   return (
     <div>
@@ -126,9 +92,6 @@ export default Product; */
           </div>
         </div>
       </div>
-
-      {/* -----------------
-       */}
     </div>
   );
 }

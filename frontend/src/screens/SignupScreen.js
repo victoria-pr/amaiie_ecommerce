@@ -17,6 +17,7 @@ export default function SignupScreen() {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [isArtist, setIsArtist] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -33,6 +34,7 @@ export default function SignupScreen() {
       const { data } = await axios.post("/api/users/signup", {
         username,
         email,
+        isArtist,
         password,
       });
       ctxDispatch({ type: "USER_SIGNIN", payload: data });
@@ -71,6 +73,18 @@ export default function SignupScreen() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
+
+        <Form.Group className='mb-3' controlId='isArtist'>
+          <Form.Label>¿Deseas inscribirte como artista?</Form.Label>
+          <Form.Select
+          required
+          onChange={(e) => setIsArtist(e.target.value === "true")}>
+          <option value=''>Selecciona una opción</option>
+          <option value='true'>Sí</option>
+          <option value='false'>No</option>
+          </Form.Select>
+          </Form.Group>
+
         <Form.Group className='mb-3' controlId='password'>
           <Form.Label>Password</Form.Label>
           <Form.Control

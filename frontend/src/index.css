@@ -87,6 +87,9 @@ button {
 .small-container {
   max-width: 600px;
 }
+.small{
+  max-width: 100px;
+}
 
 .checkout-steps > div {
   border-bottom: 1rem solid #a0a0a0;
