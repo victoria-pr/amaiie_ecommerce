@@ -6,7 +6,7 @@ import { Store } from "../Store";
 import Product from "../components/Product";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
-import "../css/ArtistScreen.scss";
+/* import "../css/ArtistScreen.scss"; */
 
 const reducer = (state, action) => {
   switch (action.type) {
