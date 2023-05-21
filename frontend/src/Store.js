@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
-
+//Creamos el contexto
 export const Store = createContext();
-
+//Estado inicia de toda la info
 const initialState = {
   userInfo: localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
@@ -18,6 +18,7 @@ const initialState = {
       : [],
   },
 };
+//para manejar las acciones que se aplican al estado
 function reducer(state, action) {
   switch (action.type) {
     case "CART_ADD_ITEM":
@@ -61,7 +62,6 @@ function reducer(state, action) {
         ...state,
         cart: { ...state.cart, shippingAddress: action.payload },
       };
-
     case "SAVE_PAYMENT_METHOD":
       return {
         ...state,
@@ -71,10 +71,11 @@ function reducer(state, action) {
       return state;
   }
 }
-
+//Componente de Store de la aplicación principal
+//HOOK useReducer para incializar el estado
 export function StoreProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = { state, dispatch };
-
+  //devuelve los valores y las propiedades de los children
   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 }

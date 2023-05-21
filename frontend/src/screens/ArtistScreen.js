@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios"; //Para hacer solicitudes HTTP y obtener datos de una API
+import { useParams, useNavigate } from "react-router-dom"; //para gestionar la nevegación en la web
 import { useEffect, useReducer, useState, useContext } from "react";
 import { getError } from "../utils";
 import { Store } from "../Store";
@@ -9,6 +9,8 @@ import Col from "react-bootstrap/esm/Col";
 import "../css/ArtistScreen.scss";
 import "../App.css";
 
+// PAGINA DEL ARTISTA: Función reductor que especifica como debe cambiar el estado de la aplicación
+//El reductor toma el estado actual y una acción y devuelve el estado actualizado (loading, error y user)
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -21,7 +23,9 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
+//HOOK useParams: para acceder al parámetro userbame
+//HOOK useState: para almacenar y actualizar el estado de los productos
+//useReducer: para gestionar el estado de la carga de la web y los errores de solicitud
 function ArtistScreen() {
   //const navigate = useNavigate();
   const params = useParams();
@@ -33,7 +37,8 @@ function ArtistScreen() {
     loading: true,
     error: "",
   });
-
+  //Realizamos una solicitud de datos al servidor cuando el valor de username cambia
+  //Función fetchData para enviar solicitudes HTTP utilizando Axios para obtener los datos del usuario y realcionarlos con el producto
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -52,7 +57,7 @@ function ArtistScreen() {
     };
     fetchData();
   }, [username]);
-
+  //Nos devuelve la página del artista
   return (
     <div>
       <div>

@@ -12,6 +12,8 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import "../css/GalleryScreen.css";
 import "../App.css";
+//PANTALLA DE INICIO
+//Definimos un reductor para gestionar el estado del componente HOME con FETCH REQUESTE (solicitud de datos) FETCH SUCESS (éxito en obtención de datos) y FETCH FAIL (error al botener datos)
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -26,7 +28,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
+//HOOK useReducer para incializar el estado (inicial com matriz vacía y un indicador de carga con un true o mensaje de error)
 function HomeScreen() {
   const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
     products: [],
@@ -34,6 +36,8 @@ function HomeScreen() {
     error: "",
   });
   //const [products, setProducts] = useState([]);
+
+  //HOOK useEffect para solicitar a la API la obtención de datos
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -48,7 +52,8 @@ function HomeScreen() {
     };
     fetchData();
   }, []);
-
+  //Devolvemos una estructura de elementos JSX(similar a HTML) para mostrar la página de inicio
+  //cada elemento de la galería es un Link que dirige a la página en función de la categoría
   return (
     <div>
       <div>
@@ -75,13 +80,13 @@ function HomeScreen() {
           <Row className='gallery-grid'>
             <Col md={11} className='gallery-item1'>
               <div className='gallery-item'>
-                <Link to='/search?category=ceramica'>
+                <Link to='/search?category=ceramicas'>
                   <img
                     src='./images/handmade2.png'
                     alt='Imagen 1'
                     className='gallery-image'
                   />
-                  <div className='gallery-item-text'>Cerámica</div>
+                  <div className='gallery-item-text'>Cerámicas</div>
                 </Link>
               </div>
             </Col>
@@ -101,33 +106,33 @@ function HomeScreen() {
 
             <Col md={5} className='gallery-item3'>
               <div className='gallery-item'>
-                <Link to='/search?category=artesanal'>
+                <Link to='/search?category=artesania'>
                   <img
                     src='./images/bolasanta.png'
                     alt='Imagen 3'
                     className='gallery-image'
                   />
-                  <div className='gallery-item-text'>Artesanal</div>
+                  <div className='gallery-item-text'>Artesania</div>
                 </Link>
               </div>
             </Col>
 
             <Col md={5} className='gallery-item4'>
               <div className='gallery-item'>
-                <Link to='/search?category=jabones'>
+                <Link to='/search?category=textil'>
                   <img
-                    src='./images/jabones.png'
+                    src='./images/textil.jpg'
                     alt='Imagen 4'
                     className='gallery-image-5'
                   />
-                  <div className='gallery-item-text'>Jabones</div>
+                  <div className='gallery-item-text'>Textil</div>
                 </Link>
               </div>
             </Col>
 
             <Col md={10} className='gallery-item5'>
               <div className='gallery-item'>
-                <Link to='/search?category=decoration'>
+                <Link to='/search?category=decoracion'>
                   <img
                     src='./images/decor.png'
                     alt='Imagen 5'

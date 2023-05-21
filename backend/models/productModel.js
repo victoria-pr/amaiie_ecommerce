@@ -1,6 +1,7 @@
-import mongoose from "mongoose"; //Importamos la librería mongoose para la base de datos del los productos
-//Esquema de la base de datos de productos
+import mongoose from "mongoose"; //Importamos la librería mongoose para el esquema de la base de datos de los productos
+
 const productSchema = new mongoose.Schema(
+  //Objeto con los elementos de los productos
   {
     nameproduct: { type: String, required: true, unique: true },
     slug: { type: String, required: true, unique: true },
@@ -16,6 +17,7 @@ const productSchema = new mongoose.Schema(
     countInStock: { type: Number, required: true },
   },
   {
+    //para que mongoose cree la fecha actualizada de creación y actualización de datos
     timestamps: true,
   }
 );

@@ -1,17 +1,20 @@
 import { useContext } from "react";
 import { Store } from "../Store";
 import "../css/ArtistScreen.scss";
-
+//Definimos el componente producto con los props que contienen su info
+//HOOK Use Context para acceder al contexto de la aplicación Store y ver el estado del carrito
 function Product(props) {
   const { product } = props;
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const {
     cart: { cartItems },
   } = state;
-
+  //Para agregar el producto al carrito, verificamos si el producto existe y actualiza la cantidad
+  //Verificamos si hay unidades en stock antes de agregarlo al carrito
+  //Si no hay stock, envía un mensaje de producto agotado y si hay stock lo añade al carrito
   const addToCartHandler = async (item) => {
     const existItem = cartItems.find((x) => x._id === product._id);
-    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const quantity = existItem ? existItem.quantity + 1 : 1; //tiene que haber una unidad
 
     if (item.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");
@@ -62,9 +65,6 @@ function Product(props) {
                       >
                         {product.nameproduct}
                       </span>
-                      {/* <Link to={`/product/${product.slug}`}>
-                        {product.nameproduct}
-                      </Link> */}
                     </h3>
                   </div>
                   <div class='description-prod'>{product.category}</div>
@@ -74,13 +74,13 @@ function Product(props) {
                     </div>
                     <div class='wcf-right'>
                       {product.countInStock === 0 ? (
-                        <span className='out-of-stock'>Out of stock</span>
+                        <span className='out-of-stock'>Agotado</span>
                       ) : (
                         <span
                           className='add-to-cart'
                           onClick={() => addToCartHandler(product)}
                         >
-                          Add to cart
+                          Comprar
                         </span>
                       )}
                     </div>

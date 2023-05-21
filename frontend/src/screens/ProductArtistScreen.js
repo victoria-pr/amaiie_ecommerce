@@ -9,7 +9,10 @@ import MessageBox from "../components/MessageBox";
 import { Store } from "../Store";
 import { getError } from "../utils";
 import { toast } from "react-toastify";
+import "../App.css";
 
+//Función reducer para gestionar el estado del componente
+//HOOK useReducer: maneja las acciones son "FETCH_REQUEST" para indicar la solicitud de datos, "FETCH_SUCCESS" para actualizar el estado con los datos obtenidos y "FETCH_FAIL" para los errores de la solicitud.
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -32,7 +35,9 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
+//Componente principal que Contiene la lógica y la estructura de la pantalla de productos del artista
+//HOOK useContext: se obtienen los datos de userInfo del contexto Store
+//HOOK useReducer: adminsitra las propiedades de loading, error y user
 export default function ProductArtistScreen() {
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -45,6 +50,8 @@ export default function ProductArtistScreen() {
     }
   );
 
+  //HOOK useEffect: para realizar una solicitud HTTP para obtener los productos asociados al usuario
+  //Cuando se monta el componente o cuando userInfo cambia, se ejecuta la función fetchData
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -84,27 +91,31 @@ export default function ProductArtistScreen() {
     }
   };
 
+  //Devolvemos un JSX (similar a HTML) con la estructura y contenido de la pantalla del artista
+  //Se muestra un componente LoadingBox, si loading es true
+  //Se muestra un componente MessageBox de error, si error tiene un valor o una lista de productos, si el usuario existe y tiene productos
+
   return (
     <div>
       <Helmet>
         <title>Productos</title>
       </Helmet>
 
-      <h1>Productos</h1>
+      <h1 className='color-verde-edit-product'>Productos</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <table className='table'>
-          <thead>
+          <thead className='color-verde'>
             <tr>
               <th>IMAGEN</th>
-              <th>NAME</th>
-              <th>USER</th>
-              <th>DESCRIPTION</th>
+              <th>NOMBRE</th>
+              <th>USUARIO</th>
+              <th>DESCRIPCIÓN</th>
               <th>FECHA CREACIÓN</th>
-              <th>ACTIONS</th>
+              <th>ACCIONES</th>
             </tr>
           </thead>
           <tbody>
@@ -124,6 +135,7 @@ export default function ProductArtistScreen() {
                 <td>{product.createdAt.substring(0, 10)}</td>
                 <td>
                   <Button
+                    className='custom-button'
                     type='button'
                     variant='light'
                     onClick={() => deleteHandler(product)}

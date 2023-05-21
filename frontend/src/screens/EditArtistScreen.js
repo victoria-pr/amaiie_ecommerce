@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { getError } from "../utils";
 import axios from "axios";
 import "../App.css";
+//PAGINA DE EDICION DEL PERFIL DEL ARTISTA
+//Función para manejar las acciones relacioneadas con la actualización del perfil del artista
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -21,23 +23,25 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
+//Componente de edición del perfil de un artista
+//HOOK useContext: para acceder al contexto del componente Store
+//función dispatch para realizar las acciones
+//Extraemos la info de userInfo y utilizamos el HOOK useState para gestionar los estados locales (username, email, imagen, descripción, password)
+//HOOK useReducer para gestionar el estado de loadingUpdate e indicar que la actualización del perfil está en progreso
 export default function EditArtistScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
   const [username, setUsername] = useState(userInfo.username);
   const [email, setEmail] = useState(userInfo.email);
-
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState(userInfo.description);
-
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
   const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
     loadingUpdate: false,
   });
-
+  // Función controlador eventos que de ejecuta al enviar el formulario de edición de perfil
+  //Objeto FormData con todos los campos actualizados que se guarda en MongoDB y mostramos un mensaje de actualización correcta
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -68,16 +72,16 @@ export default function EditArtistScreen() {
       toast.error(getError(err));
     }
   };
-
+  //Devolvemos el perfil del artista actualizado
   return (
     <div className='container small-container'>
       <Helmet>
-        <title>User Profile</title>
+        <title>Perfil del artista</title>
       </Helmet>
-      <h1 className='my-3'>User Profile</h1>
+      <h1 className=' color-verde-edit-artista'>Perfil del artista</h1>
       <form onSubmit={submitHandler} enctype='multipart/form-data'>
         <Form.Group className='mb-3' controlId='name'>
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Nombre</Form.Label>
           <Form.Control
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -119,7 +123,7 @@ export default function EditArtistScreen() {
           />
         </Form.Group>
         <Form.Group className='mb-3' controlId='password'>
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label>Confirma el Password</Form.Label>
           <Form.Control
             type='password'
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -127,7 +131,7 @@ export default function EditArtistScreen() {
         </Form.Group>
         <div className='mb-3'>
           <Button className='custom-button' type='submit'>
-            Update
+            Actualizar
           </Button>
         </div>
       </form>

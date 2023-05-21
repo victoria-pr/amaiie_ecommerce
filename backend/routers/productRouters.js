@@ -1,8 +1,9 @@
-import express from "express";
-import expressAsyncHandler from "express-async-handler";
+import express from "express"; //para crear y manejar las rutas
+import expressAsyncHandler from "express-async-handler"; //middleware de Express que facilita la gestión de errores asincrónicos en controladores de rutas
 import Product from "../models/productModel.js";
+import User from "../models/userModel.js";
 import { isAuth, isAdmin } from "../utils.js";
-import upload from "../middlewares/multerpro.js";
+import upload from "../middlewares/multerpro.js"; //para la carga de las imágenes de producto
 
 //Función Router de Express para manejar las rutas relacionadas con producto
 const productRouter = express.Router();
@@ -31,7 +32,7 @@ productRouter.post(
       countInStock: 0,
       description: "añade descripcion",
     });
-    //Guardamos el producto en la base de datos  para enviar posteriormente un mensaje de que el producto se ha creado
+    //Guardamos el producto en la base de datos para enviar posteriormente un mensaje de que el producto se ha creado
     const product = await newProduct.save();
     res.send({ message: "Product Created", product });
   })
@@ -40,13 +41,13 @@ productRouter.post(
 //Ruta PUT que actualiza los productos con identificador id
 productRouter.put(
   "/:id",
-  [isAuth,isAdmin, upload.single("image")],
+  [isAuth, isAdmin, upload.single("image")],
   expressAsyncHandler(async (req, res) => {
     const productId = req.params.id;
     const product = await Product.findById(productId);
     if (product) {
       product.nameproduct = req.body.nameproduct || product.nameproduct;
-      product.slug = req.body.slug  || product.slug;
+      product.slug = req.body.slug || product.slug;
       product.user = req.body.user || product.user;
       product.price = req.body.price || product.price;
       product.category = req.body.category || product.category;
@@ -54,25 +55,25 @@ productRouter.put(
       product.description = req.body.description || product.description;
 
       if (req.file) {
-        product.image = req.file.filename; 
+        product.image = req.file.filename;
       }
-      
+      //Guardamos la actualización del producto en la base de datos o envía un mensaje de producto no encontrado con ese id
       const updatedProduct = await product.save();
-        res.send({
-          _id: updatedProduct._id,
-          nameproduct: updatedProduct.nameproduct,
-          slug: updatedProduct.slug,
-          price: updatedProduct.price,
-          image: updatedProduct.image,
-          category: updatedProduct.category,
-          countInStock: updatedProduct.countInStock,
-          description: updatedProduct.description,
-          /* token: generateToken(updatedProduct), */
-        });
-      } else {
-        res.status(404).send({ message: 'Product not found' });
-      }
-    })
+      res.send({
+        _id: updatedProduct._id,
+        nameproduct: updatedProduct.nameproduct,
+        slug: updatedProduct.slug,
+        price: updatedProduct.price,
+        image: updatedProduct.image,
+        category: updatedProduct.category,
+        countInStock: updatedProduct.countInStock,
+        description: updatedProduct.description,
+        /* token: generateToken(updatedProduct), */
+      });
+    } else {
+      res.status(404).send({ message: "Product not found" });
+    }
+  })
 );
 
 //Ruta DELETE que elimina un producto según su identificador
@@ -80,6 +81,7 @@ productRouter.delete(
   "/:id",
   isAuth,
   isAdmin,
+  //isArtist,
 
   //función asíncrona del controlador para la ruta DELETE
   expressAsyncHandler(async (req, res) => {
@@ -117,7 +119,7 @@ productRouter.get(
     });
   })
 );
-//BUSCADOR DE PRODUCTOS: con filtros por nombre, categoría, rating y precio
+//BUSCADOR DE PRODUCTOS: con filtros por nombre, categoría, (rating eliminado) y precio
 productRouter.get(
   "/search",
   expressAsyncHandler(async (req, res) => {

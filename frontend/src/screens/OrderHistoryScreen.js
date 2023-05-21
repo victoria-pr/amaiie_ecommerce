@@ -8,7 +8,8 @@ import { Store } from "../Store";
 import { getError } from "../utils";
 import Button from "react-bootstrap/esm/Button";
 import "../App.css";
-
+//PANTALLA DE HISTORIAL DE PEDIDOS
+// Definimos un reductor para manejar acciones como FETCH_REQUEST (solicitud de datos), FETCH_SUCCESS (éxito en la obtención de datos) y FETCH_FAIL (error al obtener datos).
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -21,17 +22,19 @@ const reducer = (state, action) => {
       return state;
   }
 };
+//HOOK useContext para acceder al estado almacenado en el contexto Store.
+//HOOK useNavigate para la función de navegación por la web
 
 export default function OrderHistoryScreen() {
   const { state } = useContext(Store);
   const { userInfo } = state;
   const navigate = useNavigate();
-
+  //HOOK useReducer para el indicador de loading
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
     loading: true,
     error: "",
   });
-
+  //Función useEffect: realiza una solicitud a la API utilizando Axios para obtener los datos de los pedidos
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -51,13 +54,16 @@ export default function OrderHistoryScreen() {
     };
     fetchData();
   }, [userInfo]);
+
+  //Devolvemos una estructura de elementos JSX (similar a HTML) para mostrar la página de pedidos
+  //Botón Ver pedido: permite al usuario navegar a la página con los detalles del pedido correspondiente
   return (
     <div>
       <Helmet>
-        <title>Order History</title>
+        <title>Tus pedidos</title>
       </Helmet>
 
-      <h1 className='color-verde-order-history'>Order History</h1>
+      <h1 className='color-verde-order-history'>Tus pedidos</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -67,11 +73,11 @@ export default function OrderHistoryScreen() {
           <thead className='color-verde'>
             <tr>
               <th>ID</th>
-              <th>DATE</th>
+              <th>FECHA</th>
               <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
-              <th>ACTIONS</th>
+              <th>PAGADO</th>
+              <th>ENVIADO</th>
+              <th>ACCIONES</th>
             </tr>
           </thead>
           <tbody>
@@ -95,7 +101,7 @@ export default function OrderHistoryScreen() {
                       navigate(`/order/${order._id}`);
                     }}
                   >
-                    Details
+                    Ver pedido
                   </Button>
                 </td>
               </tr>

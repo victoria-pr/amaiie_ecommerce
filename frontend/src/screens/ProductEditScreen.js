@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-toastify"; //para mostrar notificaciones
 import { Store } from "../Store";
 import { getError } from "../utils";
 import Container from "react-bootstrap/Container";
@@ -12,7 +12,7 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Button from "react-bootstrap/Button";
 import "../App.css";
-
+//Función para  para actualizar el estado del componente en función de las acciones de loading, error y loadingUpdate
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -42,6 +42,11 @@ const reducer = (state, action) => {
       return state;
   }
 };
+//Componente principal de actualización de producto
+//HOOK useNavigate: para las funciones de navegación por la web
+//HOOK useParams: para obtener el id del producto
+//HOOK useReducer: para el loading
+//HOOK useContext: para obtener la información del estado utilizando el contexto Store y userInfo
 export default function ProductEditScreen() {
   const navigate = useNavigate();
   const params = useParams(); // /product/:id
@@ -67,6 +72,9 @@ export default function ProductEditScreen() {
   const [countInStock, setCountInStock] = useState("");
   const [description, setDescription] = useState("");
 
+  //useEffect: Realiza una solicitur HTTP al cargar el componente
+  //Llamada a la API utilizando axios para obtener los datos del producto con un id específico
+  //Si la solicitud es correcta, los datos se usan para establecer el estado de las variables y si no da un mensaje de error
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -90,7 +98,12 @@ export default function ProductEditScreen() {
     };
     fetchData();
   }, [productId]);
-
+  // Función que se llama al enviar el formulario de edición del producto
+  //Evitamos que el formulario se envíe por defecto
+  //Se crea un objeto FormData con todos los valores introducidos en el formulario (imagen incluida)
+  //Solicitud PUT a la API utilizando axios, envia el form y agrega el token del usuario
+  //Si la solicitud es correcta, actualiza el estado y muestra notificación de éxito
+  //Si da error, envia mensaje de error (notificación toast)
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -124,38 +137,18 @@ export default function ProductEditScreen() {
     }
   };
 
-  /* const uploadFileHandler = async (e, forImages) => {
-    const file = e.target.files[0];
-    const bodyFormData = new FormData();
-    bodyFormData.append("file", file);
-    try {
-      dispatch({ type: "UPLOAD_REQUEST" });
-      const { data } = await axios.post("/api/upload", bodyFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          authorization: `Bearer ${userInfo.token}`,
-        },
-      });
-      dispatch({ type: "UPLOAD_SUCCESS" });
-
-      if (forImages) {
-        setImages([...images, data.secure_url]);
-      } else {
-        setImage(data.secure_url);
-      }
-      toast.success("Image uploaded successfully. click Update to apply it");
-    } catch (err) {
-      toast.error(getError(err));
-      dispatch({ type: "UPLOAD_FAIL", payload: getError(err) });
-    }
-  }; */
+ 
+  //Renderiza el componente con los dampos del formulario para editar los detalles del producto
+  //Si loading es true, se muestra el componente LoadingBox
+  //Si error no está vacío, muestra el componente MessageBox con el mensaje de error
+  //Si no se muestra el formulario de edición de producto y puedes darle al botón de actualizar
 
   return (
     <Container className='small-container'>
       <Helmet>
-        <title>Edit Product ${productId}</title>
+        <title>Editar Producto ${productId}</title>
       </Helmet>
-      <h1 className='color-verde-edit-product'>Edit Product {productId}</h1>
+      <h1 className='color-verde-edit-product'>Editar {productId}</h1>
 
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -164,7 +157,7 @@ export default function ProductEditScreen() {
       ) : (
         <Form onSubmit={submitHandler} enctype='multipart/form-data'>
           <Form.Group className='mb-3' controlId='name'>
-            <Form.Label>Name</Form.Label>
+            <Form.Label>Nombre</Form.Label>
             <Form.Control
               value={nameproduct}
               onChange={(e) => setProductName(e.target.value)}
@@ -172,7 +165,7 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <Form.Group className='mb-3' controlId='user'>
-            <Form.Label>User</Form.Label>
+            <Form.Label>Usuario</Form.Label>
             <Form.Control
               value={user}
               onChange={(e) => setUser(e.target.value)}
@@ -188,7 +181,7 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <Form.Group className='mb-3' controlId='name'>
-            <Form.Label>Price</Form.Label>
+            <Form.Label>Precio</Form.Label>
             <Form.Control
               value={price}
               onChange={(e) => setPrice(e.target.value)}
@@ -204,7 +197,7 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <Form.Group className='mb-3' controlId='category'>
-            <Form.Label>Category</Form.Label>
+            <Form.Label>Categoría</Form.Label>
             <Form.Control
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -212,7 +205,7 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <Form.Group className='mb-3' controlId='countInStock'>
-            <Form.Label>Count In Stock</Form.Label>
+            <Form.Label>Unidades</Form.Label>
             <Form.Control
               value={countInStock}
               onChange={(e) => setCountInStock(e.target.value)}
@@ -220,7 +213,7 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <Form.Group className='mb-3' controlId='description'>
-            <Form.Label>Description</Form.Label>
+            <Form.Label>Descripción</Form.Label>
             <Form.Control
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -233,7 +226,7 @@ export default function ProductEditScreen() {
               disabled={loadingUpdate}
               type='submit'
             >
-              Update
+              Actualizar
             </Button>
             {loadingUpdate && <LoadingBox></LoadingBox>}
           </div>

@@ -11,7 +11,8 @@ import MessageBox from "../components/MessageBox";
 import Button from "react-bootstrap/Button";
 import Product from "../components/Product";
 import LinkContainer from "react-router-bootstrap/LinkContainer";
-
+//Componente principal de actualización de producto
+//HOOK useReducer: para cambios de estado del loading, según las acciones rquest, sucess o fail
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -31,20 +32,10 @@ const reducer = (state, action) => {
       return state;
   }
 };
-/* const prices = [
-  {
-    name: "$1 to $50",
-    value: "1-50",
-  },
-  {
-    name: "$51 to $200",
-    value: "51-200",
-  },
-  {
-    name: "$201 to $1000",
-    value: "201-1000",
-  },
-]; */
+//HOOK useNavigate: para las funciones de navegación por la web
+//HOOK useLocation: para obtener la ubicación en la navegación de la web
+//URL SerachParams: para extraer los parámetros de consulta de la URL (category, query, price, order y page)
+//HOOK useReducer: para los cambios de estado del loading, error, producto, page y stock
 export default function SearchScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
@@ -60,7 +51,8 @@ export default function SearchScreen() {
       loading: true,
       error: "",
     });
-
+  //HOOK UseEffect:  para realizar una solicitud HTTP al servidor cuando el componente se monta
+  //Se realiza una solicitud GET utilizando axios a una API del servidor, pasando los parámetros de búsqueda
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,8 +68,8 @@ export default function SearchScreen() {
       }
     };
     fetchData();
-  }, [category, error, order, page, price, query /*  rating */]);
-
+  }, [category, error, order, page, price, query]);
+  //HOOK useState: para manejrar los cambios de estado de las categorías
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     const fetchCategories = async () => {
@@ -90,7 +82,7 @@ export default function SearchScreen() {
     };
     fetchCategories();
   }, [dispatch]);
-
+  //FILTROS para ordenar los productos por precios
   const getFilterUrl = (filter, skipPathname) => {
     const filterPage = filter.page || page;
     const filterCategory = filter.category || category;
@@ -101,14 +93,13 @@ export default function SearchScreen() {
       skipPathname ? "" : "/search?"
     }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&order=${sortOrder}&page=${filterPage}`;
   };
-
+  //Renderiza una estructura JSX (similar a HTML) el componente principal de buscador de productos
   return (
     <div>
       <Helmet>
         <title>Buscar producto</title>
       </Helmet>
       <Row>
-        {/* <Col md={4}></Col> */}
         <Col md={12}>
           {loading ? (
             <LoadingBox></LoadingBox>
@@ -119,39 +110,28 @@ export default function SearchScreen() {
               <Row className='justify-content-between mb-3'>
                 <Col md={6}>
                   <div className='resultados'>
-                    {countProducts === 0 ? "No" : countProducts} Results
+                    {countProducts === 0 ? "No" : countProducts} Resultados
                     {query !== "all" && " : " + query}
                     {category !== "all" && " : " + category}
                     {price !== "all" && " : Price " + price}
-                    {
-                      query !== "all" ||
-                        category !== "all" ||
-                        price !== "all" /* ? (
-                      <Button
-                        variant='light'
-                        onClick={() => navigate("/search")}
-                      >
-                        <i className='fas fa-times-circle'></i>
-                      </Button>
-                    ) : null */
-                    }
+                    {query !== "all" || category !== "all" || price !== "all"}
                   </div>
                 </Col>
                 <Col className='text-end'>
-                  Sort by
+                  Ordenar
                   <select
                     value={order}
                     onChange={(e) => {
                       navigate(getFilterUrl({ order: e.target.value }));
                     }}
                   >
-                    <option value='lowest'>Price: Low to High</option>
-                    <option value='highest'>Price: High to Low</option>
+                    <option value='lowest'>Precio: de menor a mayor</option>
+                    <option value='highest'>Precio: de mayor a menor</option>
                   </select>
                 </Col>
               </Row>
               {products.length === 0 && (
-                <MessageBox>No Product Found</MessageBox>
+                <MessageBox>Producto no encontrado</MessageBox>
               )}
               <Row md={3}>
                 {products.map((product) => (

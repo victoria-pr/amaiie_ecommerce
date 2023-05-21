@@ -1,3 +1,4 @@
+//Importamos principlamente las rutas y las diferentes páginas
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import Axios from "axios";
@@ -40,6 +41,8 @@ import EditArtistScreen from "./screens/EditArtistScreen";
 import ProductArtistScreen from "./screens/ProductArtistScreen";
 import "./App.css";
 
+//Función principal que define la estructura y el comportamiento de la aplicación
+//HOOKS: useState(cambios de estado), useContext (obtener datos contexto Store), ambos para gestionar y compartir información entre componentes
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { fullBox, cart, userInfo } = state;
@@ -49,9 +52,9 @@ function App() {
     localStorage.removeItem("userInfo");
     localStorage.removeItem("shippingAddress");
     localStorage.removeItem("paymentMethod");
-    window.location.href = "/signin";
+    window.location.href = "/signin"; //si no estás logeado te lleva al signin
   };
-
+  // Filtro por categorías con HOOK useState para cambios de estado al seleccionar una de lellas
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
   const [categories, setCategories] = useState([]);
 
@@ -61,12 +64,12 @@ function App() {
         const { data } = await Axios.get(`/api/products/categories`);
         setCategories(data);
       } catch (err) {
-        toast.error(getError(err));
+        toast.error(getError(err)); //notificación de error
       }
     };
     fetchCategories();
   }, []);
-
+  //Cnfiguración de las rutas de la aplicación
   return (
     <BrowserRouter>
       {/* <div
@@ -93,7 +96,7 @@ function App() {
 
             <Nav className='ml-auto'>
               <Link to='/cart' className='nav-link custom-link'>
-                Cart
+                Carrito
                 {cart.cartItems.length > 0 && (
                   <Badge pill bg='danger'>
                     {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
@@ -118,12 +121,12 @@ function App() {
                     to='/profile'
                   >
                     <NavDropdown.Item className='custom-link custom-link-menu'>
-                      User Profile
+                      Mi perfil
                     </NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer className='custom-link' to='/orderhistory'>
                     <NavDropdown.Item className='custom-link'>
-                      Order History
+                      Mis pedidos
                     </NavDropdown.Item>
                   </LinkContainer>
                   <NavDropdown.Divider />
@@ -132,12 +135,12 @@ function App() {
                     to='/signout'
                     onClick={signoutHanlder}
                   >
-                    Sign Out
+                    Salir
                   </Link>
                 </NavDropdown>
               ) : (
                 <Link className='nav-link custom-link' to='/signin'>
-                  Sign In
+                  Acceder
                 </Link>
               )}
               {userInfo && userInfo.isArtist && (
@@ -147,7 +150,7 @@ function App() {
                   id='artist-nav-dropdown'
                 >
                   <LinkContainer className='custom-link' to='/editprofile'>
-                    <NavDropdown.Item>Edit Profile</NavDropdown.Item>
+                    <NavDropdown.Item>Editar perfil</NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer className='custom-link' to='/artistproducts'>
                     <NavDropdown.Item>Productos</NavDropdown.Item>
@@ -165,14 +168,14 @@ function App() {
                   </LinkContainer> */}
                   <LinkContainer className='custom-link' to='/admin/products'>
                     <NavDropdown.Item title='Admin' id='admin-nav-dropdown'>
-                      Products
+                      Productos
                     </NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer className='custom-link' to='/admin/orders'>
-                    <NavDropdown.Item>Orders</NavDropdown.Item>
+                    <NavDropdown.Item>Pedido</NavDropdown.Item>
                   </LinkContainer>
                   <LinkContainer className='custom-link' to='/admin/users'>
-                    <NavDropdown.Item>Users</NavDropdown.Item>
+                    <NavDropdown.Item>Usuarios</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
               )}

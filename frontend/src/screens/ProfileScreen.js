@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { getError } from "../utils";
 import axios from "axios";
 import "../App.css";
-
+//Función que utiliza el HOOK useReducer para manejar los cambios de estado en la carga de la actulización del perfil de usuario (request, sucess y fail)
 const reducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_REQUEST":
@@ -21,7 +21,9 @@ const reducer = (state, action) => {
       return state;
   }
 };
-
+//componente principal perfil del usuario
+//HOOK useContext para obtener datos de estado del contexto Store
+//HOOK useState para manejar los estados de username, email y contraseña
 export default function ProfileScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
@@ -33,7 +35,9 @@ export default function ProfileScreen() {
   const [{ loadingUpdate }, dispatch] = useReducer(reducer, {
     loadingUpdate: false,
   });
-
+  //Función que maneja el envío del form de actulización de perfil de usuario
+  // Envía una solicitud HTTP con los datos de actulización de perfil a través de axios
+  //Notificaciones de error con toastify
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -61,16 +65,16 @@ export default function ProfileScreen() {
       toast.error(getError(err));
     }
   };
-
+  //Renderiza el componente y devuelve un JXS (similar al HTML), estilos con bootstrap, actualiza los campos con onChange y botón de actualizar
   return (
     <div className='container small-container'>
       <Helmet>
-        <title>User Profile</title>
+        <title>Perfil del usuario</title>
       </Helmet>
-      <h1 className='color-verde-user-profile'>User Profile</h1>
+      <h1 className='color-verde-user-profile'>Perfil del usuario</h1>
       <form onSubmit={submitHandler}>
         <Form.Group className='mb-3' controlId='name'>
-          <Form.Label>Name</Form.Label>
+          <Form.Label>Nombre</Form.Label>
           <Form.Control
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -94,7 +98,7 @@ export default function ProfileScreen() {
           />
         </Form.Group>
         <Form.Group className='mb-3' controlId='password'>
-          <Form.Label>Confirm Password</Form.Label>
+          <Form.Label>Confirmar Password</Form.Label>
           <Form.Control
             type='password'
             onChange={(e) => setConfirmPassword(e.target.value)}
@@ -102,7 +106,7 @@ export default function ProfileScreen() {
         </Form.Group>
         <div className='mb-3'>
           <Button className='custom-button' type='submit'>
-            Update
+            Actualizar
           </Button>
         </div>
       </form>

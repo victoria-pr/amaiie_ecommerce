@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "../css/ContactoScreen.scss";
 import "../App.css";
-
+//FORMULARIO DE CONTACTO: utilizamos bootstrap para la interfaz del usuario
+//Función para los inputs del formulario de contacto
+//HOOK useState para gestionar los valores introducidos en el form y el estado de mensaje enviado
+//Los estados son actualizados por las funciones set
 function Inputs() {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [textarea, setTextArea] = useState("");
   const [sentMessage, setSentMessage] = useState("");
-
+  //Validamos si hay errores en los campos del form
   const errorMessage = Validate(username, email, textarea);
-
+  //Llamamos a la función cuando se envia el form
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!errorMessage) {
@@ -20,9 +23,12 @@ function Inputs() {
       setTextArea("");
       setTimeout(() => {
         setSentMessage("");
-      }, 3000);
+      }, 3000); //reestablecemos el estado después de 3 segundos
     }
   };
+  //El componente Inputs lo renderizamos y devolvemos el código JSX
+  //Todos los campos tiene un controlador de eventos onChange que actualiza el estado cuando cambia de valor
+  //El botón de envío tiene la propiedad disables para deshabilitarlo si hay errores en el form
 
   return (
     <div calssName='Container'>
@@ -280,7 +286,7 @@ function Inputs() {
     </div>
   );
 }
-
+//Validación de los valores introducidos en los campos del formulario
 const Validate = (username, email, textarea) => {
   if (!email.includes("@")) return "Email incorrecto";
   if (username.length < 4) return "Usuario incorrecto";

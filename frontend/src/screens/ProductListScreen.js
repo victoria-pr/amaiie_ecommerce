@@ -10,6 +10,8 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
 import "../App.css";
+//PAGINA DE LISTA DE PRODUCTOS
+//HOOK useReducer: para actualizar el estado del loading, error, products, pages, loadingCreate, loadingDelete y sucessDelete
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -53,6 +55,11 @@ const reducer = (state, action) => {
   }
 };
 
+//Componente Lista de Productos (crear, listar y borrar producto)
+//HOOK useReducer: para inicializar el estado del componente y obtener una función dispatch para enviar acciones al reductor
+//HOOK useNavigate: para las funciones de navegación por la web
+//HOOK useLocation: para obtener la información sobre la ubicación y la navegación en la aplicación
+//HOOK useContext: para obtener la información del estado utilizando el contexto Store
 export default function ProductListScreen() {
   const [
     {
@@ -77,6 +84,7 @@ export default function ProductListScreen() {
 
   const { state } = useContext(Store);
   const { userInfo } = state;
+  //Realizamos una solicitud HTTP para obtener la lista de productos desde el servidor
 
   useEffect(() => {
     const fetchData = async () => {
@@ -95,7 +103,9 @@ export default function ProductListScreen() {
       fetchData();
     }
   }, [page, userInfo, successDelete]);
-
+  //Función para añadir productos a la lista
+  //Si la solicitud es correcta, se actualiza el estado con la lista de productos
+  //Si hay error, sale el mensaje de error correspondiente
   const createHandler = async () => {
     if (window.confirm("Are you sure to create?")) {
       try {
@@ -118,7 +128,9 @@ export default function ProductListScreen() {
       }
     }
   };
-
+  //Función para borrar productos de la lista
+  //Si la solicitud es correcta, se actualiza el estado con la lista de productos
+  //Si hay error, sale el mensaje de error correspondiente
   const deleteHandler = async (product) => {
     if (window.confirm("Are you sure to delete?")) {
       try {
@@ -135,12 +147,12 @@ export default function ProductListScreen() {
       }
     }
   };
-
+  //Renderiza el componente para actualizar productos de la lista
   return (
     <div className='container-create'>
       <Row>
         <Col>
-          <h1 className='color-verde'>Products</h1>
+          <h1 className='color-verde'>Productos</h1>
         </Col>
         <Col className='col text-end'>
           <div>
@@ -149,7 +161,7 @@ export default function ProductListScreen() {
               type='button'
               onClick={createHandler}
             >
-              Create Product
+              Subir producto
             </Button>
           </div>
         </Col>
@@ -167,11 +179,11 @@ export default function ProductListScreen() {
             <thead className='color-verde'>
               <tr>
                 <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>ARTIST</th>
-                <th>ACTIONS</th>
+                <th>NOMBRE</th>
+                <th>PRECIO</th>
+                <th>CATEGORIA</th>
+                <th>ARTISTA</th>
+                <th>ACCIONES</th>
               </tr>
             </thead>
             <tbody>
@@ -189,7 +201,7 @@ export default function ProductListScreen() {
                       variant='light'
                       onClick={() => navigate(`/admin/product/${product._id}`)}
                     >
-                      Edit
+                      Editar
                     </Button>
                     &nbsp;
                     <Button
@@ -198,7 +210,7 @@ export default function ProductListScreen() {
                       variant='light'
                       onClick={() => deleteHandler(product)}
                     >
-                      Delete
+                      Borrar
                     </Button>
                   </td>
                 </tr>

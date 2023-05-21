@@ -8,14 +8,14 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import "../css/GalleryScreen.css"; // Importa el archivo CSS para estilos personalizados
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-
+//PAGINA GALERIA PRODUCTOS: Utilizamos el HOOK useState para inicializar y gestionar el estado de showApp que controla si mostrar la App o no
 const GalleryScreen = () => {
   const [showApp, setShowApp] = useState(false);
-
+  //Función que se ejecuta al hacer click en mostrar App y al actualizar el estado de showApp a true
   const handleButtonClick = () => {
     setShowApp(true);
   };
-
+  //Devolvemos una estructura JSX (similar a HTML) que muestra la galería
   return (
     <div>
       <div>
@@ -68,7 +68,7 @@ const GalleryScreen = () => {
                   alt='Imagen 4'
                   className='gallery-image-5'
                 />
-                <div className='gallery-item-text'>Ceramica</div>
+                <div className='gallery-item-text'>Cerámica</div>
               </div>
             </Col>
             <Col md={10} className='gallery-item5'>
