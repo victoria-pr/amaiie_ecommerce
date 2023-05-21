@@ -12,7 +12,9 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
 import { Store } from "../Store";
-
+import "../App.css";
+//PAGINA DE PRODUCTO ESPECIFICO
+//Función reducer  para actualizar el estado del componente en respuesta al loading, error y product
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -25,6 +27,9 @@ const reducer = (state, action) => {
       return state;
   }
 };
+//Componente principal de cada uno de los productos
+//HOOK useNavigate: para la función de navegación por las diferentes webs
+//HOOK useParams: para obtener la información de la URL
 function ProductScreen() {
   const navigate = useNavigate();
   const params = useParams();
@@ -35,7 +40,9 @@ function ProductScreen() {
     loading: true,
     error: "",
   });
-
+  //Solicitud HTTP para obtener los datos del producto desde el servidor
+  //Si la solicitud es correcta, se actualiza con los datos del producto
+  //Si hay error, envía mensaje de error
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -49,7 +56,10 @@ function ProductScreen() {
     };
     fetchData();
   }, [slug]);
-
+  //HOOK useContext: para acceder los datos del contexto Store y actualizar el estado del carrito
+  //Función de añadir al carrito, verifica si el producto está en el carrito y lo actuliza
+  //Verifica si hay stock y muestra una alerta si no hay unidades
+  //Agrega al acarrito y redirige al usuario a la página del carrito
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state;
   const addToCartHandler = async () => {
@@ -70,7 +80,10 @@ function ProductScreen() {
 
     navigate("/cart");
   };
-
+  //El componente renderiza contenido condicional en función del estado actual
+  //Si loading es verdadero, muestra un componente de carga (LoadingBox)
+  //Si hay un error, muestra un mensaje de error (MessageBox)
+  //Y si no muestra los detalles del producto
   return loading ? (
     <LoadingBox />
   ) : error ? (
@@ -80,8 +93,8 @@ function ProductScreen() {
       <Row>
         <Col md={6}>
           <img
+            src={`http://localhost:5000/fotoproducto/${product.image}`}
             className='img-large'
-            src={product.image}
             alt={product.nameproduct}
           ></img>
         </Col>
@@ -91,16 +104,19 @@ function ProductScreen() {
               <Helmet>
                 <title>{product.nameproduct}</title>
               </Helmet>
-              <h1>{product.nameproduct}</h1>
+              <h1 className='color-verde'>{product.nameproduct}</h1>
             </ListGroup.Item>
             <ListGroup.Item>Precio : {product.price}€</ListGroup.Item>
             <ListGroup.Item>
               Descripción : <p>{product.description}</p>
             </ListGroup.Item>
+            <ListGroup.Item>
+              Artista : <p>{product.brand}</p>
+            </ListGroup.Item>
           </ListGroup>
         </Col>
         <Col md={3}>
-          <Card>
+          <Card className='cardposition'>
             <Card.Body>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
@@ -111,12 +127,12 @@ function ProductScreen() {
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Status:</Col>
+                    <Col>Estado:</Col>
                     <Col>
                       {product.countInStock > 0 ? (
-                        <Badge bg='success'>In Stock</Badge>
+                        <Badge bg='success'>En Stock</Badge>
                       ) : (
-                        <Badge bg='danger'>Unavailable</Badge>
+                        <Badge bg='danger'>Agotado</Badge>
                       )}
                     </Col>
                   </Row>
@@ -125,8 +141,12 @@ function ProductScreen() {
                 {product.countInStock > 0 && (
                   <ListGroup.Item>
                     <div className='d-grid'>
-                      <Button onClick={addToCartHandler} variant='primary'>
-                        add to cart
+                      <Button
+                        className='custom-button'
+                        onClick={addToCartHandler}
+                        variant='primary'
+                      >
+                        Añadir al carrito
                       </Button>
                     </div>
                   </ListGroup.Item>

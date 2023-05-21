@@ -1,0 +1,48 @@
+.aviso-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.aviso-container h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.aviso-container p {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.aviso-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.aviso-container a:hover {
+  text-decoration: underline;
+}
+
+.aviso-container .category-title {
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.aviso-container .category-list {
+  list-style: disc;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.aviso-container .copyright {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #999;
+}

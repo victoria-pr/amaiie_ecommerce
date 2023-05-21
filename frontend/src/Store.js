@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
-
+//Creamos el contexto
 export const Store = createContext();
-
+//Estado inicia de toda la info
 const initialState = {
   userInfo: localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
@@ -18,7 +18,7 @@ const initialState = {
       : [],
   },
 };
-
+//para manejar las acciones que se aplican al estado
 function reducer(state, action) {
   switch (action.type) {
     case "CART_ADD_ITEM":
@@ -27,7 +27,6 @@ function reducer(state, action) {
       const existItem = state.cart.cartItems.find(
         (item) => item._id === newItem._id
       );
-
       const cartItems = existItem
         ? state.cart.cartItems.map((item) =>
             item._id === existItem._id ? newItem : item
@@ -37,6 +36,7 @@ function reducer(state, action) {
       return { ...state, cart: { ...state.cart, cartItems } };
 
     case "CART_REMOVE_ITEM": {
+      // remove item from cart
       const cartItems = state.cart.cartItems.filter(
         (item) => item._id !== action.payload._id
       );
@@ -45,7 +45,6 @@ function reducer(state, action) {
     }
     case "CART_CLEAR":
       return { ...state, cart: { ...state.cart, cartItems: [] } };
-
     case "USER_SIGNIN":
       return { ...state, userInfo: action.payload };
     case "USER_SIGNOUT":
@@ -63,7 +62,6 @@ function reducer(state, action) {
         ...state,
         cart: { ...state.cart, shippingAddress: action.payload },
       };
-
     case "SAVE_PAYMENT_METHOD":
       return {
         ...state,
@@ -74,10 +72,11 @@ function reducer(state, action) {
       return state;
   }
 }
-
+//Componente de Store de la aplicación principal
+//HOOK useReducer para incializar el estado
 export function StoreProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = { state, dispatch };
-
+  //devuelve los valores y las propiedades de los children
   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 }

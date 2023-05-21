@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useReducer } from "react";
-import axios from "axios";
+import Axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -9,6 +9,9 @@ import { Store } from "../Store";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { getError } from "../utils";
+import "../App.css";
+//PAGINA DE LISTA DE PRODUCTOS
+//HOOK useReducer: para actualizar el estado del loading, error, products, pages, loadingCreate, loadingDelete y sucessDelete
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -52,6 +55,11 @@ const reducer = (state, action) => {
   }
 };
 
+//Componente Lista de Productos (crear, listar y borrar producto)
+//HOOK useReducer: para inicializar el estado del componente y obtener una función dispatch para enviar acciones al reductor
+//HOOK useNavigate: para las funciones de navegación por la web
+//HOOK useLocation: para obtener la información sobre la ubicación y la navegación en la aplicación
+//HOOK useContext: para obtener la información del estado utilizando el contexto Store
 export default function ProductListScreen() {
   const [
     {
@@ -76,11 +84,12 @@ export default function ProductListScreen() {
 
   const { state } = useContext(Store);
   const { userInfo } = state;
+  //Realizamos una solicitud HTTP para obtener la lista de productos desde el servidor
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`/api/products/admin?page=${page} `, {
+        const { data } = await Axios.get(`/api/products/admin?page=${page} `, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
 
@@ -94,12 +103,14 @@ export default function ProductListScreen() {
       fetchData();
     }
   }, [page, userInfo, successDelete]);
-
+  //Función para añadir productos a la lista
+  //Si la solicitud es correcta, se actualiza el estado con la lista de productos
+  //Si hay error, sale el mensaje de error correspondiente
   const createHandler = async () => {
     if (window.confirm("Are you sure to create?")) {
       try {
         dispatch({ type: "CREATE_REQUEST" });
-        const { data } = await axios.post(
+        const { data } = await Axios.post(
           "/api/products",
           {},
           {
@@ -110,41 +121,47 @@ export default function ProductListScreen() {
         dispatch({ type: "CREATE_SUCCESS" });
         navigate(`/admin/product/${data.product._id}`);
       } catch (err) {
-        toast.error(getError(error));
+        toast.error(getError(err));
         dispatch({
           type: "CREATE_FAIL",
         });
       }
     }
   };
-
+  //Función para borrar productos de la lista
+  //Si la solicitud es correcta, se actualiza el estado con la lista de productos
+  //Si hay error, sale el mensaje de error correspondiente
   const deleteHandler = async (product) => {
     if (window.confirm("Are you sure to delete?")) {
       try {
-        await axios.delete(`/api/products/${product._id}`, {
+        await Axios.delete(`/api/products/${product._id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         toast.success("product deleted successfully");
         dispatch({ type: "DELETE_SUCCESS" });
       } catch (err) {
-        toast.error(getError(error));
+        toast.error(getError(err));
         dispatch({
           type: "DELETE_FAIL",
         });
       }
     }
   };
-
+  //Renderiza el componente para actualizar productos de la lista
   return (
-    <div>
+    <div className='container-create'>
       <Row>
         <Col>
-          <h1>Products</h1>
+          <h1 className='color-verde'>Productos</h1>
         </Col>
         <Col className='col text-end'>
           <div>
-            <Button type='button' onClick={createHandler}>
-              Create Product
+            <Button
+              className='custom-button custom-button-create'
+              type='button'
+              onClick={createHandler}
+            >
+              Subir producto
             </Button>
           </div>
         </Col>
@@ -152,7 +169,6 @@ export default function ProductListScreen() {
 
       {loadingCreate && <LoadingBox></LoadingBox>}
       {loadingDelete && <LoadingBox></LoadingBox>}
-
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -160,39 +176,41 @@ export default function ProductListScreen() {
       ) : (
         <>
           <table className='table'>
-            <thead>
+            <thead className='color-verde'>
               <tr>
                 <th>ID</th>
-                <th>NAME</th>
-                <th>PRICE</th>
-                <th>CATEGORY</th>
-                <th>BRAND</th>
-                <th>ACTIONS</th>
+                <th>NOMBRE</th>
+                <th>PRECIO</th>
+                <th>CATEGORIA</th>
+                <th>ARTISTA</th>
+                <th>ACCIONES</th>
               </tr>
             </thead>
             <tbody>
               {products.map((product) => (
                 <tr key={product._id}>
                   <td>{product._id}</td>
-                  <td>{product.name}</td>
+                  <td>{product.nameproduct}</td>
                   <td>{product.price}</td>
                   <td>{product.category}</td>
-                  <td>{product.brand}</td>
+                  <td>{product.user}</td>
                   <td>
                     <Button
+                      className='custom-button'
                       type='button'
                       variant='light'
                       onClick={() => navigate(`/admin/product/${product._id}`)}
                     >
-                      Edit
+                      Editar
                     </Button>
                     &nbsp;
                     <Button
+                      className='custom-button'
                       type='button'
                       variant='light'
                       onClick={() => deleteHandler(product)}
                     >
-                      Delete
+                      Borrar
                     </Button>
                   </td>
                 </tr>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useReducer, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toast } from "react-toastify"; //para mostrar notificaciones
 import { Store } from "../Store";
 import { getError } from "../utils";
 import Container from "react-bootstrap/Container";
@@ -11,7 +11,8 @@ import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Button from "react-bootstrap/Button";
-
+import "../App.css";
+//Función para  para actualizar el estado del componente en función de las acciones de loading, error y loadingUpdate
 const reducer = (state, action) => {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -41,14 +42,15 @@ const reducer = (state, action) => {
       return state;
   }
 };
+//Componente principal de actualización de producto
+//HOOK useNavigate: para las funciones de navegación por la web
+//HOOK useParams: para obtener el id del producto
+//HOOK useReducer: para el loading
+//HOOK useContext: para obtener la información del estado utilizando el contexto Store y userInfo
 export default function ProductEditScreen() {
   const navigate = useNavigate();
   const params = useParams(); // /product/:id
   const { id: productId } = params;
-
-  const { state } = useContext(Store);
-  const { userInfo } = state;
-  const { loading, error, loadingUpdate, loadingUpload } = productState;
 
   const [productState, dispatch] = useReducer(reducer, {
     loading: true,
@@ -57,28 +59,33 @@ export default function ProductEditScreen() {
     loadingUpload: false,
   });
 
-  const [name, setName] = useState("");
+  const { state } = useContext(Store);
+  const { userInfo } = state;
+  const { loading, error, loadingUpdate } = productState;
+
+  const [nameproduct, setProductName] = useState("");
   const [slug, setSlug] = useState("");
+  const [user, setUser] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
-  const [images, setImages] = useState([]);
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState("");
-  const [brand, setBrand] = useState("");
   const [description, setDescription] = useState("");
-
+  //useEffect: Realiza una solicitur HTTP al cargar el componente
+  //Llamada a la API utilizando axios para obtener los datos del producto con un id específico
+  //Si la solicitud es correcta, los datos se usan para establecer el estado de las variables y si no da un mensaje de error
   useEffect(() => {
     const fetchData = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
         const { data } = await axios.get(`/api/products/${productId}`);
-        setName(data.name);
+        setProductName(data.nameproduct);
         setSlug(data.slug);
+        setUser(data.user);
         setPrice(data.price);
         setImage(data.image);
         setCategory(data.category);
         setCountInStock(data.countInStock);
-        setBrand(data.brand);
         setDescription(data.description);
         dispatch({ type: "FETCH_SUCCESS" });
       } catch (err) {
@@ -90,104 +97,75 @@ export default function ProductEditScreen() {
     };
     fetchData();
   }, [productId]);
-
+  // Función que se llama al enviar el formulario de edición del producto
+  //Evitamos que el formulario se envíe por defecto
+  //Se crea un objeto FormData con todos los valores introducidos en el formulario (imagen incluida)
+  //Solicitud PUT a la API utilizando axios, envia el form y agrega el token del usuario
+  //Si la solicitud es correcta, actualiza el estado y muestra notificación de éxito
+  //Si da error, envia mensaje de error (notificación toast)
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      dispatch({ type: "UPDATE_REQUEST" });
-      await axios.put(
-        `/api/products/${productId}`,
-        {
-          _id: productId,
-          name,
-          slug,
-          price,
-          image,
-          category,
-          brand,
-          countInStock,
-          description,
+      const formData = new FormData();
+      formData.append("image", image);
+      formData.append("nameproduct", nameproduct);
+      formData.append("user", user);
+      formData.append("slug", slug);
+      formData.append("price", price);
+      formData.append("category", category);
+      formData.append("countInStock", countInStock);
+      formData.append("description", description);
+      const { data } = await axios.put(`/api/products/${productId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${userInfo.token}`,
         },
-        {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
-      );
+      });
       dispatch({
         type: "UPDATE_SUCCESS",
       });
+      dispatch({ type: "USER_SIGNIN", payload: data });
+      localStorage.setItem("productInfo", JSON.stringify(data));
       toast.success("Product updated successfully");
       navigate("/admin/products");
-    } catch (err) {
-      toast.error(getError(err));
-      dispatch({ type: "UPDATE_FAIL" });
-    }
-  };
-  const uploadFileHandler = async (e, forImages) => {
-    const file = e.target.files[0];
-    const bodyFormData = new FormData();
-    bodyFormData.append("file", file);
-    try {
-      dispatch({ type: "UPLOAD_REQUEST" });
-      const { data } = await axios.post("/api/upload", bodyFormData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          authorization: `Bearer ${userInfo.token}`,
-        },
+    } catch (error) {
+      dispatch({
+        type: "FETCH_FAIL",
       });
-      dispatch({ type: "UPLOAD_SUCCESS" });
-
-      if (forImages) {
-        setImages([...images, data.secure_url]);
-      } else {
-        setImage(data.secure_url);
-      }
-      toast.success("Image uploaded successfully. click Update to apply it");
-    } catch (err) {
-      toast.error(getError(err));
-      dispatch({ type: "UPLOAD_FAIL", payload: getError(err) });
+      toast.error(getError(error));
     }
   };
-  const deleteFileHandler = async (fileName, f) => {
-    try {
-      const { data } = await axios.post(
-        "/api/delete",
-        { file: fileName },
-        {
-          headers: {
-            authorization: `Bearer ${userInfo.token}`,
-          },
-        }
-      );
-
-      if (data.success) {
-        setImages(images.filter((x) => x !== fileName));
-        toast.success("Image removed successfully. Click Update to apply it.");
-      } else {
-        throw new Error(data.message);
-      }
-    } catch (err) {
-      toast.error(getError(err));
-    }
-  };
+  //Renderiza el componente con los dampos del formulario para editar los detalles del producto
+  //Si loading es true, se muestra el componente LoadingBox
+  //Si error no está vacío, muestra el componente MessageBox con el mensaje de error
+  //Si no se muestra el formulario de edición de producto y puedes darle al botón de actualizar
 
   return (
     <Container className='small-container'>
       <Helmet>
-        <title>Edit Product ${productId}</title>
+        <title>Editar Producto ${productId}</title>
       </Helmet>
-      <h1>Edit Product {productId}</h1>
+      <h1 className='color-verde-edit-product'>Editar {productId}</h1>
 
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
-        <Form onSubmit={submitHandler}>
+        <Form onSubmit={submitHandler} enctype='multipart/form-data'>
           <Form.Group className='mb-3' controlId='name'>
-            <Form.Label>Name</Form.Label>
+            <Form.Label>Nombre</Form.Label>
             <Form.Control
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={nameproduct}
+              onChange={(e) => setProductName(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group className='mb-3' controlId='user'>
+            <Form.Label>User</Form.Label>
+            <Form.Control
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
               required
             />
           </Form.Group>
@@ -200,68 +178,31 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <Form.Group className='mb-3' controlId='name'>
-            <Form.Label>Price</Form.Label>
+            <Form.Label>Precio</Form.Label>
             <Form.Control
               value={price}
               onChange={(e) => setPrice(e.target.value)}
               required
             />
           </Form.Group>
-          <Form.Group className='mb-3' controlId='image'>
-            <Form.Label>Image File</Form.Label>
-            <Form.Control
-              value={image}
-              onChange={(e) => setImage(e.target.value)}
-              required
-            />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='imageFile'>
-            <Form.Label>Upload Image</Form.Label>
-            <Form.Control type='file' onChange={uploadFileHandler} />
-            {loadingUpload && <LoadingBox></LoadingBox>}
-          </Form.Group>
 
-          <Form.Group className='mb-3' controlId='additionalImage'>
-            <Form.Label>Additional Images</Form.Label>
-            {images.length === 0 && <MessageBox>No image</MessageBox>}
-            <ListGroup variant='flush'>
-              {images.map((x) => (
-                <ListGroup.Item key={x}>
-                  {x}
-                  <Button variant='light' onClick={() => deleteFileHandler(x)}>
-                    <i className='fa fa-times-circle'></i>
-                  </Button>
-                </ListGroup.Item>
-              ))}
-            </ListGroup>
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='additionalImageFile'>
-            <Form.Label>Upload Aditional Image</Form.Label>
+          <Form.Group className='mb-3' controlId='image'>
+            <Form.Label>Imagen</Form.Label>
             <Form.Control
               type='file'
-              onChange={(e) => uploadFileHandler(e, true)}
+              onChange={(e) => setImage(e.target.files[0])}
             />
-            {loadingUpload && <LoadingBox></LoadingBox>}
           </Form.Group>
-
           <Form.Group className='mb-3' controlId='category'>
-            <Form.Label>Category</Form.Label>
+            <Form.Label>Categoría</Form.Label>
             <Form.Control
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               required
             />
           </Form.Group>
-          <Form.Group className='mb-3' controlId='brand'>
-            <Form.Label>Brand</Form.Label>
-            <Form.Control
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
-              required
-            />
-          </Form.Group>
           <Form.Group className='mb-3' controlId='countInStock'>
-            <Form.Label>Count In Stock</Form.Label>
+            <Form.Label>Unidades</Form.Label>
             <Form.Control
               value={countInStock}
               onChange={(e) => setCountInStock(e.target.value)}
@@ -269,7 +210,7 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <Form.Group className='mb-3' controlId='description'>
-            <Form.Label>Description</Form.Label>
+            <Form.Label>Descripción</Form.Label>
             <Form.Control
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -277,8 +218,12 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <div className='mb-3'>
-            <Button disabled={loadingUpdate} type='submit'>
-              Update
+            <Button
+              className='custom-button'
+              disabled={loadingUpdate}
+              type='submit'
+            >
+              Actualizar
             </Button>
             {loadingUpdate && <LoadingBox></LoadingBox>}
           </div>

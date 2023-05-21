@@ -5,7 +5,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { Store } from "../Store";
-
+import "../App.css";
+//PANTALLA DE METODO DE PAGO
+//HOOK useNavigate: para obtener acceso a la función navegación
+//HOOK useState: para cambios de estado en el método de pago Paypal
 export default function PaymentMethodScreen() {
   const navigate = useNavigate();
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -16,26 +19,31 @@ export default function PaymentMethodScreen() {
   const [paymentMethodName, setPaymentMethod] = useState(
     paymentMethod || "PayPal"
   );
-
+  //HOOK useEffect: para verificar si hay una dirección de envío y si no hay te redirige a la selección de dirección de envío
   useEffect(() => {
     if (!shippingAddress.address) {
       navigate("/shipping");
     }
   }, [shippingAddress, navigate]);
+
+  //Para guardar el método de pago seleccionado, almacena el método y te lleva al siguiente proceso de compra
   const submitHandler = (e) => {
     e.preventDefault();
     ctxDispatch({ type: "SAVE_PAYMENT_METHOD", payload: paymentMethodName });
     localStorage.setItem("paymentMethod", paymentMethodName);
     navigate("/placeorder");
   };
+  //Componente que renderiza la interfaz (Form + Botón)
+  //CheckOutSteps: pasos del proceso de compra
+  //Helmet: para establecer el título de la página
   return (
     <div>
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <div className='container small-container'>
         <Helmet>
-          <title>Payment Method</title>
+          <title>Método de pago</title>
         </Helmet>
-        <h1 className='my-3'>Payment Method</h1>
+        <h1 className='my-3 color-verde'>Método de pago</h1>
         <Form onSubmit={submitHandler}>
           <div className='mb-3'>
             <Form.Check
@@ -58,7 +66,9 @@ export default function PaymentMethodScreen() {
             />
           </div>
           <div className='mb-3'>
-            <Button type='submit'>Continue</Button>
+            <Button className='custom-button' type='submit'>
+              Continue
+            </Button>
           </div>
         </Form>
       </div>

@@ -8,25 +8,30 @@ import { useState, useContext, useEffect } from "react";
 import { Store } from "../Store";
 import { toast } from "react-toastify";
 import { getError } from "../utils";
-
+import "../App.css";
+//PANTALLA DEL LOGOUT
+//Función para que el usuario pueda registrase por primera vez
+//HOOK useNavigate: para las funciones de navegación por la web
+//HOOK useLocation: para saber la ubicación de navegación del usuario
 export default function SignupScreen() {
   const navigate = useNavigate();
   const { search } = useLocation();
   const redirectInUrl = new URLSearchParams(search).get("redirect");
   const redirect = redirectInUrl ? redirectInUrl : "/";
-
+  //HOOK useState: para los cambios de estado de username, email y password
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  //HOOK useContext: para obtener los datos del contexto Store y se extrae la propiedad userInfo del estado
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
-
+  //Se ejecuta cuando se envía el formulario de registro
+  //Solicitud POST para enviar con axios los datos de registro proporcionados por el usuario
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("Pasword don not match");
+      toast.error("Pasword don not match"); //notificación de fallo de contraseña
       return;
     }
     try {
@@ -44,16 +49,19 @@ export default function SignupScreen() {
   };
   useEffect(() => {
     if (userInfo) {
+      //Se utiliza la función navigate para redirigir al usuario a la página especificada en la variable "redirect"
       navigate(redirect);
     }
   }, [navigate, redirect, userInfo]);
-
+  //Renderiza el componente de registro en una estructura JSX
+  //Helmet para estableces el título de la página
+  //onChange para cambiar el estado de usuario, mail y password mediante las funciones set
   return (
     <Container className='small-container'>
       <Helmet>
-        <title>Sign Up</title>
+        <title>Registro</title>
       </Helmet>
-      <h1 className='my-3'>Sign Up</h1>
+      <h1 className='my-3'>Registro</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group className='mb-3' controlId='username'>
           <Form.Label>Username</Form.Label>
@@ -79,7 +87,7 @@ export default function SignupScreen() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Form.Group>
-            <Form.Label>Confirm Password</Form.Label>
+            <Form.Label>Confirma tu Password</Form.Label>
             <Form.Control
               type='password'
               required
@@ -88,11 +96,13 @@ export default function SignupScreen() {
           </Form.Group>
         </Form.Group>
         <div className='mb-3'>
-          <Button type='submit'>Sign Up</Button>
+          <Button className='custom-button' type='submit'>
+            Sign Up
+          </Button>
         </div>
         <div className='mb-3'>
-          Already have an account?{" "}
-          <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+          Todavía no tienes una cuenta?{" "}
+          <Link to={`/signin?redirect=${redirect}`}>Regístrate</Link>
         </div>
       </Form>
     </Container>

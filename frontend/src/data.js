@@ -5,7 +5,7 @@ const data = {
     {
       username: "Basir",
       email: "admin@example.com",
-
+      description: "Basir es un artista de la pintura y la escultura.",
       password: "123456",
       isAdmin: true,
 
@@ -28,7 +28,7 @@ const data = {
       image: "/images/deco.png", // 679px × 829px
       price: 120,
       countInStock: 2,
-      brand: "Idoya",
+      user: "Idoya",
       description: "high quality",
     },
     {
@@ -39,7 +39,7 @@ const data = {
       image: "/images/mueble.png",
       price: 250,
       countInStock: 2,
-      brand: "Vicky",
+      user: "Vicky",
       description: "high quality",
     },
     {
@@ -50,7 +50,7 @@ const data = {
       image: "/images/miki.png",
       price: 25,
       countInStock: 2,
-      brand: "Unai",
+      user: "Unai",
       description: "high quality product",
     },
     {
@@ -60,31 +60,9 @@ const data = {
       category: "decoration",
       image: "/images/santa1.png",
       price: 65,
-      countInStock: 1,
-      brand: "Unai",
+      countInStock: 0,
+      user: "Unai",
       description: "high quality product",
-    },
-    {
-      // _id: '5',
-      nameproduct: "zapatillas pintura",
-      slug: "zapatillas",
-      category: "pintura",
-      image: "/images/zapatillas.png",
-      price: 65,
-      countInStock: 1,
-      brand: "Marta",
-      description: "Design shoes",
-    },
-    {
-      // _id: '5',
-      nameproduct: "Pulseras de oro",
-      slug: "pulseras",
-      category: "joyeria",
-      image: "/images/pulseras.png",
-      price: 70,
-      countInStock: 2,
-      brand: "María",
-      description: "Joyas de diseño",
     },
   ],
 };

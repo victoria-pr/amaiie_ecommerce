@@ -1,6 +1,6 @@
-import axios from "axios";
-import React, { useContext, useEffect, useReducer } from "react";
-import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import axios from "axios"; // para solicitudes HTPP
+import React, { useContext, useEffect, useReducer } from "react"; //para gestionar el estado del componente
+import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js"; //intergración de la pasarela de pago
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useParams } from "react-router-dom";
 import Row from "react-bootstrap/Row";
@@ -14,7 +14,10 @@ import MessageBox from "../components/MessageBox";
 import { Store } from "../Store";
 import { getError } from "../utils";
 import { toast } from "react-toastify";
+import "../App.css";
 
+//PANTALLA DE DETALLES DEL PEDIDO
+//Función reducer: para actualizar el estado de loading (carga), error, order (pedido), successPay (pago exitoso), loadingPay (carga de pago), loadingDeliver (carga de entrega) y successDeliver (entrega exitosa)
 function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -48,6 +51,11 @@ function reducer(state, action) {
       return state;
   }
 }
+//Componente principal Pedido
+//HOOK useContext: obtiene el estado y la info del usuario del contexto Store
+//HOOK useParams: para obtener el parámetro id del pedido de la URL
+//HOOK useNavigate: para la navegación por las páginas de la web
+//HOOK useReducer: para gestionar el estado del componente
 export default function OrderScreen() {
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -74,7 +82,7 @@ export default function OrderScreen() {
     successPay: false,
     loadingPay: false,
   });
-
+  //Función de Paypal que se llama cuando se realiza el pago
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
   function createOrder(data, actions) {
@@ -90,7 +98,7 @@ export default function OrderScreen() {
         return orderID;
       });
   }
-
+  //Función de Paypal que se llama cuando se aprueba el pago
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
       try {
@@ -110,10 +118,11 @@ export default function OrderScreen() {
       }
     });
   }
+  //Función de paypal que se llama cuando se produce un error
+  //HOOK useEffect: para obtener los detalles del pedido utilizando axios y para carga del script de Paypal
   function onError(err) {
     toast.error(getError(err));
   }
-
   useEffect(() => {
     const fetchOrder = async () => {
       try {
@@ -168,7 +177,7 @@ export default function OrderScreen() {
     successPay,
     successDeliver,
   ]);
-
+  //Función para marcar un pedido como entregado
   async function deliverOrderHandler() {
     try {
       dispatch({ type: "DELIVER_REQUEST" });
@@ -186,7 +195,10 @@ export default function OrderScreen() {
       dispatch({ type: "DELIVER_FAIL" });
     }
   }
-
+  //Componente que renderiza los elementos del pedido
+  //Si loading es true, muestra el componente LoadingBox
+  //Si el error es true, muestra el componente MessageBox
+  //En otro caso, muestra la información del pedido incluyendo detalles de envío, detalles de pago, lista de productos y resumen del pedido
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -194,58 +206,46 @@ export default function OrderScreen() {
   ) : (
     <div>
       <Helmet>
-        <title>Order {orderId}</title>
+        <title>Pedido {orderId}</title>
       </Helmet>
-      <h1 className='my-3'>Order {orderId}</h1>
+      <h1 className=' color-verde-order'>Pedido {orderId}</h1>
       <Row>
         <Col md={8}>
           <Card className='mb-3'>
             <Card.Body>
-              <Card.Title>Shipping</Card.Title>
+              <Card.Title className='color-verde'>Envío</Card.Title>
               <Card.Text>
-                <strong>Name:</strong> {order.shippingAddress.fullName} <br />
-                <strong>Address: </strong> {order.shippingAddress.address},
+                <strong>Nombre:</strong> {order.shippingAddress.fullName} <br />
+                <strong>Dirección: </strong> {order.shippingAddress.address},
                 {order.shippingAddress.city}, {order.shippingAddress.postalCode}
                 ,{order.shippingAddress.country}
-                {/*  &nbsp;
-                {order.shippingAddress.location &&
-                  order.shippingAddress.location.lat && (
-                    <a
-                      target='_new'
-                      href={`https://maps.google.com?q=${order.shippingAddress.location.lat},${order.shippingAddress.location.lng}`}
-                    >
-                      Show On Map
-                    </a>
-                  )} */}
               </Card.Text>
               {order.isDelivered ? (
                 <MessageBox variant='success'>
-                  Delivered at {order.deliveredAt}
+                  Entregado {order.deliveredAt}
                 </MessageBox>
               ) : (
-                <MessageBox variant='danger'>Not Delivered</MessageBox>
+                <MessageBox variant='danger'>No entregado</MessageBox>
               )}
             </Card.Body>
           </Card>
           <Card className='mb-3'>
             <Card.Body>
-              <Card.Title>Payment</Card.Title>
+              <Card.Title className='color-verde'>Pago</Card.Title>
               <Card.Text>
-                <strong>Method:</strong> {order.paymentMethod}
+                <strong>Método de pago:</strong> {order.paymentMethod}
               </Card.Text>
               {order.isPaid ? (
-                <MessageBox variant='success'>
-                  Paid at {order.paidAt}
-                </MessageBox>
+                <MessageBox variant='success'>Pagado {order.paidAt}</MessageBox>
               ) : (
-                <MessageBox variant='danger'>Not Paid</MessageBox>
+                <MessageBox variant='danger'>No pagado</MessageBox>
               )}
             </Card.Body>
           </Card>
 
           <Card className='mb-3'>
             <Card.Body>
-              <Card.Title>Items</Card.Title>
+              <Card.Title className='color-verde'>Productos</Card.Title>
               <ListGroup variant='flush'>
                 {order.orderItems.map((item) => (
                   <ListGroup.Item key={item._id}>
@@ -261,7 +261,7 @@ export default function OrderScreen() {
                       <Col md={3}>
                         <span>{item.quantity}</span>
                       </Col>
-                      <Col md={3}>${item.price}</Col>
+                      <Col md={3}>{item.price}€</Col>
                     </Row>
                   </ListGroup.Item>
                 ))}
@@ -272,33 +272,37 @@ export default function OrderScreen() {
         <Col md={4}>
           <Card className='mb-3'>
             <Card.Body>
-              <Card.Title>Order Summary</Card.Title>
+              <Card.Title className='color-verde'>
+                Resumen del pedido
+              </Card.Title>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Items</Col>
-                    <Col>${order.itemsPrice.toFixed(2)}</Col>
+                    <Col>Productos</Col>
+                    <Col>{order.itemsPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Shipping</Col>
-                    <Col>${order.shippingPrice.toFixed(2)}</Col>
+                    <Col>Envío</Col>
+                    <Col>{order.shippingPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
-                    <Col>Tax</Col>
-                    <Col>${order.taxPrice.toFixed(2)}</Col>
+                    <Col>Impuestos</Col>
+                    <Col>{order.taxPrice.toFixed(2)}€</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>
-                      <strong> Order Total</strong>
+                      <strong className='color-verde'> Total pedido</strong>
                     </Col>
                     <Col>
-                      <strong>${order.totalPrice.toFixed(2)}</strong>
+                      <strong className='color-verde'>
+                        {order.totalPrice.toFixed(2)}€
+                      </strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>

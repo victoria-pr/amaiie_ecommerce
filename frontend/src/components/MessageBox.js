@@ -1,3 +1,4 @@
+//Para mensajes de alerta y notificaciones
 import Alert from "react-bootstrap/Alert";
 
 export default function MessageBox(props) {
