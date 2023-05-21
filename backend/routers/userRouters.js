@@ -64,10 +64,11 @@ userRouter.post(
 
 userRouter.post(
   "/signup",
-  expressAsyncHandler(async (req, res) => {
-    const newUser = new User({
+  expressAsyncHandler(async (req, res) => { 
+    const newUser = new User({ 
       username: req.body.username,
       email: req.body.email,
+      isArtist: req.body.isArtist,
       password: bcrypt.hashSync(req.body.password, 10),
     });
     const user = await newUser.save();

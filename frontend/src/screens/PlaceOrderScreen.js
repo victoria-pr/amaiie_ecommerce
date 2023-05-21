@@ -122,7 +122,7 @@ function PlaceOrderScreen() {
                     <Row className='align-items-center'>
                       <Col md={6}>
                         <img
-                          src={item.image}
+                          src={`http://localhost:5000/fotoproducto/${item.image}`}
                           alt={item.nameproduct}
                           className='img-fluid rounded img-thumbnail'
                         ></img>

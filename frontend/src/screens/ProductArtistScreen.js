@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useReducer } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button } from "react-bootstrap";
-import Axios from "axios";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
@@ -26,6 +25,7 @@ const reducer = (state, action) => {
         loadingDelete: false,
         successDelete: true,
       };
+
     case "DELETE_RESET":
       return { ...state, loadingDelete: false, successDelete: false };
     default:
@@ -70,7 +70,7 @@ export default function ProductArtistScreen() {
   const deleteHandler = async (product) => {
     if (window.confirm("Are you sure to delete?")) {
       try {
-        await Axios.delete(`/api/products/${product._id}`, {
+        await axios.delete(`/api/products/${product._id}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         toast.success("product deleted successfully");

@@ -99,7 +99,11 @@ function ProductScreen() {
               Descripción : <p>{product.description}</p>
             </ListGroup.Item>
             <ListGroup.Item>
-              Artista : <p>{product.brand}</p>
+              Artista : 
+              
+              <span
+               onClick={() => { window.location.href = `/user/${product.user}`;
+              }}><p>{product.user}</p></span> 
             </ListGroup.Item>
           </ListGroup>
         </Col>

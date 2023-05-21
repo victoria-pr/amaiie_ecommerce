@@ -43,7 +43,6 @@ function ArtistScreen() {
 
         const products = await axios.get(`/api/users/${username}/products`);
         const productsData = products.data;
-        console.log(productsData);
         setProducts(productsData);
 
         dispatch({ type: "FETCH_SUCCESS", payload: userData });
@@ -56,48 +55,6 @@ function ArtistScreen() {
 
   return (
     <div>
-      {/* --------------------------
-       */}
-      {/*  <div className='fotocontainer'>
-        <div className='fotocard fotocard0'>
-          <div className='fotoborder'>
-            <h2>Unai</h2>
-            <div className='icons'>
-              <i className='fa fa-codepen' aria-hidden='true'></i>
-              <i className='fa fa-instagram' aria-hidden='true'></i>
-              <i className='fa fa-dribbble' aria-hidden='true'></i>
-              <i className='fa fa-twitter' aria-hidden='true'></i>
-              <i className='fa fa-facebook' aria-hidden='true'></i>
-            </div>
-          </div>
-        </div>
-      </div>
- */}
-      {/* -----------------
-       */}
-
-      {/*   <div>
-        <h1>{user.username}</h1>
-      </div>
-      <div>
-        <h1>{user.email}</h1>
-      </div>
-      <div>
-        <img
-          src={`http://localhost:5000/uploads/${user.image}`}
-          alt={user.username}
-        />
-      </div>
-      <div>
-        <h1>{user.description}</h1>
-      </div>
- */}
-      {/*  <div>
-        <h1>{user.username}</h1>
-      </div>
-      <div>
-        <h1>{user.email}</h1>
-      </div> */}
       <div>
         <div className='infoartist'>
           <div>
@@ -122,16 +79,6 @@ function ArtistScreen() {
           </div>
         </div>
       </div>
-
-      {/* <div className='item3'>
-        <div className='item'>
-          <img
-            src={`http://localhost:5000/uploads/${user.image}`}
-            alt={user.username}
-            className='image-artist'
-          />
-        </div>
-      </div> */}
 
       <Row>
         {products.map((product) => (

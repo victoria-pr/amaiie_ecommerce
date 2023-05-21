@@ -74,6 +74,7 @@ export default function SignupScreen() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
+
         <Form.Group className='mb-3' controlId='isArtist'>
           <Form.Label>¿Deseas inscribirte como artista?</Form.Label>
           <Form.Select
@@ -85,6 +86,7 @@ export default function SignupScreen() {
             <option value='false'>No</option>
           </Form.Select>
         </Form.Group>
+
         <Form.Group className='mb-3' controlId='password'>
           <Form.Label>Password</Form.Label>
           <Form.Control

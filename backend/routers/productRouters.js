@@ -1,7 +1,6 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Product from "../models/productModel.js";
-import User from "../models/userModel.js";
 import { isAuth, isAdmin } from "../utils.js";
 import upload from "../middlewares/multerpro.js";
 
@@ -81,7 +80,6 @@ productRouter.delete(
   "/:id",
   isAuth,
   isAdmin,
-  //isArtist,
 
   //función asíncrona del controlador para la ruta DELETE
   expressAsyncHandler(async (req, res) => {
