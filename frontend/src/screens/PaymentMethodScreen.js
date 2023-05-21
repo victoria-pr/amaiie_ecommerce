@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { Store } from "../Store";
+import "../App.css";
 
 export default function PaymentMethodScreen() {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ export default function PaymentMethodScreen() {
         <Helmet>
           <title>Payment Method</title>
         </Helmet>
-        <h1 className='my-3'>Payment Method</h1>
+        <h1 className='my-3 color-verde'>Payment Method</h1>
         <Form onSubmit={submitHandler}>
           <div className='mb-3'>
             <Form.Check
@@ -58,7 +59,9 @@ export default function PaymentMethodScreen() {
             />
           </div>
           <div className='mb-3'>
-            <Button type='submit'>Continue</Button>
+            <Button className='custom-button' type='submit'>
+              Continue
+            </Button>
           </div>
         </Form>
       </div>

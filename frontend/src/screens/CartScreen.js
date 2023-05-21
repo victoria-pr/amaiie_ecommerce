@@ -15,6 +15,7 @@ import {
   faPlusCircle,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import "../App.css";
 
 export default function CartScreen() {
   const navigate = useNavigate();
@@ -46,12 +47,12 @@ export default function CartScreen() {
       <Helmet>
         <title>Shopping Cart</title>
       </Helmet>
-      <h1 className='shoppingcart'>Shopping Cart</h1>
+      <h1 className='shoppingcart color-verde'>Shopping Cart</h1>
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
             <MessageBox>
-              Cart is empty. <Link to='/'>Go Shopping</Link>
+              Cart is empty. <Link to='/'> Go Shopping</Link>
             </MessageBox>
           ) : (
             <ListGroup>
@@ -76,7 +77,10 @@ export default function CartScreen() {
                         variant='light'
                         disabled={item.quantity === 1}
                       >
-                        <FontAwesomeIcon icon={faMinusCircle} />
+                        <FontAwesomeIcon
+                          className='color-verde'
+                          icon={faMinusCircle}
+                        />
                       </Button>{" "}
                       <span>{item.quantity}</span>{" "}
                       <Button
@@ -86,16 +90,22 @@ export default function CartScreen() {
                         }
                         disabled={item.quantity === item.countInStock} // puedes añadir unidades hasta alcanzar el stock que hay
                       >
-                        <FontAwesomeIcon icon={faPlusCircle} />
+                        <FontAwesomeIcon
+                          className='color-verde'
+                          icon={faPlusCircle}
+                        />
                       </Button>
                     </Col>
-                    <Col md={3}>${item.price}</Col>
+                    <Col md={3}>{item.price}€</Col>
                     <Col md={2}>
                       <Button
                         variant='light'
                         onClick={() => removeItemHandler(item)}
                       >
-                        <FontAwesomeIcon icon={faTrash} />
+                        <FontAwesomeIcon
+                          className='color-verde'
+                          icon={faTrash}
+                        />
                       </Button>
                     </Col>
                   </Row>
@@ -109,15 +119,16 @@ export default function CartScreen() {
             <Card.Body>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h3>
+                  <h3 className='color-verde'>
                     Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{" "}
-                    items): €
-                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                    items):
+                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)} €
                   </h3>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <div className='d-grid'>
                     <Button
+                      className='custom-button'
                       type='button'
                       variant='primary'
                       onClick={checkoutHandler}

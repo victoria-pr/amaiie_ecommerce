@@ -3,142 +3,107 @@ import "../css/AvisoLegalScreen.css";
 const Aviso = () => {
   return (
     <div className='aviso-container'>
-      <h2> Titularidad y gestión de este sitio web</h2>
-      <br></br>
+      <h2 className='aviso'> Titularidad y gestión de este sitio web</h2>
       <p>
-        {" "}
         Este sitio web en su conjunto está administrado y es propiedad de
         Bootcamp The Bridge-Kutxabank , quien pone a disposición de los USUARIOS
         la dirección de correo electrónico y teléfono, a continuación, con el
         fin de recibir comentarios, observaciones o cualquier comunicado
         referente a la operación de este sitio web y su contenido.
       </p>
-      <br></br>
-      <p> Correo electrónico: info@amaiie.com </p>
-      <br></br>
-      <p> Teléfono: +34 333 555 777</p>
-      <br></br>
-      <h2> Datos de carácter personal</h2>
-      <br></br>
       <p>
-        {" "}
+        Correo electrónico: info@amaiie.com
+        <br></br>Teléfono: +34 333 555 777
+      </p>
+      <h2 className='aviso'> Datos de carácter personal</h2>
+      <p>
         De conformidad con lo dispuesto en la Ley Orgánica 3/2018 de 5 de
         diciembre, de Protección de Datos de Carácter Personal y su normativa de
-        desarrollo y el RGPD en vigor desde el 25 de mayo de 2018, Booktinder le
+        desarrollo y el RGPD en vigor desde el 25 de mayo de 2018, Amaiie le
         informa de que los datos personales facilitados por usted mediante
         correo electrónico o formulario electrónico, serán incorporados a un
         fichero cuyo responsable y titular es Bootcamp TheBridge-Kutxabank.
       </p>
-      <br></br>
       <p>
-        {" "}
         Cuando los usuarios a través del registro o nuestro formulario nos
         faciliten voluntariamente sus datos, estos serán utilizados para
         facilitarle la información requerida acerca de nuestra plataforma.
       </p>
-      <br></br>
       <p>
-        {" "}
         Si lo desea, puede dirigirse a Bootcamp The Bridge-Kutxabank a través de
         nuestro mail info@amaiie.com, con el fin de ejercer los derechos de
         acceso, rectificación, cancelación y oposición.
       </p>
-      <br></br>
-      <h2> Finalidad</h2>
-      <br></br>
+      <h2 className='aviso'> Finalidad</h2>
       <p>
-        {" "}
         Los datos personales registrados por medio de los formularios
         habilitados al efecto en el sitio web son recopilados con la finalidad
         de mantener la relación con el usuario, la gestión, administración,
-        prestación y mejora de los servicios que presta Booktinder al facilitar
-        la comunicación entre usuarios de la plataforma de intercambio de
-        libros.{" "}
+        prestación y mejora de los servicios que presta Amaiie al facilitar la
+        comunicación entre usuarios de la plataforma de intercambio de libros.
       </p>
-      <br></br>
       <p>
-        {" "}
-        Booktinder no cede ni cederá a terceros los datos personales del usuario
-        sin su consentimiento expreso.
-        <br></br>
-        <p>
-          {" "}
-          Al crear una cuenta de registro, el usuario acepta recibir información
-          sobre Booktinder, en formato de boletines electrónicos, ofertas o
-          comunicaciones publicitarias y promocionales por vía electrónica a su
-          dirección de correo electrónico o a través de otro medio de
-          comunicación electrónica equivalente a aquellos usuarios que hayan
-          otorgado expresamente su consentimiento.
-        </p>
-        <br></br>
-        <p>
-          {" "}
-          El usuario podrá aceptar o no recibir comunicaciones generales,
-          adaptadas a sus intereses y preferencias declarados, al tipo de
-          contenido al que se ha suscrito.{" "}
-        </p>
-        <br></br>
-        <p>
-          {" "}
-          El usuario podrá aceptar o no recibir comunicaciones comerciales
-          automatizadas adaptadas a su comportamiento en la web ya sea de
-          navegación o participación en promociones.{" "}
-        </p>
-        <br></br>
-        <p>
-          {" "}
-          Los datos personales proporcionados se conservarán hasta que se
-          solicite su supresión o revoque su consentimiento por el interesado.
-          Para revocar su consentimiento puede presentar su solicitud a la
-          cuenta de correo: infobooktinder.com
-        </p>
-        <br></br>
-        <h2>
-          {" "}
-          Carácter obligatorio o facultativo de la información facilitada por el
-          usuario y veracidad de los datos
-        </h2>
-        <br></br>
-        <p>
-          {" "}
-          Todos los campos requeridos en los formularios de registro son
-          estrictamente necesarios para atender cualquier petición o servicio
-          solicitado.
-        </p>
-        <br></br>
-        <p>
-          {" "}
-          El usuario garantiza que los datos personales facilitados a Booktinder
-          son veraces y se hace responsable de comunicar al mismo cualquier
-          modificación de los mismos.
-        </p>
-        <br></br>
-        <h2>
-          {" "}
-          Derechos de acceso, rectificación, oposición y cancelación de los
-          usuarios
-        </h2>
-        <br></br>
-        <p>
-          {" "}
-          Booktinder informa al usuario que puede ejercer sus derechos de
-          acceso, rectificación, oposición y cancelación al tratamiento de sus
-          datos personales, en los términos y condiciones previstos en la LOPD y
-          en el RGPD. Si el usuario decide darse de baja, sus datos serán
-          totalmente cancelados.
-        </p>
-        <br></br>
+        Amaiie no cede ni cederá a terceros los datos personales del usuario sin
+        su consentimiento expreso.
+      </p>
+      <p>
+        Al crear una cuenta de registro, el usuario acepta recibir información
+        sobre Amaiie, en formato de boletines electrónicos, ofertas o
+        comunicaciones publicitarias y promocionales por vía electrónica a su
+        dirección de correo electrónico o a través de otro medio de comunicación
+        electrónica equivalente a aquellos usuarios que hayan otorgado
+        expresamente su consentimiento.
+      </p>
+      <p>
+        El usuario podrá aceptar o no recibir comunicaciones generales,
+        adaptadas a sus intereses y preferencias declarados, al tipo de
+        contenido al que se ha suscrito.
+      </p>
+      <p>
+        El usuario podrá aceptar o no recibir comunicaciones comerciales
+        automatizadas adaptadas a su comportamiento en la web ya sea de
+        navegación o participación en promociones.
+      </p>
+      <p>
+        Los datos personales proporcionados se conservarán hasta que se solicite
+        su supresión o revoque su consentimiento por el interesado. Para revocar
+        su consentimiento puede presentar su solicitud a la cuenta de correo:
+        infoAmaiie.com
+      </p>
+      <h2 className='aviso'>
+        Carácter obligatorio o facultativo de la información facilitada por el
+        usuario y veracidad de los datos
+      </h2>
+      <p>
+        Todos los campos requeridos en los formularios de registro son
+        estrictamente necesarios para atender cualquier petición o servicio
+        solicitado.
+      </p>
+      <p>
+        El usuario garantiza que los datos personales facilitados a Amaiie son
+        veraces y se hace responsable de comunicar al mismo cualquier
+        modificación de los mismos.
+      </p>
+      <h2 className='aviso'>
+        Derechos de acceso, rectificación, oposición y cancelación de los
+        usuarios
+      </h2>
+      <p>
+        Amaiie informa al usuario que puede ejercer sus derechos de acceso,
+        rectificación, oposición y cancelación al tratamiento de sus datos
+        personales, en los términos y condiciones previstos en la LOPD y en el
+        RGPD. Si el usuario decide darse de baja, sus datos serán totalmente
+        cancelados.
+      </p>
+      <p>
         Estos derechos pueden hacerse efectivos, de forma ágil y gratuita,
         mediante el envío de un correo electrónico a la dirección
-        info@booktinder.com solicitando la baja, como indican las instrucciones
-        que aparecen al final de todos nuestro correos electrónicos.
+        info@Amaiie.com solicitando la baja, como indican las instrucciones que
+        aparecen al final de todos nuestro correos electrónicos.
       </p>
-      <br></br>
-      <h2> Seguridad</h2>
-      <br></br>
+      <h2 className='aviso'> Seguridad</h2>
       <p>
-        {" "}
-        Booktinder mantiene los niveles de seguridad de protección de datos
+        Amaiie mantiene los niveles de seguridad de protección de datos
         personales conforme al Real Decreto 994/1999, de 11 de junio, relativo a
         las medidas de seguridad de los ficheros automatizados que contengan
         datos de carácter personal, y ha establecido todos los medios técnicos a
@@ -147,18 +112,15 @@ const Aviso = () => {
         sitio web, sin perjuicio de informarle de que las medidas de seguridad
         en Internet no son inexpugnables.
       </p>
-      <br></br>
       <p>
-        {" "}
-        Booktinder se compromete a cumplir con el deber de secreto y
+        Amaiie se compromete a cumplir con el deber de secreto y
         confidencialidad respecto de los datos personales contenidos en el
         fichero automatizado de acuerdo con la legislación aplicable.
       </p>
-      <br></br>
-      <h2> Información sobre cookies, IPs y técnicas de 'spam'</h2>
-      <br></br>
+      <h2 className='aviso'>
+        Información sobre cookies, IPs y técnicas de 'spam'
+      </h2>
       <p>
-        {" "}
         El usuario acepta el uso de cookies y seguimientos de IPs. Nuestro
         analizador de tráfico del site utiliza o puede utilizar cookies y
         seguimientos de IPs que nos permiten recoger datos a efectos
@@ -166,87 +128,65 @@ const Aviso = () => {
         visitado, fecha de la última visita, URL y dominio de la que proviene,
         explorador utilizado y resolución de la pantalla. No obstante, el
         usuario si lo desea puede desactivar y/o eliminar estas cookies
-        siguiendo las instrucciones de su navegador de Internet.{" "}
+        siguiendo las instrucciones de su navegador de Internet.
       </p>
-      <br></br>
       <p>
-        {" "}
-        BookTinder tampoco utiliza técnicas de 'spamming' y únicamente tratará
-        los datos que el usuario transmita mediante los formularios electrónicos
+        Amaiie tampoco utiliza técnicas de 'spamming' y únicamente tratará los
+        datos que el usuario transmita mediante los formularios electrónicos
         habilitados en este sitio web o mensajes de correo electrónico.{" "}
       </p>
-      <br></br>
-      <h2> Uso de cookies</h2>
-      <br></br>
+      <h2 className='aviso'> Uso de cookies</h2>
       <p>
-        {" "}
         Nuestro sitio web puede usar «cookies». Las cookies permiten
         personalizar los sitios y saber qué páginas visitan nuestros usuarios.
         Nos ayudan entender el comportamiento de los usuarios, que utilizamos
         para mejorar nuestros sitios y mensajes.
       </p>
-      <br></br>
       <p>
-        {" "}
         Si quieres desactivar las cookies, todos los navegadores poseen una
         funcionalidad que permite hacerlo de manera sencilla. Si no sabes cómo
         hacerlo en la ayuda de cada navegador podrás encontrar las
         instrucciones.
       </p>
-      <br></br>
       <p>
-        {" "}
         Nuestra página web utiliza cookies, por lo que es posible que no puedas
         acceder a determinadas secciones si las desactivas. En ningún caso, los
         datos recogidos en estas cookies te identifican personalmente, todos los
         datos que se recogen en estas cookies se hacen de manera anónima y no
         permiten seguir tu actividad cuando navegas fuera de nuestra web.
       </p>
-      <br></br>
       <p>
-        {" "}
         Las cookies empleadas en nuestras páginas están catalogadas en las
         siguientes categorías:
       </p>
-      <br></br>
-      <h2> Categoría 1: Cookies estrictamente necesarias</h2>
-      <br></br>
+      <h2 className='aviso'> Categoría 1: Cookies estrictamente necesarias</h2>
       <p>
-        {" "}
         Estas cookies son imprescindibles para que puedas navegar por las
         páginas y usar sus prestaciones. Sin estas cookies, no podemos ofrecerte
         determinados servicios.
       </p>
-      <br></br>
-      <h2> Categoría 2: Cookies sobre comportamiento</h2>
-      <br></br>
+      <h2 className='aviso'> Categoría 2: Cookies sobre comportamiento</h2>
       <p>
-        {" "}
         Estas cookies recogen información sobre cómo utilizas nuestro sitio, por
         ejemplo las páginas que más visitas. Estos datos nos permiten optimizar
         la web y facilitar su navegación.
       </p>
-      <br></br>
-      <h2> Categoría 3: Cookies de funcionalidad</h2>
-      <br></br>
-      <br></br>
-      <h2> Modificación de la presente política de privacidad</h2>
-      <br></br>
-      <p>
+      <h2 className='aviso'> Categoría 3: Cookies de funcionalidad</h2>
+      <h2 className='aviso'>
         {" "}
-        Booktinder se reserva el derecho a modificar la presente política para
+        Modificación de la presente política de privacidad
+      </h2>
+      <p>
+        Amaiie se reserva el derecho a modificar la presente política para
         adaptarla a futuras novedades legislativas o jurisprudenciales, así como
         a prácticas de la industria, informando previamente a los usuarios de
         los cambios que en ella se produzcan.
       </p>
-      <br></br>
       <p>
-        {" "}
-        Asimismo, Booktinder se reserva la rescisión de los servicios que
-        realiza, en aquellos usuarios que no cumplan con los términos y
-        condiciones legales de uso, así como con la legislación vigente.
+        Asimismo, Amaiie se reserva la rescisión de los servicios que realiza,
+        en aquellos usuarios que no cumplan con los términos y condiciones
+        legales de uso, así como con la legislación vigente.
       </p>
-      <br></br>
       <p> Copyright © 2023. Amaiie. Todos los derechos reservados.</p>
     </div>
   );

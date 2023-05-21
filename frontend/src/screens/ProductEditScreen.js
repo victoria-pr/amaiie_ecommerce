@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import Button from "react-bootstrap/Button";
+import "../App.css";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -154,14 +155,14 @@ export default function ProductEditScreen() {
       <Helmet>
         <title>Edit Product ${productId}</title>
       </Helmet>
-      <h1>Edit Product {productId}</h1>
+      <h1 className='color-verde-edit-product'>Edit Product {productId}</h1>
 
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
-        <Form onSubmit={submitHandler} enctype="multipart/form-data" >
+        <Form onSubmit={submitHandler} enctype='multipart/form-data'>
           <Form.Group className='mb-3' controlId='name'>
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -200,7 +201,6 @@ export default function ProductEditScreen() {
             <Form.Control
               type='file'
               onChange={(e) => setImage(e.target.files[0])}
-              
             />
           </Form.Group>
           <Form.Group className='mb-3' controlId='category'>
@@ -228,7 +228,11 @@ export default function ProductEditScreen() {
             />
           </Form.Group>
           <div className='mb-3'>
-            <Button disabled={loadingUpdate} type='submit'>
+            <Button
+              className='custom-button'
+              disabled={loadingUpdate}
+              type='submit'
+            >
               Update
             </Button>
             {loadingUpdate && <LoadingBox></LoadingBox>}

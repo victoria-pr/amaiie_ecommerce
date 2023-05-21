@@ -5,6 +5,7 @@ import { useState, useContext, useEffect } from "react";
 import { Store } from "../Store";
 import { useNavigate } from "react-router-dom";
 import CheckoutSteps from "../components/CheckoutSteps";
+import "../App.css";
 
 export default function ShippingAddressScreen() {
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ export default function ShippingAddressScreen() {
       </Helmet>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <div className='container small-container'>
-        <h1 className='my-3'> Shipping Address</h1>
+        <h1 className='my-3 color-verde'> Shipping Address</h1>
         <Form onSubmit={submitHandler}>
           <Form.Group className='mb-3' controlId='fullName'>
             <Form.Label> Full Name </Form.Label>
@@ -99,7 +100,7 @@ export default function ShippingAddressScreen() {
             />
           </Form.Group>
           <div className='mb-3'>
-            <Button variant='primary' type='submit'>
+            <Button className='custom-button' variant='primary' type='submit'>
               Continue
             </Button>
           </div>

@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet-async";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import "../css/GalleryScreen.css";
+import "../App.css";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -56,11 +57,17 @@ function HomeScreen() {
           <div className='decorative-text-line'></div>
           <div className='decorative-text-content'>
             <div className='artista'>
-              Artistas con Mucho Arte <br></br>que transmiten Inspiración I
-              Emociones
+              Artistas con Mucho <strong className='color-verde'>Arte</strong>
+              <br></br>que transmiten Inspiración I
+              <strong className='color-verde'> Emociones</strong>
             </div>
-            <div className='arte'>01 Arte ...</div>
-            <div className='inspiracion'>Emoción esencial capturada</div>
+            <div className='arte'>
+              01 <strong className='color-verde'>Artistas</strong> ...
+            </div>
+            <div className='inspiracion'>
+              <strong className='color-verde'>Esencia </strong>
+              capturada
+            </div>
           </div>
         </div>
 
@@ -94,13 +101,13 @@ function HomeScreen() {
 
             <Col md={5} className='gallery-item3'>
               <div className='gallery-item'>
-                <Link to='/search?category=navidad'>
+                <Link to='/search?category=artesanal'>
                   <img
                     src='./images/bolasanta.png'
                     alt='Imagen 3'
                     className='gallery-image'
                   />
-                  <div className='gallery-item-text'>Navidad</div>
+                  <div className='gallery-item-text'>Artesanal</div>
                 </Link>
               </div>
             </Col>
@@ -136,7 +143,7 @@ function HomeScreen() {
       <Helmet>
         <title>Amaiie</title>
       </Helmet>
-      <h1>Productos</h1>
+      <h1 className='color-verde'>Productos</h1>
       <div className='products'>
         {loading ? (
           <LoadingBox />

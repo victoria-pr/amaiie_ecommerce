@@ -12,6 +12,7 @@ import { Store } from "../Store";
 import { getError } from "../utils";
 import CheckoutSteps from "../components/CheckoutSteps";
 import LoadingBox from "../components/LoadingBox";
+import "../App.css";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -62,7 +63,7 @@ function PlaceOrderScreen() {
         },
         {
           headers: {
-            authorization: `Bearer ${userInfo.token}`, 
+            authorization: `Bearer ${userInfo.token}`,
           },
         }
       );
@@ -88,12 +89,12 @@ function PlaceOrderScreen() {
       <Helmet>
         <title>Preview Order</title>
       </Helmet>
-      <h1 className='my-3'>Preview Order</h1>
+      <h1 className='my-3 color-verde'>Preview Order</h1>
       <Row>
         <Col md={8}>
           <Card className='mb-3'>
             <Card.Body>
-              <Card.Title> Shipping </Card.Title>
+              <Card.Title className='color-verde'> Shipping </Card.Title>
               <Card.Text>
                 <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
                 <strong>Address:</strong> {cart.shippingAddress.address} <br />
@@ -105,7 +106,7 @@ function PlaceOrderScreen() {
           </Card>
           <Card className='mb-3'>
             <Card.Body>
-              <Card.Title> Payment </Card.Title>
+              <Card.Title className='color-verde'> Payment </Card.Title>
               <Card.Text>
                 <strong>Method:</strong> {cart.paymentMethod}
               </Card.Text>
@@ -114,7 +115,7 @@ function PlaceOrderScreen() {
           </Card>
           <Card className='mb-3'>
             <Card.Body>
-              <Card.Title> Items </Card.Title>
+              <Card.Title className='color-verde'> Items </Card.Title>
               <ListGroup variant='flush'>
                 {cart.cartItems.map((item) => (
                   <ListGroup.Item key={item._id}>
@@ -146,7 +147,7 @@ function PlaceOrderScreen() {
         <Col md={4}>
           <Card>
             <Card.Body>
-              <Card.Title> Order Summary</Card.Title>
+              <Card.Title className='color-verde'> Order Summary</Card.Title>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
                   <Row>
@@ -169,7 +170,7 @@ function PlaceOrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>
-                      <strong>Order Total</strong>
+                      <strong className='color-verde'>Order Total</strong>
                     </Col>
                     <Col>{cart.totalPrice.toFixed(2)}€</Col>
                   </Row>
@@ -178,6 +179,7 @@ function PlaceOrderScreen() {
                 <ListGroup.Item>
                   <div className='d-grid'>
                     <Button
+                      className='custom-button'
                       type='button'
                       onClick={placeOrderHandler}
                       disabled={cart.cartItems.length === 0}

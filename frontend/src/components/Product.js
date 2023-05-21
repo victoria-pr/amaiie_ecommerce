@@ -33,7 +33,7 @@ function Product(props) {
                 <div class='wsk-cp-img'>
                   <img
                     src={`http://localhost:5000/fotoproducto/${product.image}`}
-                    alt='Product'
+                    alt={product.nameproduct}
                     class='img-responsive'
                   />
                 </div>
