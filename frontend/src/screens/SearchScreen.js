@@ -32,6 +32,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
 //HOOK useNavigate: para las funciones de navegación por la web
 //HOOK useLocation: para obtener la ubicación en la navegación de la web
 //URL SerachParams: para extraer los parámetros de consulta de la URL (category, query, price, order y page)
@@ -82,6 +83,7 @@ export default function SearchScreen() {
     };
     fetchCategories();
   }, [dispatch]);
+
   //FILTROS para ordenar los productos por precios
   const getFilterUrl = (filter, skipPathname) => {
     const filterPage = filter.page || page;
@@ -93,12 +95,14 @@ export default function SearchScreen() {
       skipPathname ? "" : "/search?"
     }category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&order=${sortOrder}&page=${filterPage}`;
   };
+
   //Renderiza una estructura JSX (similar a HTML) el componente principal de buscador de productos
   return (
     <div>
       <Helmet>
         <title>Buscar producto</title>
       </Helmet>
+
       <Row>
         <Col md={12}>
           {loading ? (
@@ -117,6 +121,7 @@ export default function SearchScreen() {
                     {query !== "all" || category !== "all" || price !== "all"}
                   </div>
                 </Col>
+
                 <Col className='text-end'>
                   Ordenar
                   <select
@@ -140,6 +145,7 @@ export default function SearchScreen() {
                   </Col>
                 ))}
               </Row>
+
               <div>
                 {[...Array(pages).keys()].map((x) => (
                   <LinkContainer

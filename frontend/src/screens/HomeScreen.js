@@ -12,6 +12,7 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import "../css/GalleryScreen.css";
 import "../App.css";
+import SearchScreen from "./SearchScreen";
 //PANTALLA DE INICIO
 //Definimos un reductor para gestionar el estado del componente HOME con FETCH REQUESTE (solicitud de datos) FETCH SUCESS (éxito en obtención de datos) y FETCH FAIL (error al botener datos)
 
@@ -28,6 +29,7 @@ const reducer = (state, action) => {
       return state;
   }
 };
+
 //HOOK useReducer para incializar el estado (inicial com matriz vacía y un indicador de carga con un true o mensaje de error)
 function HomeScreen() {
   const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
@@ -148,8 +150,10 @@ function HomeScreen() {
       <Helmet>
         <title>Amaiie</title>
       </Helmet>
+
       <h1 className='color-verde'>Productos</h1>
       <div className='products'>
+        {/*   <SearchScreen /> */}
         {loading ? (
           <LoadingBox />
         ) : error ? (

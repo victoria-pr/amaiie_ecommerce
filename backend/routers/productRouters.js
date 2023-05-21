@@ -140,14 +140,7 @@ productRouter.get(
           }
         : {};
     const categoryFilter = category && category !== "all" ? { category } : {};
-    /*   const ratingFilter =
-      rating && rating !== "all"
-        ? {
-            rating: {
-              $gte: Number(rating),
-            },
-          }
-        : {}; */
+
     const priceFilter =
       price && price !== "all"
         ? {
