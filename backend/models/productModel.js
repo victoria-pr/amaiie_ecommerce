@@ -1,35 +1,25 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"; //Importamos la librería mongoose para el esquema de la base de datos de los productos
 
-const productSchema = new mongoose.Schema({
-  nameproduct: { type: String, required: true, unique: true },
-  slug: { type: String, required: true, unique: true },
-  image: { type: String, required: false },
-  images: { String },
-  description: { type: String, required: true },
-  price: { type: Number, required: true },
-  createdate: { type: Date, required: true },
-  idartist: { type: mongoose.Types.ObjectId, ref: "owner", required: true },
-
-  category: {
-    type: String,
-    required: false,
-    required: true,
-    enum: [
-      "clothing",
-      "decoration",
-      "painting",
-      "photography",
-      "jewelry",
-      "ceramic",
-      "paper",
-      "miniatures",
-      "soaps and candel",
-    ],
+const productSchema = new mongoose.Schema(
+  //Objeto con los elementos de los productos
+  {
+    nameproduct: { type: String, required: true, unique: true },
+    slug: { type: String, required: true, unique: true },
+    image: { type: String, required: true },
+    user: {
+      type: String,
+      ref: "User",
+      required: false,
+    },
+    category: { type: String, required: true },
+    description: { type: String, required: true },
+    price: { type: Number, required: true },
+    countInStock: { type: Number, required: true },
   },
-
-  freezeTableName: true,
-  typestamps: false,
-});
-
-const Product = mongoose.model("product", productSchema);
+  {
+    //para que mongoose cree la fecha actualizada de creación y actualización de datos
+    timestamps: true,
+  }
+);
+const Product = mongoose.model("Product", productSchema);
 export default Product;

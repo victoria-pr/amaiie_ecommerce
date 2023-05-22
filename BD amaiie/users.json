@@ -1,0 +1,153 @@
+[{
+  "_id": {
+    "$oid": "646611839afdbe2434b33439"
+  },
+  "username": "pepa",
+  "email": "pepapig@example.com",
+  "password": "$2a$10$mDaxw53OL4QXgWWsSv7exOXk5SArQYfGF1xsPCkpxwL4kvEM/hV8u",
+  "isArtist": false,
+  "isAdmin": true,
+  "products": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646611839afdbe2434b3343a"
+  },
+  "username": "vicky",
+  "email": "artist@example.com",
+  "password": "$2a$10$w4Cn08mkmphpuN0OYhrz1eaS8ekGnc8LUvIQ8mtNmYnHZpH9Lf/0S",
+  "description": "Vicky es una talentosa artista de 31 años con una pasión innata por las manualidades. Su creatividad y habilidades artísticas le permiten crear piezas únicas y diferentes que cautivan a todos los que las ven. Con su dedicación y amor por su oficio, se ha convertido en una exitosa emprendedora en el mundo de las manualidades.  Desde temprana edad, Vicky mostró un gran interés por las artes y la creación. Siempre estaba experimentando con diferentes materiales y técnicas, explorando nuevas formas de expresar su imaginación. A lo largo de los años, ha perfeccionado su técnica y ha desarrollado un estilo distintivo que combina elementos tradicionales y contemporáneos.  Vicky se especializa en la creación de manualidades únicas que tienen un enfoque moderno y estético. Utiliza una amplia variedad de materiales, desde papel y tela hasta arcilla y metales, para crear piezas verdaderamente sorprendentes. Sus obras abarcan desde joyería artesanal y accesorios hasta decoración del hogar y regalos personalizados.",
+  "isArtist": true,
+  "isAdmin": false,
+  "products": [],
+  "__v": 0,
+  "image": "vicky.png"
+},{
+  "_id": {
+    "$oid": "646632c5c89ecc02d03a830e"
+  },
+  "username": "unai",
+  "email": "unai@unai.com",
+  "password": "$2a$10$hDDh/yKRen/EO3trvoXhIO05ufJZ83gqRcLt0V3Tu9hrOuEeHkCT2",
+  "isArtist": true,
+  "isAdmin": false,
+  "__v": 0,
+  "description": "En el mundo de Unai, no hay límites para la creatividad. Cada proyecto es un desafío emocionante y una oportunidad para experimentar con diferentes técnicas y materiales. Su arte multidisciplinario es una expresión auténtica de su personalidad y visión artística, y a través de cada pieza, busca despertar la imaginación y provocar una conexión profunda con el espectador. Sus obras son mucho más que objetos; son una invitación a explorar, a reflexionar y a apreciar la belleza en todas sus formas.",
+  "image": "unai.png"
+},{
+  "_id": {
+    "$oid": "6467960d3203edd5d79a0ca0"
+  },
+  "username": "maria",
+  "email": "maria@email.com",
+  "password": "$2a$10$pJGSB0m41nOwLdHAaRZnnenGlPvPAR1LQNu2cXrppwwqbPPnNQUhW",
+  "isArtist": true,
+  "isAdmin": false,
+  "__v": 0,
+  "description": "María tiene una pasión desbordante por el arte y la moda y es conocida por su increíble habilidad para pintar, especialmente en superficies únicas como unas zapatillas deportivas.\r\nSu creatividad y destreza la convierten en una auténtica pionera en su campo. Pasa horas y horas en su pequeño estudio, rodeada de pinceles, pinturas y zapatillas blancas esperando ser transformadas en obras maestras y en piezas únicas.\r\nCada par de zapatillas es una nueva oportunidad para plasmar su imaginación y llevar una historia a los pies. No son unas simples zapatillas, sino una expresión única de la personalidad y el estilo de quien las lleva puestas.",
+  "image": "maria.png"
+},{
+  "_id": {
+    "$oid": "646796713203edd5d79a0ca6"
+  },
+  "username": "javier",
+  "email": "javier@email.com",
+  "password": "$2a$10$Iuc1wLwp.e5rUfuUCl5cQOpXxX/lCWY4p54nTFjXb1ZGHdtWrrjqu",
+  "isArtist": true,
+  "isAdmin": false,
+  "__v": 0,
+  "description": "Javier es un jabonero profesional que tiene un pequeño laboratorio donde fabrica productos ecológicos con un rico olor a hierbabuena. Ama la naturaleza y ante todo le gusta proteger el medio ambiente.\r\nFabrica jabones naturales, combinando a la perfección su pasión por la química y su deseo de crear productos ecológicos. Sus productos son de alta calidad, suaves para la piel, fabricados con ingredientes naturales, con envases biodegradables y respetuosos con el medioambiente.\r\nEstá especializado en la fabricación de jabones con aromas naturales. El sello distintivo de sus productos es un refrescante y relajante olor a hierbabuena, que obtiene de cultivarla en su propio jardín.",
+  "image": "javier.png"
+},{
+  "_id": {
+    "$oid": "646796993203edd5d79a0cac"
+  },
+  "username": "sofia",
+  "email": "sofia@email.com",
+  "password": "$2a$10$N05Hw/I0avr86bs9BBFlDucANhKCQsinK1gFT9mJC3iSntVTHoogK",
+  "isArtist": true,
+  "isAdmin": false,
+  "__v": 0,
+  "description": "Sofía ha vivido desde muy pequeña rodeada por el arte de la alfarería, ya que su familia llevaba tres generaciones dedicadas a esta hermosa tradición.\r\nDe pequeña pasaba las tardes en el taller de cerámica familiar, observando maravillada cómo su abuela moldeaba el barro con sus manos  expertas, dándole forma a hermosas piezas que luego eran decoradas a mano.\r\nSiguiendo la tradición familiar, combina en sus piezas las técnicas tradicionales con modernos diseños, logrando preservar y enriquecer la tradición familiar de tres generaciones.",
+  "image": "sofia.png"
+},{
+  "_id": {
+    "$oid": "646796bc3203edd5d79a0cb2"
+  },
+  "username": "marina",
+  "email": "marina@email.com",
+  "password": "$2a$10$oaKo//41pK2cQy9bHPgXLuB6TwqLWBRvywv6M3sle95HI2vdFbiLi",
+  "isArtist": true,
+  "isAdmin": false,
+  "__v": 0,
+  "description": "Marina siempre había sentido una atracción especial por las joyas y la forma en que podían realzar la belleza y la personalidad de las personas. Por eso decidió embarcarse en la aventura de crear sus propias joyas, plasmando su estilo único y original.\r\nInspirada por la elegancia del minimalismo, crea joyas con líneas limpias y sencillas, utilizando el oro como material, ya que consideraba que este metal noble transmite un aura de sofisticación.\r\nElabora a mano sus piezas, prestando atención a los detalles más delicados, consiguiendo transmitir una sensación de lujo en cada pieza que sale de su taller.",
+  "image": "marina.png"
+},{
+  "_id": {
+    "$oid": "646796d63203edd5d79a0cb8"
+  },
+  "username": "mario",
+  "email": "mario@email.com",
+  "password": "$2a$10$7q0xS4PNmuHJCdv.NC484.pidHrau4An3hEstecKz9zUYHLFFdSXi",
+  "isArtist": true,
+  "isAdmin": false,
+  "__v": 0,
+  "description": "Mario siempre había soñado con tener una casa que reflejara su estilo único y personalidad. Sin embargo, al buscar muebles para renovar su hogar, se encontró con una gran frustración, ya que las tiendas convencionales ofrecían muebles de calidad mediocre y diseños genéricos que no lograban capturar su esencia creativa. Decidió explorar el mundo de la restauración de muebles, para rescatar antigüedades de madera natural y con sus manos darle una nueva vida.\r\nAhora crea piezas únicas y con carácter, que destacan por su calidad y estilo atemporal. Con paciencia y habilidad, repara y resalta la belleza natural de la madera, aplicando barnices y tratamientos especiales que realzan su color y textura.\r\nEl resultado de su trabajo es espectacular, convirtiendo piezas olvidadas en verdaderas\r\njoyas.  Cada día, se levanta emocionado por la oportunidad de dar nueva vida a muebles que han sido testigos de historias y recuerdos.",
+  "image": "mario.png"
+},{
+  "_id": {
+    "$oid": "646796ed3203edd5d79a0cbe"
+  },
+  "username": "carolina",
+  "email": "carolina@email.com",
+  "password": "$2a$10$9OPaXo0ubfNwYvQcJ.SzV.GbfdzdwmMXvi7WEipCfKtzZKsWiVKJO",
+  "isArtist": true,
+  "isAdmin": false,
+  "__v": 0,
+  "description": "Carolina descubrió durante el embarazo de su primer bebé su talento para crear prendas con lana y puntada a puntada le transmitió su amor y cariño a través de sus creaciones.\r\nCon una habilidad innata ha seguido realizando prendas únicas para bebés, con lanas suaves y de alta calidad, buscando siempre la comodidad y la delicadeza que\r\nmerecen los más pequeños. Cada diseño está pensado con cuidado y atención en\r\nlos detalles, creando prendas exclusivas y llenas de encanto.\r\nNo solo busca que sus creaciones sean estéticamente bonitas, sino también prácticas y funcionales. Sus prendas son cómodas de usar y fáciles de lavar, pensadas para la vida diaria de los bebés y la comodidad de los padres.\r\nTodas sus prendas están impregnadas de su pasión por el tejido y su deseo de hacer algo especial para cada bebé, envolviéndole en calidez, amor y cuidado, regalándole un pedacito de su corazón en cada prenda que teje.",
+  "image": "carolina.png"
+},{
+  "_id": {
+    "$oid": "6467970b3203edd5d79a0cc4"
+  },
+  "username": "ada",
+  "email": "ada@email.com",
+  "password": "$2a$10$KWYaUGdptIaA/Kx.YwbxpuHpzokMVPaiL.DkrCUbEVozaKhwJVemW",
+  "isArtist": true,
+  "isAdmin": false,
+  "__v": 0,
+  "description": "Ada ama la naturaleza y se siente especialmente identificada dibujando la vida salvaje en sus obras. Le trae muy buenos recuerdos de su infancia, ya que tuvo la maravillosa oportunidad de crecer rodeada de la exuberante belleza y diversidad de la fauna sudafricana. Desde entonces, dibujar animales se ha convertido en su pasión y su forma de expresión más profunda.\r\nLa técnica de acuarela es el medio perfecto para plasmar la energía de los animales que tanto admira. Con cada trazo y pincelada, Ada logra capturar la esencia de cada criatura, transmitiendo su belleza y poderío. Utiliza colores vivos y sutiles transparencias para dar vida a los pelajes, plumajes y texturas de los animales que pinta.\r\nSus obras destacan por su realismo y por la sensibilidad con la que captura la esencia de\r\ncada animal. A menudo, suele regresar a su tierra natal para buscar inspiración\r\ny sus pinturas se han convertido en una forma de concienciar sobre la\r\nimportancia de la conservación de la vida silvestre y la protección de los\r\nhábitats naturales.",
+  "image": "ada.png"
+},{
+  "_id": {
+    "$oid": "64693fc23b2dbdb43a11d64c"
+  },
+  "username": "idoya",
+  "email": "idoya@email.com",
+  "password": "$2a$10$tBU923Mnz.5lVh.6mJTaHO4yx1MNSTKVCrX9X0ys81usnA3Q9fH.y",
+  "isArtist": true,
+  "isAdmin": false,
+  "__v": 0,
+  "description": "Idoya tras varios años trabajando como financiera, se ha dado cuenta que su verdadera pasión no son los números, sino aquello que hace en su tiempo de ocio que es visitar tiendas  de muebles antiguos y realizar pequeños proyectos de restauración. Disfruta dando vida a un mueble antiguo y se pasa horas investigando técnicas y estilos en revistas de decoración. Hace un año que ha abierto su propio taller y lo tiene lleno de piezas antiguas, desde mesas y sillas hasta cómodas y armarios;  esperando a que se les devuelva el esplendor y belleza que un día tuvieron. Cada día, se sumerge en una nueva aventura, restaurando con amor y delicadeza cada mueble que llega a sus manos. Con valentía, determinación y trabajo ha demostrado que perseguir los sueños y seguir el corazón de lo que amamos, puede llevarte a la verdadera felicidad y realización.",
+  "image": "idoya.png"
+},{
+  "_id": {
+    "$oid": "646a4df98e7889d290f5b816"
+  },
+  "username": "usuario",
+  "email": "user@user.com",
+  "password": "$2a$10$///COXFDa8SAWgbD/RsQ6.fbAk6t2hTiZDgnXXoRfSq3SNRedFBsi",
+  "isArtist": false,
+  "isAdmin": false,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646a59988e7889d290f5b864"
+  },
+  "username": "unaiartista",
+  "email": "unai@unaicom",
+  "password": "$2a$10$bbObNZzDw1o2UIUtdnp0SOW1RWpqw.78M5xiTKA4apcjMUrp3GjW6",
+  "isArtist": true,
+  "isAdmin": false,
+  "__v": 0
+}]

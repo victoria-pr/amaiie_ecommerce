@@ -1,13 +1,130 @@
+@font-face {
+  font-family: montserrat;
+  src: url(fonts/Montserrat-VariableFont_wght.ttf);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: montserrat;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+/* .site-container {
+  min-height: 100vh;
+}
+ */
+main {
+  flex: 1;
+}
+/* header {  background-color: #4E4949
+;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  padding: 1rem;
+}
+header a {
+  color: rgb(223, 154, 165);
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 25px;
+}
+ */
+main {
+  padding: 1rem;
+}
+
+.products {
+  display: flex; /*Para poner los productos uno detrás de otro*/
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+.product {
+  border: 0.5px #404040 solid;
+  margin: 1rem; /*espacio entre productos*/
+}
+.product image {
+  width: 50%;
+  max-width: 400px;
+}
+h2 {
+  text-align: center;
+}
+.product-info {
+  padding: 1rem;
+  text-decoration: none;
+}
+.product-info a {
+  color: rgb(223, 154, 165);
+  font-weight: bold;
+  text-decoration: none;
+}
+.img-large {
+  max-width: 100%;
+}
+button {
+  background-color: #f3f3f3;
+  border: 1px solid #ddd;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 13px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 80%; /* Ancho de cada botón */
+  line-height: 1.5; /* Centrar texto verticalmente */
+  text-align: center; /* Centrar texto horizontalmente */
+}
+
+.img-thumbnail {
+  height: 80px;
+}
+
+.mg-large {
+  max-width: 100%;
+}
+.img-large {
+  max-width: 100%;
+}
+
+.small-container {
+  max-width: 600px;
+}
+.small{
+  max-width: 100px;
+}
+
+.checkout-steps > div {
+  border-bottom: 0.4rem solid #a0a0a0;
+  color: #a0a0a0;
+}
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid #147587;
+  color: #147587;
+}
+
+.shoppingcart {
+  margin-top: 50px;
+}
+
+.checkout-steps {
+  margin-top: 30px;
+}
+
+.resultados {
+  margin-top: 50px;
+}
+
+.btn-primary,
+.btn-outline-primary {
+  background-color: #147587;
+  color: #000000;
+  border-color: #147587;
+}
+
+#button-search {
+  width: 49px;
+  height: 30px;
+  color: #147587;
 }
