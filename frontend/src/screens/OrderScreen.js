@@ -84,7 +84,6 @@ export default function OrderScreen() {
   });
   //Función de Paypal que se llama cuando se realiza el pago
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
-
   function createOrder(data, actions) {
     return actions.order
       .create({

@@ -39,6 +39,8 @@ import ArtistScreen from "./screens/ArtistScreen";
 import ProtectedRoute from "./components/ProtectedRoute";
 import EditArtistScreen from "./screens/EditArtistScreen";
 import ProductArtistScreen from "./screens/ProductArtistScreen";
+import UserEditScreen from "./screens/UserListScreen";
+import UserListScreen from "./screens/UserEditScreen";
 import "./App.css";
 
 //Función principal que define la estructura y el comportamiento de la aplicación
@@ -171,9 +173,6 @@ function App() {
                       Productos
                     </NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer className='custom-link' to='/admin/orders'>
-                    <NavDropdown.Item>Pedido</NavDropdown.Item>
-                  </LinkContainer>
                   <LinkContainer className='custom-link' to='/admin/users'>
                     <NavDropdown.Item>Usuarios</NavDropdown.Item>
                   </LinkContainer>
@@ -212,6 +211,7 @@ function App() {
             <Route path='/editprofile' element={<EditArtistScreen />} />
             <Route path='/placeorder' element={<PlaceOrderScreen />} />
             <Route path='/artistproducts' element={<ProductArtistScreen />} />
+
             <Route
               path='/profile'
               element={
@@ -251,6 +251,23 @@ function App() {
               element={
                 <AdminRoute>
                   <ProductEditScreen />
+                </AdminRoute>
+              }
+            ></Route>
+            <Route
+              path='/admin/user/:id'
+              element={
+                <AdminRoute>
+                  <UserEditScreen />
+                </AdminRoute>
+              }
+            ></Route>
+
+            <Route
+              path='/admin/users'
+              element={
+                <AdminRoute>
+                  <UserListScreen />
                 </AdminRoute>
               }
             ></Route>
