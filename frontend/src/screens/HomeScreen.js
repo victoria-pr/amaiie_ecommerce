@@ -152,8 +152,9 @@ function HomeScreen() {
       </Helmet>
 
       <h1 className='color-verde'>Productos</h1>
-      <div className='products'>
-        {/*   <SearchScreen /> */}
+      <SearchScreen />
+      {/* <div className='products'>
+        
         {loading ? (
           <LoadingBox />
         ) : error ? (
@@ -167,7 +168,7 @@ function HomeScreen() {
             ))}
           </Row>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
