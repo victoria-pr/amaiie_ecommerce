@@ -7,6 +7,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { StoreProvider } from "./Store";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+
 //método que proporciona una API experimental para renderizar componentes de React de manera concurrente
 //Objetivo: renderizar el componente raiz de la aplicación, manejar su estado global, manejar el título de la página de forma asíncrona y cargar el script de Paypal
 //Para activar verificaciones y advertencias de rendimiento en modo desarrollo
