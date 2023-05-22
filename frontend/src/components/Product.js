@@ -35,11 +35,18 @@ function Product(props) {
             <div class='col-md-12'>
               <div class='wsk-cp-product'>
                 <div class='wsk-cp-img'>
-                  <img
-                    src={`http://localhost:5000/fotoproducto/${product.image}`}
-                    alt={product.nameproduct}
-                    class='img-responsive'
-                  />
+                  <span
+                    className='custom-link-text'
+                    onClick={() => {
+                      window.location.href = `/product/${product.slug}`;
+                    }}
+                  >
+                    <img
+                      src={`http://localhost:5000/fotoproducto/${product.image}`}
+                      alt={product.nameproduct}
+                      class='img-responsive'
+                    />
+                  </span>
                 </div>
                 <div class='wsk-cp-text'>
                   <div class='category'>

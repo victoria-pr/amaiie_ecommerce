@@ -1,0 +1,267 @@
+[{
+  "_id": {
+    "$oid": "646799303203edd5d79a0d04"
+  },
+  "nameproduct": "Zapatillas",
+  "slug": "zapatillas-personalizadas",
+  "image": "646799303203edd5d79a0d04.png",
+  "user": "maria",
+  "category": "decoracion",
+  "description": "zapatillas personalizadas con pintura",
+  "price": 150,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-19T15:43:44.683Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-21T14:03:54.837Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64679c3e3203edd5d79a0d4e"
+  },
+  "nameproduct": "Jabones",
+  "slug": "jabones-ecológicos",
+  "image": "64679c3e3203edd5d79a0d4e.png",
+  "user": "javier",
+  "category": "artesania",
+  "description": "Jabones ecológicos ",
+  "price": 50,
+  "countInStock": 0,
+  "createdAt": {
+    "$date": "2023-05-19T15:56:46.217Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T16:09:50.622Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64679fbd3203edd5d79a0d80"
+  },
+  "nameproduct": "Cerámicas",
+  "slug": "cerámicas",
+  "image": "64679fbd3203edd5d79a0d80.png",
+  "user": "sofia",
+  "category": "ceramicas",
+  "description": "Piezas de cerámicas que combina  técnicas tradicionales con diseños modernos ",
+  "price": 250,
+  "countInStock": 0,
+  "createdAt": {
+    "$date": "2023-05-19T16:11:41.958Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T16:13:49.282Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6467a0473203edd5d79a0d8a"
+  },
+  "nameproduct": "Pulseras ",
+  "slug": "pulseras-artesanales",
+  "image": "6467a0473203edd5d79a0d8a.png",
+  "user": "marina",
+  "category": "joyeria",
+  "description": "delicadas pulseras elaboradas a mano",
+  "price": 60,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-19T16:13:59.627Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T16:20:44.541Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6467a0a63203edd5d79a0d94"
+  },
+  "nameproduct": "Mesa roble",
+  "slug": "mesa-roble",
+  "image": "6467a0a63203edd5d79a0d94.png",
+  "user": "mario",
+  "category": "decoracion",
+  "description": "preciosa mesa hecha de roble",
+  "price": 750,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-19T16:15:34.439Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T16:16:31.906Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6467a0ea3203edd5d79a0da0"
+  },
+  "nameproduct": "Ropa bebé",
+  "slug": "ropa-bebe",
+  "image": "6467a0ea3203edd5d79a0da0.png",
+  "user": "carolina",
+  "category": "textil",
+  "description": "prendas de bebé creadas con lana",
+  "price": 120,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-19T16:16:42.058Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T16:17:51.188Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6467a1343203edd5d79a0daa"
+  },
+  "nameproduct": "Ilustración Jirafa ",
+  "slug": "jirafa-ilustración",
+  "image": "6467a1343203edd5d79a0daa.png",
+  "user": "ada",
+  "category": "artesania",
+  "description": "preciosas ilustraciones personalizadas",
+  "price": 90,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-19T16:17:56.454Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-19T16:18:58.356Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646937303b2dbdb43a11d5af"
+  },
+  "nameproduct": "Armario",
+  "slug": "Armario-antiguo",
+  "image": "646937303b2dbdb43a11d5af.png",
+  "user": "idoya",
+  "category": "decoracion",
+  "description": "high quality",
+  "price": 3000,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-20T21:10:08.731Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-20T21:11:52.186Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646937e13b2dbdb43a11d5cb"
+  },
+  "nameproduct": "Bola Santa Claus",
+  "slug": "bola-santa",
+  "image": "646937e13b2dbdb43a11d5cb.jpg",
+  "user": "unai",
+  "category": "artesania",
+  "description": "bola santa claus creada con distintos materiales",
+  "price": 120,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-20T21:13:05.981Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-20T21:13:59.419Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "646938223b2dbdb43a11d5d5"
+  },
+  "nameproduct": "Bola Minnie",
+  "slug": "Bola Minnie",
+  "image": "646938223b2dbdb43a11d5d5.jpg",
+  "user": "unai",
+  "category": "artesania",
+  "description": "bola artesana hecha con diferentes materiales",
+  "price": 100,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-20T21:14:10.853Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-20T21:14:52.274Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6469385a3b2dbdb43a11d5df"
+  },
+  "nameproduct": "Bola Mickey Mouse",
+  "slug": "bola-mickey",
+  "image": "6469385a3b2dbdb43a11d5df.jpg",
+  "user": "unai",
+  "category": "artesania",
+  "description": "bola artesanal de Mickey Mousse hecha de distintos materiales",
+  "price": 100,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-20T21:15:06.223Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-20T21:15:55.388Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64693b703b2dbdb43a11d5e9"
+  },
+  "nameproduct": "Estuche flores",
+  "slug": "estuche-flores",
+  "image": "64693b703b2dbdb43a11d5e9.jpg",
+  "user": "vicky",
+  "category": "artesania",
+  "description": "estuche de estampado de flores hecho a mano ",
+  "price": 60,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-20T21:28:16.776Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-20T21:36:15.040Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64693ba83b2dbdb43a11d5f3"
+  },
+  "nameproduct": "Pendientes girasolescrochet",
+  "slug": "pendientes-girasoles",
+  "image": "64693ba83b2dbdb43a11d5f3.png",
+  "user": "vicky",
+  "category": "joyeria",
+  "description": "pendientes de girasoles hecho con crochet",
+  "price": 50,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-20T21:29:12.491Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-20T21:36:38.704Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "64693d6d3b2dbdb43a11d61b"
+  },
+  "nameproduct": "Anillo alambre",
+  "slug": "anillo-alambre",
+  "image": "64693d6d3b2dbdb43a11d61b.png",
+  "user": "vicky",
+  "category": "joyeria",
+  "description": "anillo hecho con alambre y bolas",
+  "price": 50,
+  "countInStock": 1,
+  "createdAt": {
+    "$date": "2023-05-20T21:36:45.839Z"
+  },
+  "updatedAt": {
+    "$date": "2023-05-20T21:37:35.824Z"
+  },
+  "__v": 0
+}]
