@@ -3,7 +3,7 @@ import "../css/AvisoLegalScreen.css";
 const Aviso = () => {
   return (
     <div className='aviso-container'>
-      <h2 className='aviso'> Titularidad y gestión de este sitio web</h2>
+      <h2 className='color-verde'>Titularidad y gestión de este sitio web</h2>
       <p>
         Este sitio web en su conjunto está administrado y es propiedad de
         Bootcamp The Bridge-Kutxabank , quien pone a disposición de los USUARIOS

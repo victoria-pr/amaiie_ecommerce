@@ -6,6 +6,7 @@ import "../css/ArtistScreen.scss";
 function Product(props) {
   const { product } = props;
   const { state, dispatch: ctxDispatch } = useContext(Store);
+
   const {
     cart: { cartItems },
   } = state;
