@@ -43,10 +43,10 @@ function ArtistScreen() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const response = await axios.get(`/api/users/username/${username}`);
+        const response = await axios.get(`https://api.amaiie.lafuentedanel.com/api/users/username/${username}`);
         const userData = response.data;
 
-        const products = await axios.get(`/api/users/${username}/products`);
+        const products = await axios.get(`https://api.amaiie.lafuentedanel.com/api/users/${username}/products`);
         const productsData = products.data;
         setProducts(productsData);
 

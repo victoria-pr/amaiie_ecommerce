@@ -47,7 +47,7 @@ function ProductScreen() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const response = await axios.get(`/api/products/slug/${slug}`);
+        const response = await axios.get(`https://api.amaiie.lafuentedanel.com/api/products/slug/${slug}`);
         const productData = response.data;
         dispatch({ type: "FETCH_SUCCESS", payload: productData });
       } catch (err) {

@@ -32,7 +32,7 @@ export default function CartScreen() {
   //Si la cantidad es mayor al stock se muestra una alerta y no se actualiza
   //Si hay suficiente stock envia una acción para agregar y actualizar el carrito
   const updateCartHandler = async (item, quantity) => {
-    const { data } = await Axios.get(`/api/products/${item._id}`);
+    const { data } = await Axios.get(`https://api.amaiie.lafuentedanel.com/api/products/${item._id}`);
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");
       return;
