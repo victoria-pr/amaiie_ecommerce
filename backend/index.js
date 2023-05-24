@@ -21,7 +21,7 @@ mongoose
 
 // Servidor express: creamos una instancia de la aplicación Exoress
 const app = express();
-app.use(cors()); // middleware que permite peticiones desde otros dominios
+app.use(cors({origin:'*'})); // middleware que permite peticiones desde otros dominios
 app.use(express.json()); // middleware que permite recibir json en el body de las peticiones
 app.use(express.urlencoded({ extended: true })); // middleware que permite recibir datos de formularios en el body de las peticiones
 app.use(express.static("publicback")); //sirve archivos estáticos desde la carpeta publicback
