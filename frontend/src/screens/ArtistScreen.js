@@ -76,7 +76,7 @@ function ArtistScreen() {
           <div className='item2'>
             <div className='item'>
               <img
-                src={`http://localhost:5000/uploads/${user.image}`}
+                src={`https://api.amaiie.lafuentedanel.com/uploads/${user.image}`}
                 alt={user.username}
                 className='image-artist'
               />

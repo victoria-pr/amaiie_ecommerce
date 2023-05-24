@@ -251,7 +251,7 @@ export default function OrderScreen() {
                     <Row className='align-items-center'>
                       <Col md={6}>
                         <img
-                          src={`http://localhost:5000/fotoproducto/${item.image}`}
+                          src={`https://api.amaiie.lafuentedanel.com/fotoproducto/${item.image}`}
                           alt={item.name}
                           className='img-fluid rounded img-thumbnail'
                         ></img>{" "}

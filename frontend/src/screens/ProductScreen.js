@@ -93,7 +93,7 @@ function ProductScreen() {
       <Row>
         <Col md={6}>
           <img
-            src={`http://localhost:5000/fotoproducto/${product.image}`}
+            src={`https://api.amaiie.lafuentedanel.com/fotoproducto/${product.image}`}
             className='img-large'
             alt={product.nameproduct}
           ></img>

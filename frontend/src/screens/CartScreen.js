@@ -68,7 +68,7 @@ export default function CartScreen() {
                   <Row className='align-items-center'>
                     <Col md={4}>
                       <img
-                        src={`http://localhost:5000/fotoproducto/${item.image}`}
+                        src={`https://api.amaiie.lafuentedanel.com/fotoproducto/${item.image}`}
                         alt={item.nameproduct}
                         className='img-fluid rounded img-thumbnail'
                       ></img>{" "}

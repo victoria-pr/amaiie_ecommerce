@@ -42,7 +42,7 @@ function Product(props) {
                     }}
                   >
                     <img
-                      src={`http://localhost:5000/fotoproducto/${product.image}`}
+                      src={`https://api.amaiie.lafuentedanel.com/fotoproducto/${product.image}`}
                       alt={product.nameproduct}
                       class='img-responsive'
                     />
