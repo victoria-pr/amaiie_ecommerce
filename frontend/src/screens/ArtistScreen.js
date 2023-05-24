@@ -23,7 +23,6 @@ const reducer = (state, action) => {
 };
 
 function ArtistScreen() {
-  //const navigate = useNavigate();
   const params = useParams();
   const { username } = params;
   const [products, setProducts] = useState([]);

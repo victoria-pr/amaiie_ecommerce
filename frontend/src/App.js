@@ -39,6 +39,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import EditArtistScreen from "./screens/EditArtistScreen";
 import ProductArtistScreen from "./screens/ProductArtistScreen";
 import "./App.css";
+import UserListScreen from "./screens/userListScreen";
+import UserEditScreen from "./screens/UserEditScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -159,9 +161,6 @@ function App() {
                   <LinkContainer to='/admin/products'>
                     <NavDropdown.Item>Products</NavDropdown.Item>
                   </LinkContainer>
-                  <LinkContainer className='custom-link' to='/admin/orders'>
-                    <NavDropdown.Item>Orders</NavDropdown.Item>
-                  </LinkContainer>
                   <LinkContainer className='custom-link' to='/admin/users'>
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>
@@ -243,6 +242,22 @@ function App() {
                 </AdminRoute>
               }
             ></Route>
+            <Route
+                path="/admin/user/:id"
+                element={
+                  <AdminRoute>
+                    <UserEditScreen />
+                  </AdminRoute>
+                }
+              ></Route>
+            <Route
+                path="/admin/users"
+                element={
+                  <AdminRoute>
+                    <UserListScreen />
+                  </AdminRoute>
+                }
+              ></Route>
           </Routes>
         </Container>
       </main>

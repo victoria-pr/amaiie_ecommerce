@@ -17,7 +17,7 @@ services:
     container_name: node-amaiie
     restart: always
     ports:
-      - 3030:3000
+      - 5000:5000
     depends_on:
       - mongo
     networks:

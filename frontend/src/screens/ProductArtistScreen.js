@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useReducer } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Button } from 'react-bootstrap';
@@ -36,6 +37,7 @@ const reducer = (state, action) => {
 export default function ProductArtistScreen() {
     const { state } = useContext(Store);
     const { userInfo } = state;
+    const navigate = useNavigate();
   
     const [{ loading, error, products, successDelete }, dispatch] = useReducer(reducer, {
       loading: true,
@@ -65,7 +67,7 @@ export default function ProductArtistScreen() {
     const deleteHandler = async (product) => {
       if (window.confirm("Are you sure to delete?")) {
         try {
-          await Axios.delete(`/api/products/${product._id}`, {
+          await Axios.delete(`/admin/product/${product._id}`, {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           });
           toast.success("product deleted successfully");
@@ -102,15 +104,34 @@ export default function ProductArtistScreen() {
                 <th>ACTIONS</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody> 
               {products.map((product) => (
                 <tr key={product._id}>
-                  <td> <img src={`http://localhost:5000/fotoproducto/${product.image}`} alt={product.nameproduct} className="small"></img></td>
+                  <td> <span
+                    className='custom-link-text'
+                    onClick={() => {
+                      window.location.href = `/product/${product.slug}`;
+                    }}>
+                  <img
+                    src={`http://localhost:5000/fotoproducto/${product.image}`}
+                    alt={product.nameproduct}
+                    className="small"
+                  />
+                  </span></td>
                   <td>{product.nameproduct}</td>
                   <td>{product.user}</td>
                   <td>{product.description}</td>
                   <td>{product.createdAt.substring(0, 10)}</td>
                   <td>
+                  <Button
+                      className='custom-button'
+                      type='button'
+                      variant='light'
+                      /* onClick={() => navigate(`/admin/product/${product._id}`)} */
+                    >
+                      Edit
+                    </Button>
+                    &nbsp;
                     <Button
                       type='button'
                       variant='light'

@@ -25,12 +25,11 @@ const reducer = (state, action) => {
 export default function EditArtistScreen() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { userInfo } = state;
+
   const [username, setUsername] = useState(userInfo.username);
   const [email, setEmail] = useState(userInfo.email);
-
   const [image, setImage] = useState(null);
   const [description, setDescription] = useState(userInfo.description);
-
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -99,7 +98,7 @@ export default function EditArtistScreen() {
             type='file'
             /* value={username}*/
             onChange={(e) => setImage(e.target.files[0])}
-            required
+            
           />
         </Form.Group>
         <Form.Group className='mb-3' controlId='description'>

@@ -18,6 +18,7 @@ const initialState = {
         : [],
     },
 };
+
 function reducer(state,action) {
     switch (action.type) { 
         case 'CART_ADD_ITEM':
@@ -74,6 +75,8 @@ function reducer(state,action) {
         }
     }
  
+
+    
 export function StoreProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = { state, dispatch };
