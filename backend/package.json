@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "proxy": "https://api.amaiie.lafuentedanel.com/",
+  "proxy": "https://api.amaiie.vickypr.com/",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
