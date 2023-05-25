@@ -47,7 +47,7 @@ function ProductScreen() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const response = await axios.get(`https://api.amaiie.vickypr.com/api/products/slug/${slug}`);
+        const response = await axios.get(`https://api.amaiie.vickypr.es/api/products/slug/${slug}`);
         const productData = response.data;
         dispatch({ type: "FETCH_SUCCESS", payload: productData });
       } catch (err) {
@@ -93,7 +93,7 @@ function ProductScreen() {
       <Row>
         <Col md={6}>
           <img
-            src={`https://api.amaiie.vickypr.com/fotoproducto/${product.image}`}
+            src={`https://api.amaiie.vickypr.es/fotoproducto/${product.image}`}
             className='img-large'
             alt={product.nameproduct}
           ></img>

@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy": "https://api.amaiie.vickypr.com",
+  "proxy": "https://api.amaiie.vickypr.es",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

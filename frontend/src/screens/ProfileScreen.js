@@ -42,7 +42,7 @@ export default function ProfileScreen() {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        "https://api.amaiie.vickypr.com/api/users/profile",
+        "https://api.amaiie.vickypr.es/api/users/profile",
         {
           username,
           email,
