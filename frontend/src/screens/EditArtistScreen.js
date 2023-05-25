@@ -103,7 +103,7 @@ export default function EditArtistScreen() {
             type='file'
             /* value={username}*/
             onChange={(e) => setImage(e.target.files[0])}
-            required
+            
           />
         </Form.Group>
         <Form.Group className='mb-3' controlId='description'>
